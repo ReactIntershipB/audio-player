@@ -32,9 +32,10 @@ npm start
 * [MobX](https://mobx.js.org/) - React state manager
 
 ## Authors
-* **Dominika Porzyczka** - *React developer* - []()
-* **Marek Giełda** - *React developer* - [marekgielda](https://github.com/marekgielda)
-* **Witold Mętel** - *React developer* - []()
+* **Dominika Porzyczka** - *React developer* - [dominikaporzyczkaSS](dominikaporzyczkaSS)
+* **Marek Giełda** - *React developer* - [marekgielda-softserve](https://github.com/marekgielda-softserve)
+* **Witold Mętel** - *React developer* - [wmete-softserve](wmete-softserve)
+* **Wojciech Tartanus** - *React developer* - [wtart-softserve](wtart-softserve)
 
 ## Licence
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
