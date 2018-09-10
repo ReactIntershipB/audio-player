@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
+import Searcher from './Searcher';
+import Playlist from './Playlist';
+import Player from './Player';
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        Hello World
+      <div>
+        <Searcher />
+        <Playlist />
+        <Player />
       </div>
     );
   }
