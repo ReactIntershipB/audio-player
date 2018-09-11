@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class App extends Component {
+class Player extends Component {
   render() {
     return (
       <div>
-          
+        <h1>Player Components</h1>
       </div>
     );
   }
 }
 
-export default App;
+export default Player;
