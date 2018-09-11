@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 
 import Playlist from './components/Playlist/Playlist';
-import Searcher from './components/Searcher';
-import Player from './Player/Player';
-
-
-import Searcher from './Searcher/Searcher';
+import Searcher from './components/Searcher/Searcher';
+import Player from './components/Player/Player';
 
 class App extends Component {
   render() {
