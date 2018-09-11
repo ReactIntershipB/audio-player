@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
+import './Player.css';
 
 class Player extends Component {
 
   render() {
 
-    let style = {
-      width: '100%',
-      height: '120px',
-      paddingTop: '10px',
-      position: 'fixed',
-      bottom: '0rem',
-      border: 'solid 1px lightgrey'
-    };
-
     return (
 
-      <div style={style}>
+      <div className='player'>
         
         <Row  type='flex'
               justify='center'
