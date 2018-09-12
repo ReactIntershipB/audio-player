@@ -6,9 +6,7 @@ export class Model {
     @observable isInitialized = false;
 
     @action
-    getAPIBaseURL = (CORS_ALLOW_URL, BASE_URL) => {
-        return `${CORS_ALLOW_URL}${BASE_URL}`;
-    }
+    getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
     @action
     getSongsFromAPI = (getAPIBaseURL, term) => {
