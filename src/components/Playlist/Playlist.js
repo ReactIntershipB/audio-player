@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { List, Button, Avatar } from 'antd'
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, reaction } from 'mobx';
 
 import './Playlist.css'
 
@@ -46,6 +46,30 @@ class Playlist extends Component {
 
     componentDidMount() {
         this.model.init();
+        reaction(() => this.props.mediator.currentSongPosition,
+                 (position) =>  this.setSongByPosition(position));
+    }
+
+    setSongByPosition(position) {
+            const alignedPosition = this.alignePosition(position);
+            const song = this.model.playlist[alignedPosition];
+            this.changeSong(song, alignedPosition);
+    }
+
+    alignePosition(position) {
+        if (position < 0) return this.model.playlist.length - 1;
+        if (position > this.model.playlist.length - 1) return 0;
+        return position; 
+    }
+
+    changeSong(song, position) {
+        this.ui.updateCurrentSong(song.id);
+        this.props.mediator.setCurrentSong(song.id);        
+        this.props.mediator.setCurrentSongPostion(position);
+    }
+
+    getSongPosition(song) {
+      return this.model.playlist.indexOf(song);
     }
 
     iconChange = (id) => {
@@ -65,7 +89,7 @@ class Playlist extends Component {
                              <div key={item.id}>
                             <List.Item>
                                     <List.Item.Meta
-                                        avatar={<Button type="primary" shape="circle" icon={this.iconChange(item.id)} size="large" onClick={() => this.ui.onSongClick(item.id)}/>}
+                                        avatar={<Button type="primary" shape="circle" icon={this.iconChange(item.id)} size="large" onClick={() => this.changeSong(item, this.getSongPosition(item))}/>}
                                         title={item.title}
                                         description={`${item.author}, ${item.album}`}
                                     />
@@ -83,12 +107,15 @@ class Playlist extends Component {
 
 class PlaylistUI {
     @observable
-    currentlyPlaying = null;
+    currentlyPlaying;
+
+    currentSongPosition;
+
     @observable
     isPaused = false;
 
     @action
-    onSongClick = (id) => {
+    updateCurrentSong = (id) => {
         this.currentlyPlaying = id;
     }
 
