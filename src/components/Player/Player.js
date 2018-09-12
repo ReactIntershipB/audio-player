@@ -36,6 +36,10 @@ class Player extends Component {
     return this.model.track ? this.model.track.time : 0;
   }
 
+  get trackTimeStatus() {
+    return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
+  }
+
   render() {
     return (
 
@@ -118,7 +122,7 @@ class Player extends Component {
 
               <Col span={2}>
               
-                <span>{this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength)}</span>
+                <span>{this.trackTimeStatus}</span>
               
               </Col>
 
