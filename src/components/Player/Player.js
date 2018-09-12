@@ -20,20 +20,23 @@ class Player extends Component {
     this.ui = new PlayerUI();
     this.model = new PlayerModel();
   }
-
+  
   componentDidMount() {
-    let initPromise = this.model.init();
-        initPromise.then(() => {
-          this.ui.playTrack(this.model.track.time)
-        });
+    const initPromise = this.model.init();
+    initPromise.then(() => {
+      this.ui.playTrack(this.model.track.time)
+    });
   }
-
+  
   sliderChange = (value) => {
     this.ui.updateTimer(value);
   }
+  
+  get trackLength() {
+    return this.model.track ? this.model.track.time : 0;
+  }
 
   render() {
-    let trackLength = this.model.track ? this.model.track.time : 0;
     return (
 
       <div className='player'>
@@ -115,7 +118,7 @@ class Player extends Component {
 
               <Col span={2}>
               
-                <span>{this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(trackLength)}</span>
+                <span>{this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength)}</span>
               
               </Col>
 
