@@ -53,8 +53,13 @@ export default class Searcher extends Component {
         const { value } = this.ui;
 
         if (value !== '') {
+<<<<<<< ebb443ee774e27f12950d0fe5ce0131922a91054
             console.log('input value: ' + value);
             this.model.passValue(value);
+=======
+            console.log("input value: " + value);
+            this.model.find(value)
+>>>>>>> Add fetching data
             this.ui.resetValue();
         }
     }
@@ -111,7 +116,74 @@ class SearcherUI {
 }
 
 class SearcherModel {
+<<<<<<< ebb443ee774e27f12950d0fe5ce0131922a91054
     passValue = (value) => {
         console.log('Value in model: ' + value);
+=======
+    @observable
+    data = '';
+
+    @observable
+    filteredData = '';
+
+    find = (value) => {
+        console.log("Value in model: " + value);
+        this.fetchData()
+            .then(() => {
+                this.filterData(value);
+            })  
+    }
+
+    @action
+    filterData = (value) => {
+        const filteredData = this.data.filter((item) => (
+            item.title.toLowerCase().includes(value.toLowerCase())
+        ))
+        this.filteredData = filteredData;
+        console.log(this.filteredData);
+    }
+  
+    @action
+    fetchData = () => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                this.data = data;
+                console.log(this.result);
+                resolve(true);
+            }, 1000);
+        });
+>>>>>>> Add fetching data
     }
 }
+
+
+const data = [
+    {
+        id: 0,
+        title: "Song",
+        author: "Author1",
+        album: "Chocolate cake dessert sweet roll jujubes",
+        time: "03:14"
+    },
+    {
+        id: 1,
+        title: "Banana Song",
+        author: "Author2",
+        album: "Lollipop chupa chups tart bonbon",
+        time: "02:30"
+    },
+    {
+        id: 2,
+        title: "Song title",
+        author: "Author3",
+        album: "Gummi bears wafer pastry macaroon icing biscuit",
+        time: "04:02"
+    },
+    {
+        id: 3,
+        title: "Despacito",
+        author: "Author4",
+        album: "Jujubes caramels jelly carrot cake",
+        time: "03:18"
+    }
+]
