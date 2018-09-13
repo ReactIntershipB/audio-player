@@ -2,11 +2,11 @@ import { Model } from './../Model';
 import { observable, action } from 'mobx';
 
 export class PlaylistModel extends Model {
-    constructor() {
-        super();
+  constructor() {
+    super();
 
-        this.model = new Model();
-    }
+    this.model = new Model();
+  }
 
     @observable
     playlist = [];
@@ -16,13 +16,13 @@ export class PlaylistModel extends Model {
     }
 
     findSongs(term) {
-        this.model.getSongsFromAPI(term, 'artist')
-            .then(res => this.setPlaylist(res.data))
-            .catch(err => console.log(err));
+      this.model.getSongsFromAPI(term, 'artist')
+        .then(res => this.setPlaylist(res.data))
+        .catch(err => console.log(err));
     }
 
     @action
     setPlaylist = (data) => {
-        this.playlist = [...data];
+      this.playlist = [...data];
     }
 }

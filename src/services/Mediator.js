@@ -12,34 +12,34 @@ class Mediator {
 
    @action
    setCurrentSong(songId) {
-      this.currentSongId = songId;
+     this.currentSongId = songId;
    }
 
    setCurrentSongPostion(position) {
-       this.currentSongPosition = position;
+     this.currentSongPosition = position;
    }
 
    @action
    setPlaylist(playlist) {
-      this.playlist = [...playlist];
+     this.playlist = [...playlist];
    }
 
    @action
    getNextSong() {
-      if (this.currentSongPosition === undefined || this.currentSongPosition === null) {
-          this.currentSongPosition = 0;
-      } else {
-          this.currentSongPosition++;
-      }
+     if (this.currentSongPosition === undefined || this.currentSongPosition === null) {
+       this.currentSongPosition = 0;
+     } else {
+       this.currentSongPosition++;
+     }
    }
 
    @action
    getPreviousSong() {
-       if (this.currentSongPosition === undefined || this.currentSongPosition === null) {
-           this.currentSongPosition = -1;
-       } else {
-           this.currentSongPosition--;
-       }
+     if (this.currentSongPosition === undefined || this.currentSongPosition === null) {
+       this.currentSongPosition = -1;
+     } else {
+       this.currentSongPosition--;
+     }
    }
 }
 

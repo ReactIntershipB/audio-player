@@ -52,8 +52,8 @@ class Player extends React.Component {
     return (
       <div className='player'>
         <Row type='flex'
-             justify='center'
-             align='middle'>
+          justify='center'
+          align='middle'>
 
           <Col span={2}>
 
@@ -73,7 +73,7 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
-                <span className='title'>{this.trackTitle}</span>
+              <span className='title'>{this.trackTitle}</span>
             </Row>
 
             <Row
@@ -95,9 +95,9 @@ class Player extends React.Component {
                 className='btns'>
 
                 <Button shape='circle'
-                        size={'large'}
-                        icon='backward'
-                        onClick={this.handlePreviousSongClick}
+                  size={'large'}
+                  icon='backward'
+                  onClick={this.handlePreviousSongClick}
                 />
               </Col>
 
@@ -106,9 +106,9 @@ class Player extends React.Component {
                 className='btns'>
 
                 <Button shape='circle'
-                        size={'large'}
-                        icon={this.ui.getIconType()}
-                        onClick={() => this.ui.updateSongState()} />
+                  size={'large'}
+                  icon={this.ui.getIconType()}
+                  onClick={() => this.ui.updateSongState()} />
               </Col>
 
               <Col
@@ -116,9 +116,9 @@ class Player extends React.Component {
                 className='btns'>
 
                 <Button shape='circle'
-                        size={'large'}
-                        icon='forward'
-                        onClick={this.handleNextSongClick}
+                  size={'large'}
+                  icon='forward'
+                  onClick={this.handleNextSongClick}
                 />
               </Col>
 
@@ -137,10 +137,10 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                        max={this.model.track ? this.model.track.time : 0}
-                        value={this.ui.timer}
-                        disabled={false}
-                        onChange={this.sliderChange} />
+                  max={this.model.track ? this.model.track.time : 0}
+                  value={this.ui.timer}
+                  disabled={false}
+                  onChange={this.sliderChange} />
               </Col>
 
               <Col span={2}>
@@ -196,8 +196,8 @@ class PlayerUI {
 
   resetTimeTrack = () => {
     if (this.intervalId !== undefined || this.intervalId !== null) {
-        window.clearInterval(this.intervalId);
-        this.intervalId = null;
+      window.clearInterval(this.intervalId);
+      this.intervalId = null;
     }
     this.timer = 0;
   }
