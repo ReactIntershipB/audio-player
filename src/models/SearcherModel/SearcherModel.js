@@ -1,11 +1,11 @@
 import { Model } from './../Model';
-import { observable, action, autorun } from 'mobx';
+import { observable, action } from 'mobx';
 
 export class SearcherModel extends Model {
     constructor() {
         super();
 
-        autorun(this.fetchData);
+        this.model = new Model();
     }
 
     @observable term = '';
