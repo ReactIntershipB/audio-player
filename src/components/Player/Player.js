@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
@@ -45,76 +45,79 @@ class Player extends Component {
   }
 
   render() {
+    
     return (
 
       <div className='player'>
-        
-        <Row  type='flex'
-              justify='center'
-              align='middle'>
+        <Row
+          type='flex'
+          justify='center'
+          align='middle'>
 
           <Col span={2}>
 
             <Avatar shape='square'
-                    size={80}
-                    icon='star' />
+              size={80}
+              icon='star' />
 
             <br />
 
             <span>{this.trackTitle}</span>
 
           </Col>
-          
+
           <Col span={20}>
 
             <Row  type='flex'
-                  justify='center'
-                  align='middle'>
-              
+              justify='center'
+              align='middle'>
+
               <Col span={2}>
-              
+
                 <Button href='#'>shuffle</Button>
-              
+
               </Col>
 
               <Col span={2}>
 
                 <Button shape='circle'
-                        size={'large'}
-                        icon='backward'/>
-              
+                  size={'large'}
+                  icon='backward'/>
+
               </Col>
 
               <Col span={2}>
-              
+
                 <Button shape='circle'
                         size={'large'}
                         icon={this.ui.getIconType()}
                         onClick={() => this.ui.updateSongState()} />
-              
+                          
               </Col>
 
               <Col span={2}>
-              
+
                 <Button shape='circle'
-                        size={'large'}
-                        icon='forward'/>
-              
+                  size={'large'}
+                  icon='forward'/>
+
               </Col>
 
-               <Col span={2}>
-              
+              <Col span={2}>
+
                 <Button href='#'>repeat</Button>
-              
+
               </Col>
 
             </Row>
 
-            <Row  type='flex'
-                  justify='center'
-                  align='middle'>
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'>
 
               <Col span={22}>
+
               
                 <Slider min={0}
                         max={this.model.track ? this.model.track.time : 0}
@@ -139,11 +142,8 @@ class Player extends Component {
       </div>
 
     );
-
   }
-
 }
-
 
 class PlayerUI {
   
