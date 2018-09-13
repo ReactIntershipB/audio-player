@@ -40,6 +40,10 @@ class Player extends Component {
     return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
   }
 
+  get trackTitle () {
+    return this.model.track ? this.model.track.title : '';
+  }
+
   render() {
     return (
 
@@ -57,7 +61,7 @@ class Player extends Component {
 
             <br />
 
-            <span>{this.model.track ? this.model.track.title : ''}</span>
+            <span>{this.trackTitle}</span>
 
           </Col>
           
