@@ -15,15 +15,15 @@ export default class Searcher extends Component {
     this.model = new SearcherModel();
   }
 
-  get dropdownMenu () {
-    return (
-      <Menu
-        className='dropdown-menu'
-        value={this.ui.filterName}
-        onClick={this.onFilterClick}
-      >
+    get dropdownMenu () {
+        return (
+        <Menu
+            className='dropdown-menu'
+            value={this.model.filterName}
+            onClick={this.onFilterClick}
+        >
         <Menu.Item key="0" value='artist'>
-                    Artist
+            Artist
         </Menu.Item>
         <Menu.Item key="1" value='album'>
                     Album
@@ -51,11 +51,11 @@ export default class Searcher extends Component {
     }
 
     onSubmitClick = e => {
-      e.preventDefault();
-      if (this.model.term !== '') {
-        this.model.findSongs(this.model.term, this.model.filterName);
-        this.model.term = '';
-      }
+        e.preventDefault();
+        if (this.model.term !== '') {
+            this.model.find(this.model.term, this.model.filterName);
+            this.model.term = '';
+        }
     }
 
     render () {

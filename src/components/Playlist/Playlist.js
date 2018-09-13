@@ -16,7 +16,6 @@ export default class Playlist extends Component {
   }
 
   componentDidMount () {
-    this.model.init();
     reaction(() => this.props.mediator.currentSongPosition,
       (position) => this.setSongByPosition(position));
   }
