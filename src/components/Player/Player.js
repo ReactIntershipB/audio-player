@@ -139,6 +139,7 @@ Player.propTypes = {
 class PlayerUI {
   @observable isPaused = false;
   @observable timer = 0;
+  intervalId;
 
   iconTypes = {
     pause: 'pause',
@@ -157,11 +158,22 @@ class PlayerUI {
 
   @action
   playTrack (trackLength) {
-    setInterval(() => {
+    this.resetTimeTrack();
+    this.intervalId = setInterval(() => {
       if (!this.isPaused && this.timer < trackLength) {
         this.timer++;
+      } else if (this.time >= trackLength) {
+        window.clearInterval(this.intervalId);
       }
     }, 1000);
+  }
+
+  resetTimeTrack = () => {
+    if (this.intervalId !== undefined || this.intervalId !== null) {
+        window.clearInterval(this.intervalId);
+        this.intervalId = null;
+    }
+    this.timer = 0;
   }
 
   secondsToStringTime = (time) => {
