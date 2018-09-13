@@ -1,46 +1,46 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, autorun } from 'mobx';
 import './Player.css';
-import { observer } from 'mobx-react';
-import { observable, autorun } from 'mobx';
 
 const data = [
   {
       id: 0,
-      title: "Tytuł1",
-      author: "Author1",
-      album: "Chocolate cake dessert sweet roll jujubes",
-      time: "03:14"
+      title: 'No trailing space',
+      author: 'Linter',
+      album: 'Chocolate cake dessert sweet roll jujubes',
+      time: 194
   },
   {
       id: 1,
-      title: "Tytuł2",
-      author: "Author2",
-      album: "Lollipop chupa chups tart bonbon",
-      time: "02:30"
+      title: 'I\'m forgotten',
+      author: 'Var',
+      album: 'Lollipop chupa chups tart bonbon',
+      time: 160
   },
   {
       id: 2,
-      title: "Tytuł3",
-      author: "Author3",
-      album: "Gummi bears wafer pastry macaroon icing biscuit",
-      time: "04:02"
+      title: 'I don\'t have this',
+      author: 'Arrow function',
+      album: 'Gummi bears wafer pastry macaroon icing biscuit',
+      time: 242
   },
   {
       id: 3,
-      title: "Tytuł4",
-      author: "Author4",
-      album: "Jujubes caramels jelly carrot cake",
-      time: "03:18"
+      title: 'Deadline is coming',
+      author: 'Scrum master',
+      album: 'Jujubes caramels jelly carrot cake',
+      time: 198
   }
-]
+];
 
 @observer
 class Player extends React.Component {
   constructor() {
     super();
+    this.ui = new PlayerUI();
     this.model = new PlayerModel();
   }
 
@@ -80,9 +80,9 @@ class Player extends React.Component {
   render() {
     return (
       <div className='player'>
-        <Row  type='flex'
-              justify='center'
-              align='middle'>
+        <Row type='flex'
+             justify='center'
+             align='middle'>
 
           <Col span={2}>
             <Avatar shape='square'
@@ -124,7 +124,7 @@ class Player extends React.Component {
                 <Button shape='circle'
                         size={'large'}
                         icon='forward'
-                        onClick={this.handleNextSongClick} 
+                        onClick={this.handleNextSongClick}
                 />
               </Col>
 
@@ -161,6 +161,10 @@ class Player extends React.Component {
     );
   }
 }
+
+Player.propTypes = {
+  mediator: PropTypes.object
+};
 
 class PlayerUI {
   @observable isPaused = false;
@@ -206,11 +210,13 @@ class PlayerModel {
   track;
 
   init = (songId) => {
-    return this.fetchTrack(songId);
+    return this.find(songId);
   }
 
   find = (songId) => {
-    return this.fetch(songId).then(song => this.currentSong = song);
+    return this.fetch(songId).then(song => {
+      this.track = song;
+    });
   }
 
   fetch = (songId) => {
@@ -218,7 +224,7 @@ class PlayerModel {
       setTimeout(() => {
         const matchedSong = data.filter(song => song.id === songId);
         if (matchedSong.length) resolve(matchedSong[0]);
-      }, 500)
-    }); 
+      }, 500);
+    });
   }
 }
