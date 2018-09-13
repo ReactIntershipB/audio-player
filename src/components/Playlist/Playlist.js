@@ -8,8 +8,8 @@ import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
 import './Playlist.css';
 
 @observer
-class Playlist extends Component {
-    constructor () {
+export default class Playlist extends Component {
+    constructor() {
         super();
         this.ui = new PlaylistUI();
         this.model = new PlaylistModel();
@@ -45,9 +45,21 @@ class Playlist extends Component {
 
     iconChange = (id) => {
         return this.ui.currentlyPlaying === id ? 'pause' : 'caret-right';
-     }
+    }
 
-    render () {
+    getplayButton = (item) => {
+        return (
+            <Button
+                type='primary'
+                shape='circle'
+                icon={this.iconChange(item.id)}
+                size='large'
+                onClick={() => this.changeSong(item, this.getSongPosition(item))}
+            />
+        );
+    }
+
+    render() {
         return (
             <div className='playlist-container'>
                 <div className='avatar'>
@@ -55,21 +67,21 @@ class Playlist extends Component {
                     <h2>Top Hits</h2>
                 </div>
                 <div>
-                        {this.model.playlist.map(item => {
-                         return (
-                             <div key={item.id}>
-                            <List.Item>
+                    {this.model.playlist.map(item => {
+                        return (
+                            <div key={item.id}>
+                                <List.Item>
                                     <List.Item.Meta
-                                        avatar={<Button type="primary" shape="circle" icon={this.iconChange(item.id)} size="large" onClick={() => this.changeSong(item, this.getSongPosition(item))}/>}
+                                        avatar={this.getplayButton(item)}
                                         title={item.title}
-                                        description={`${item.author}, ${item.album}`}
+                                        description={`${item.artist.name}, ${item.album.title}`}
                                     />
                                     <div>{item.time}</div>
-                            </List.Item>
-                            <hr />
+                                </List.Item>
+                                <hr />
                             </div>
-                      );
-                      })}
+                        );
+                    })}
                 </div>
             </div>
         );
@@ -94,5 +106,3 @@ class PlaylistUI {
         this.currentlyPlaying = id;
     }
 }
-
-export default Playlist;
