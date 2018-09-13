@@ -15,7 +15,7 @@ export default class Searcher extends Component {
     this.model = new SearcherModel();
   }
 
-    get dropdownMenu () {
+    get dropdownMenu() {
         return (
         <Menu
             className='dropdown-menu'
@@ -35,11 +35,11 @@ export default class Searcher extends Component {
     );
   };
 
-  get addonSearchIcon () {
-    return (
-      <Icon type="search" />
-    );
-  };
+    get addonSearchIcon() {
+        return (
+            <Icon type="search" />
+        );
+    };
 
     onInputChange = e => {
       this.model.term = e.target.value;
@@ -52,14 +52,19 @@ export default class Searcher extends Component {
 
     onSubmitClick = e => {
         e.preventDefault();
-        if (this.model.term !== '') {
-            this.model.find(this.model.term, this.model.filterName);
-            this.model.term = '';
+        const { term, filterName } = this.model;
+        if (term !== '') {
+            this.model.find(term, filterName);
+            this.clearInput();
         }
     }
 
-    render () {
-      return (
+    clearInput = () => {
+        this.model.term = '';
+    }
+
+    render() {
+        return (
         <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
           <Input
             placeholder="Find some music..."
