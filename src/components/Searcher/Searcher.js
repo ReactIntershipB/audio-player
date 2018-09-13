@@ -15,7 +15,7 @@ export default class Searcher extends Component {
     this.model = new SearcherModel();
   }
 
-    get dropdownMenu () {
+    get dropdownMenu() {
         return (
         <Menu
             className='dropdown-menu'
@@ -35,11 +35,11 @@ export default class Searcher extends Component {
     );
   };
 
-  get addonSearchIcon() {
-    return (
-      <Icon type="search" />
-    );
-  };
+    get addonSearchIcon() {
+        return (
+            <Icon type="search" />
+        );
+    };
 
     onInputChange = e => {
       this.model.term = e.target.value;
