@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, computed, autorun, reaction } from 'mobx';
 
 import './Searcher.css';
 
@@ -66,6 +66,7 @@ export default class Searcher extends Component {
 
     render () {
         return (
+<<<<<<< 3568a8cb69ab6d647626a362a8eef951b5da784d
         <div className='searcher-wrapper'>
             <Input
                 placeholder="Find some music..."
@@ -88,6 +89,30 @@ export default class Searcher extends Component {
             >Submit</Button>
         </div>
         );
+=======
+            <div className='searcher-wrapper'>
+                <Input
+                    placeholder="Find some music..."
+                    className="searcher-input"
+                    onChange={this.onInputChange}
+                    value={this.ui.value}
+                    addonAfter={this.addonSearchIcon}
+                />
+                <Dropdown
+                    className='dropdown'
+                    overlay={this.dropdownMenu}
+                >
+                    <a className="ant-dropdown-link" href="#">
+                        <Icon type="down" />
+                    </a>
+                </Dropdown>
+                <Button
+                    type="primary"
+                    onClick={this.onSubmitClick}
+                >Submit</Button>
+            </div>
+        )
+>>>>>>> Add autorun to fetchData
     }
 }
 
@@ -116,46 +141,50 @@ class SearcherUI {
 }
 
 class SearcherModel {
+<<<<<<< 3568a8cb69ab6d647626a362a8eef951b5da784d
 <<<<<<< ebb443ee774e27f12950d0fe5ce0131922a91054
     passValue = (value) => {
         console.log('Value in model: ' + value);
 =======
+=======
+    constructor() {
+        autorun(this.fetchData)
+    }
+
+>>>>>>> Add autorun to fetchData
     @observable
-    data = '';
+    data = [];
 
     @observable
-    filteredData = '';
+    value = '';
 
     find = (value) => {
         console.log("Value in model: " + value);
-        this.fetchData()
-            .then(() => {
-                this.filterData(value);
-            })  
+        this.value = value;
     }
 
-    @action
-    filterData = (value) => {
-        const filteredData = this.data.filter((item) => (
-            item.title.toLowerCase().includes(value.toLowerCase())
+    @computed
+    get filteredData() {
+        return this.data.filter((item) => (
+            item.title.toLowerCase().includes(this.value.toLowerCase())
         ))
-        this.filteredData = filteredData;
-        console.log(this.filteredData);
     }
-  
-    @action
+
     fetchData = () => {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
+                console.log(this.value)
                 this.data = data;
-                console.log(this.result);
                 resolve(true);
-            }, 1000);
+            }, 2000);
         });
+<<<<<<< 3568a8cb69ab6d647626a362a8eef951b5da784d
 >>>>>>> Add fetching data
     }
+=======
+    };
+>>>>>>> Add autorun to fetchData
 }
-
 
 const data = [
     {
