@@ -15,13 +15,13 @@ export default class Searcher extends Component {
     this.model = new SearcherModel();
   }
 
-  get dropdownMenu() {
-    return (
-      <Menu
-        className='dropdown-menu'
-        value={this.model.filterName}
-        onClick={this.onFilterClick}
-      >
+    get dropdownMenu () {
+        return (
+        <Menu
+            className='dropdown-menu'
+            value={this.model.filterName}
+            onClick={this.onFilterClick}
+        >
         <Menu.Item key="0" value='artist'>
             Artist
         </Menu.Item>
