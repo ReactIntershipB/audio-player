@@ -84,7 +84,7 @@ class Player extends React.Component {
                 span={2}
                 className='btns'>
 
-                <Button href='#'>
+                <Button>
                   <i className="fas fa-random"></i>
                 </Button>
               </Col>
@@ -122,7 +122,7 @@ class Player extends React.Component {
               </Col>
 
               <Col span={2} className='btns'>
-                <Button href='#'>
+                <Button>
                   <i className="fas fa-redo-alt"></i>
                 </Button>
               </Col>
