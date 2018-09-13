@@ -6,6 +6,6 @@ const Router = () => (
     <Switch>
       <Route exact path='/' component={App}/>
     </Switch>
-)
+);
 
 export default Router;

@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
+import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
 import './Player.css';
 import { observer } from 'mobx-react';
 import { observable, autorun } from 'mobx';
@@ -36,14 +38,19 @@ const data = [
 ]
 
 @observer
-class Player extends Component {
+class Player extends React.Component {
   constructor() {
     super();
     this.model = new PlayerModel();
   }
 
   componentDidMount() {
-    autorun(() => this.model.find(this.props.mediator.currentSongId));
+    autorun(() => {
+      const initPromise = this.model.init(this.props.mediator.currentSongId);
+      initPromise.then(() => {
+        this.ui.playTrack(this.model.track.time);
+      });
+    });
   }
 
   handleNextSongClick = () => {
@@ -54,9 +61,23 @@ class Player extends Component {
     this.props.mediator.getPreviousSong();
   }
 
+  sliderChange = (value) => {
+    this.ui.updateTimer(value);
+  }
+
+  get trackLength () {
+    return this.model.track ? this.model.track.time : 0;
+  }
+
+  get trackTimeStatus () {
+    return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
+  }
+
+  get trackTitle () {
+    return this.model.track ? this.model.track.title : '';
+  }
+
   render() {
-    const songTitle = this.model.currentSong ? this.model.currentSong.title : '';
-    const songLength = this.model.currentSong ? this.model.currentSong.time : '0:00';
     return (
       <div className='player'>
         <Row  type='flex'
@@ -64,80 +85,70 @@ class Player extends Component {
               align='middle'>
 
           <Col span={2}>
-
             <Avatar shape='square'
-                    size={80}
-                    icon='star' />
+              size={80}
+              icon='star' />
 
             <br />
 
-            <span>{songTitle}</span>
-
+            <span>{this.trackTitle}</span>
           </Col>
-          
+
           <Col span={20}>
 
-            <Row  type='flex'
-                  justify='center'
-                  align='middle'>
-              
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'>
+
               <Col span={2}>
-              
                 <Button href='#'>shuffle</Button>
-              
               </Col>
 
               <Col span={2}>
-
                 <Button shape='circle'
                         size={'large'}
                         icon='backward'
                         onClick={this.handlePreviousSongClick}
                 />
-              
               </Col>
 
               <Col span={2}>
-              
                 <Button shape='circle'
                         size={'large'}
-                        icon='caret-right'
-                />
-              
+                        icon={this.ui.getIconType()}
+                        onClick={() => this.ui.updateSongState()} />
               </Col>
 
               <Col span={2}>
-              
                 <Button shape='circle'
                         size={'large'}
                         icon='forward'
                         onClick={this.handleNextSongClick} 
                 />
-              
               </Col>
 
-               <Col span={2}>
-              
+              <Col span={2}>
                 <Button href='#'>repeat</Button>
-              
               </Col>
 
             </Row>
 
-            <Row  type='flex'
-                  justify='center'
-                  align='middle'>
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'>
 
               <Col span={22}>
-              
-                <Slider defaultValue={25} disabled={false} />
-              
+                <Slider min={0}
+                        max={this.model.track ? this.model.track.time : 0}
+                        value={this.ui.timer}
+                        disabled={false}
+                        onChange={this.sliderChange} />
               </Col>
 
               <Col span={2}>
-              
-                <span>{songLength}</span>
-              
+                <span>{this.trackTimeStatus}</span>
               </Col>
 
             </Row>
@@ -145,26 +156,64 @@ class Player extends Component {
           </Col>
 
         </Row>
-
       </div>
 
     );
+  }
+}
 
+class PlayerUI {
+  @observable isPaused = false;
+  @observable timer = 0;
+
+  iconTypes = {
+    pause: 'pause',
+    play: 'caret-right'
   }
 
+  @action
+  updateSongState () {
+    this.isPaused = !this.isPaused;
+  }
+
+  @action
+  updateTimer (value) {
+    this.timer = value;
+  }
+
+  @action
+  playTrack (trackLength) {
+    setInterval(() => {
+      if (!this.isPaused && this.timer < trackLength) {
+        this.timer++;
+      }
+    }, 1000);
+  }
+
+  secondsToStringTime = (time) => {
+    return `${parseInt(time / 60)}:${time % 60}`;
+  }
+
+  getIconType = () => {
+    return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
+  }
 }
 
 export default Player;
 
 class PlayerModel {
   @observable
-  currentSong = null;
+  track;
 
-  find(songId) {
-     this.fetch(songId).then(song => this.currentSong = song);
+  init = (songId) => {
+    return this.fetchTrack(songId);
   }
 
-  fetch(songId) {
+  find = (songId) => {
+    return this.fetch(songId).then(song => this.currentSong = song);
+  }
+
+  fetch = (songId) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const matchedSong = data.filter(song => song.id === songId);

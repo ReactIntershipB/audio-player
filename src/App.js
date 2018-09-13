@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Mediator from './services/Mediator';
 
 import Playlist from './components/Playlist/Playlist';
 import Searcher from './components/Searcher/Searcher';
 import Player from './components/Player/Player';
 
-
-class App extends Component {
-  render() {
+class App extends React.Component {
+  render () {
     return (
       <div>
         <Searcher />

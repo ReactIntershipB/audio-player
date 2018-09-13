@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
-
+import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
+import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
 import './Searcher.css';
 
+@observer
 export default class Searcher extends Component {
-
-    state = {
-        inputValue: '',
-        filterName: '1st filter'
+    constructor() {
+        super();
+        this.ui = new SearcherUI();
+        this.model = new SearcherModel();
     }
 
-    get dropdownMenu() {
+    get dropdownMenu () {
         return (
-            <Menu 
-                className='dropdown-menu' 
-                value={this.state.filterName}
+            <Menu
+                className='dropdown-menu'
+                value={this.ui.filterName}
                 onClick={this.onFilterClick}
             >
                 <Menu.Item key="0" value='1st filter'>
@@ -27,50 +30,47 @@ export default class Searcher extends Component {
                     3rd filter
                 </Menu.Item>
             </Menu>
-        )
+        );
     };
 
-    get addonSearchIcon() {
+    get addonSearchIcon () {
         return (
             <Icon type="search" />
-        )
+        );
     };
 
-    onInputChange = e => {
-        console.log(e.target.value);
-        this.setState({
-            inputValue: e.target.value
-        })
+    onInputChange = (e) => {
+        const value = e.target.value;
+        this.ui.setValue(value);
     }
 
     onFilterClick = (e) => {
-        console.log(e.item.props.value);
-        this.setState({
-            filterName: e.item.props.value
-        })
+        const value = e.item.props.value;
+        this.ui.setFilterName(value);
     }
 
     onSubmitClick = () => {
-        if (this.state.inputValue !== '') {
-            console.log(this.state.inputValue);
-            this.setState({
-                inputValue: ''
-            })
+        const { value } = this.ui;
+
+        if (value !== '') {
+            console.log('input value: ' + value);
+            this.model.find(value);
+            this.ui.resetValue();
         }
     }
 
-    render() {
+    render () {
         return (
         <div className='searcher-wrapper'>
-            <Input 
+            <Input
                 placeholder="Find some music..."
                 className="searcher-input"
                 onChange={this.onInputChange}
-                value={this.state.inputValue}
-                addonAfter={this.addonSearchIcon} 
+                value={this.ui.value}
+                addonAfter={this.addonSearchIcon}
             />
-            <Dropdown 
-                className='dropdown' 
+            <Dropdown
+                className='dropdown'
                 overlay={this.dropdownMenu}
             >
                 <a className="ant-dropdown-link" href="#">
@@ -82,6 +82,30 @@ export default class Searcher extends Component {
                 onClick={this.onSubmitClick}
             >Submit</Button>
         </div>
-        )
+        );
+    }
+}
+
+class SearcherUI {
+    @observable
+    value = '';
+
+    @observable
+    filterName = '1st filter';
+
+    @action
+    setValue = (value) => {
+        this.value = value;
+    }
+
+    @action
+    setFilterName = (value) => {
+        console.log(value);
+        this.filterName = value;
+    }
+
+    @action
+    resetValue = () => {
+        this.value = '';
     }
 }
