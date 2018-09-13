@@ -1,11 +1,11 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
+import axios from 'axios';
 
-import { CORS_ALLOW_URL, BASE_URL } from "../config/api_config";
+import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
 
 export class Model {
     @observable isInitialized = false;
 
-    @action
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
     @action
@@ -14,5 +14,4 @@ export class Model {
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }
-
 }

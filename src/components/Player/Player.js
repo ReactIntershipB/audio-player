@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
@@ -43,7 +43,7 @@ class Player extends React.Component {
     return this.model.track ? this.model.track.title : '';
   }
 
-  render () {
+  render() {
     return (
 
       <div className='player'>
