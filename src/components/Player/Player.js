@@ -19,6 +19,7 @@ class Player extends React.Component {
       const initPromise = this.model.init(this.props.mediator.currentSongId);
       initPromise.then(() => {
         this.ui.playTrack(this.model.track.time);
+        console.log(this.ui);
       });
     });
   }

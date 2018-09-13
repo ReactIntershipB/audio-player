@@ -11,7 +11,7 @@ export class Model {
     @action
     getSongsFromAPI = (term, filterName) => {
         return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
-            .then(res => console.log(res.data))
+            .then(res => res.data)
             .catch(err => console.log(err));
     }
 }
