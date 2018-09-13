@@ -4,7 +4,6 @@ import { Input, Dropdown, Icon, Menu, Button } from 'antd';
 import './Searcher.css';
 
 export default class Searcher extends Component {
-
     state = {
         inputValue: '',
         filterName: '1st filter'
@@ -70,7 +69,7 @@ export default class Searcher extends Component {
                 addonAfter={this.addonSearchIcon}
             />
             <Dropdown
-                className='dropdown' 
+                className='dropdown'
                 overlay={this.dropdownMenu}
             >
                 <a className="ant-dropdown-link" href="#">
