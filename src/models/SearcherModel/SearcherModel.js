@@ -67,13 +67,3 @@ const data = [
         time: '03:18'
     }
 ];
-
-// this.model = new Model();
-// @observable term = '';
-
-// @action
-// findSongs(term) {
-//     this.model.getSongsFromAPI(this.model.getAPIBaseURL, term)
-//         .then(songsRes => console.log(songsRes))
-//         .catch(err => console.log(err));
-// }
