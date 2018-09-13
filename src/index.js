@@ -9,7 +9,8 @@ import './index.css';
 ReactDOM.render(
    <BrowserRouter>
      <Router />
-   </BrowserRouter>, 
+   </BrowserRouter>
+   ,
    document.getElementById('root')
 );
 registerServiceWorker();

@@ -1,8 +1,5 @@
+import { observable } from 'mobx';
 
-import { observable } from "mobx";
-
-class Model {
+export class Model {
     @observable isInitialized = false;
 }
-
-export class {Model};

@@ -10,10 +10,10 @@ export default class Searcher extends Component {
         filterName: '1st filter'
     }
 
-    get dropdownMenu() {
+    get dropdownMenu () {
         return (
-            <Menu 
-                className='dropdown-menu' 
+            <Menu
+                className='dropdown-menu'
                 value={this.state.filterName}
                 onClick={this.onFilterClick}
             >
@@ -27,27 +27,27 @@ export default class Searcher extends Component {
                     3rd filter
                 </Menu.Item>
             </Menu>
-        )
+        );
     };
 
-    get addonSearchIcon() {
+    get addonSearchIcon () {
         return (
             <Icon type="search" />
-        )
+        );
     };
 
     onInputChange = e => {
         console.log(e.target.value);
         this.setState({
             inputValue: e.target.value
-        })
+        });
     }
 
     onFilterClick = (e) => {
         console.log(e.item.props.value);
         this.setState({
             filterName: e.item.props.value
-        })
+        });
     }
 
     onSubmitClick = () => {
@@ -55,21 +55,21 @@ export default class Searcher extends Component {
             console.log(this.state.inputValue);
             this.setState({
                 inputValue: ''
-            })
+            });
         }
     }
 
-    render() {
+    render () {
         return (
         <div className='searcher-wrapper'>
-            <Input 
+            <Input
                 placeholder="Find some music..."
                 className="searcher-input"
                 onChange={this.onInputChange}
                 value={this.state.inputValue}
-                addonAfter={this.addonSearchIcon} 
+                addonAfter={this.addonSearchIcon}
             />
-            <Dropdown 
+            <Dropdown
                 className='dropdown' 
                 overlay={this.dropdownMenu}
             >
@@ -82,6 +82,6 @@ export default class Searcher extends Component {
                 onClick={this.onSubmitClick}
             >Submit</Button>
         </div>
-        )
+        );
     }
 }
