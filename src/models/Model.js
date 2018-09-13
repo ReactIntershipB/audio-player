@@ -9,8 +9,8 @@ export class Model {
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
     @action
-    getSongsFromAPI = (getAPIBaseURL, term) => {
-        return axios.get(`${getAPIBaseURL}${term}`)
+    getSongsFromAPI = (term, filterName) => {
+        return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
             .then(res => console.log(res.data))
             .catch(err => console.log(err));
     }

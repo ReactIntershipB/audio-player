@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
-import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
+
 import './Searcher.css';
+import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
 
 @observer
 export default class Searcher extends Component {
     constructor() {
         super();
+
         this.ui = new SearcherUI();
         this.model = new SearcherModel();
     }
@@ -20,14 +22,14 @@ export default class Searcher extends Component {
                 value={this.ui.filterName}
                 onClick={this.onFilterClick}
             >
-                <Menu.Item key="0" value='1st filter'>
-                    1st filter
+                <Menu.Item key="0" value='artist'>
+                    Artist
                 </Menu.Item>
-                <Menu.Item key="1" value='2nd filter'>
-                    2nd filter
+                <Menu.Item key="1" value='album'>
+                    Album
                 </Menu.Item>
-                <Menu.Item key="2" value='3rd filter'>
-                    3rd filter
+                <Menu.Item key="2" value='track'>
+                    Track
                 </Menu.Item>
             </Menu>
         );
@@ -39,34 +41,31 @@ export default class Searcher extends Component {
         );
     };
 
-    onInputChange = (e) => {
-        const value = e.target.value;
-        this.ui.setValue(value);
+    onInputChange = e => {
+        this.model.term = e.target.value;
     }
 
-    onFilterClick = (e) => {
-        const value = e.item.props.value;
-        this.ui.setFilterName(value);
+    onFilterClick = e => {
+        console.log(e.item.props.value);
+        this.model.filterName = e.item.props.value;
     }
 
-    onSubmitClick = () => {
-        const { value } = this.ui;
-
-        if (value !== '') {
-            console.log('input value: ' + value);
-            this.model.find(value);
-            this.ui.resetValue();
+    onSubmitClick = e => {
+        e.preventDefault();
+        if (this.model.term !== '') {
+            this.model.findSongs(this.model.term, this.model.filterName);
+            this.model.term = '';
         }
     }
 
     render () {
         return (
-        <div className='searcher-wrapper'>
+        <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
             <Input
                 placeholder="Find some music..."
                 className="searcher-input"
                 onChange={this.onInputChange}
-                value={this.ui.value}
+                value={this.model.term}
                 addonAfter={this.addonSearchIcon}
             />
             <Dropdown
@@ -79,9 +78,12 @@ export default class Searcher extends Component {
             </Dropdown>
             <Button
                 type="primary"
+                disabled={!this.model.term}
                 onClick={this.onSubmitClick}
-            >Submit</Button>
-        </div>
+            >
+                Submit
+            </Button>
+        </form>
         );
     }
 }
