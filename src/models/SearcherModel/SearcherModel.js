@@ -1,5 +1,5 @@
 import { Model } from './../Model';
-import { observable, computed, autorun } from 'mobx';
+import { observable, action, autorun } from 'mobx';
 
 export class SearcherModel extends Model {
     constructor() {
@@ -8,22 +8,14 @@ export class SearcherModel extends Model {
         autorun(this.fetchData);
     }
 
-    @observable
-    data = [];
+    @observable term = '';
+    @observable filterName = 'artist';
 
-    @observable
-    value = '';
-
-    find = (value) => {
-        console.log('Value in model: ' + value);
-        this.value = value;
-    }
-
-    @computed
-    get filteredData() {
-        return this.data.filter((item) => (
-            item.title.toLowerCase().includes(this.value.toLowerCase())
-        ));
+    @action
+    findSongs(term, filterName) {
+        this.model.getSongsFromAPI(term, filterName)
+            .then(songsRes => console.log(songsRes))
+            .catch(err => console.log(err));
     }
 
     fetchData = () => {
