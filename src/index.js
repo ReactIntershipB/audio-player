@@ -7,10 +7,10 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 ReactDOM.render(
-   <BrowserRouter>
-     <Router />
-   </BrowserRouter>
-   ,
-   document.getElementById('root')
+  <BrowserRouter>
+    <Router />
+  </BrowserRouter>
+  ,
+  document.getElementById('root')
 );
 registerServiceWorker();

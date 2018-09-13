@@ -10,8 +10,8 @@ export class Model {
 
     @action
     getSongsFromAPI = (term, filterName) => {
-        return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
-            .then(res => res.data)
-            .catch(err => console.log(err));
+      return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
+        .then(res => res.data)
+        .catch(err => console.log(err));
     }
 }
