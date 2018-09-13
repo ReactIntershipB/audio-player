@@ -62,7 +62,6 @@ export default class Playlist extends Component {
             );
           })}
         </div>
-
       </div>
     );
   }
