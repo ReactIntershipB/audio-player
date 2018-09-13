@@ -55,13 +55,15 @@ class Player extends React.Component {
              align='middle'>
 
           <Col span={2}>
+
             <Avatar shape='square'
               size={80}
               icon='star' />
 
             <br />
 
-            <span>{this.trackTitle}</span>
+            <span>Album title</span>
+
           </Col>
 
           <Col span={20}>
@@ -70,12 +72,27 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
+                <span className='title'>{this.trackTitle}</span>
+            </Row>
 
-              <Col span={2}>
-                <Button href='#'>shuffle</Button>
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'>
+
+              <Col
+                span={2}
+                className='btns'>
+
+                <Button href='#'>
+                  <i className="fas fa-random"></i>
+                </Button>
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
                         size={'large'}
                         icon='backward'
@@ -83,14 +100,20 @@ class Player extends React.Component {
                 />
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
                         size={'large'}
                         icon={this.ui.getIconType()}
                         onClick={() => this.ui.updateSongState()} />
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
                         size={'large'}
                         icon='forward'
@@ -98,8 +121,10 @@ class Player extends React.Component {
                 />
               </Col>
 
-              <Col span={2}>
-                <Button href='#'>repeat</Button>
+              <Col span={2} className='btns'>
+                <Button href='#'>
+                  <i className="fas fa-redo-alt"></i>
+                </Button>
               </Col>
 
             </Row>
