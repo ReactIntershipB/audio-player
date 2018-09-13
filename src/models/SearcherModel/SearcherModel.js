@@ -40,30 +40,30 @@ export class SearcherModel extends Model {
 const data = [
     {
         id: 0,
-        title: 'Song',
-        author: 'Author1',
+        title: 'No trailing space',
+        author: 'Linter',
         album: 'Chocolate cake dessert sweet roll jujubes',
-        time: '03:14'
+        time: 194
     },
     {
         id: 1,
-        title: 'Banana Song',
-        author: 'Author2',
+        title: 'I\'m forgotten',
+        author: 'Var',
         album: 'Lollipop chupa chups tart bonbon',
-        time: '02:30'
+        time: 160
     },
     {
         id: 2,
-        title: 'Song title',
-        author: 'Author3',
+        title: 'I don\'t have this',
+        author: 'Arrow function',
         album: 'Gummi bears wafer pastry macaroon icing biscuit',
-        time: '04:02'
+        time: 242
     },
     {
         id: 3,
-        title: 'Despacito',
-        author: 'Author4',
+        title: 'Deadline is coming',
+        author: 'Scrum master',
         album: 'Jujubes caramels jelly carrot cake',
-        time: '03:18'
+        time: 198
     }
 ];

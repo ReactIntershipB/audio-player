@@ -1,30 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
+import { observable, action, autorun } from 'mobx';
+import { PlayerModel } from '../../models/PlayerModel/PlayerModel';
 import './Player.css';
-
-const data = {
-  id: 2,
-  title: 'Tytuł3',
-  author: 'Author3',
-  album: 'Gummi bears wafer pastry macaroon icing biscuit',
-  time: 200
-};
 
 @observer
 class Player extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.ui = new PlayerUI();
     this.model = new PlayerModel();
   }
 
-  componentDidMount () {
-    const initPromise = this.model.init();
-    initPromise.then(() => {
-      this.ui.playTrack(this.model.track.time);
+  componentDidMount() {
+    autorun(() => {
+      const initPromise = this.model.init(this.props.mediator.currentSongId);
+      initPromise.then(() => {
+        this.ui.playTrack(this.model.track.time);
+      });
     });
+  }
+
+  handleNextSongClick = () => {
+    this.props.mediator.getNextSong();
+  }
+
+  handlePreviousSongClick = () => {
+    this.props.mediator.getPreviousSong();
   }
 
   sliderChange = (value) => {
@@ -45,15 +49,12 @@ class Player extends React.Component {
 
   render() {
     return (
-
       <div className='player'>
-        <Row
-          type='flex'
-          justify='center'
-          align='middle'>
+        <Row type='flex'
+             justify='center'
+             align='middle'>
 
           <Col span={2}>
-
             <Avatar shape='square'
               size={80}
               icon='star' />
@@ -61,7 +62,6 @@ class Player extends React.Component {
             <br />
 
             <span>{this.trackTitle}</span>
-
           </Col>
 
           <Col span={20}>
@@ -72,40 +72,34 @@ class Player extends React.Component {
               align='middle'>
 
               <Col span={2}>
-
                 <Button href='#'>shuffle</Button>
-
               </Col>
 
               <Col span={2}>
-
                 <Button shape='circle'
-                  size={'large'}
-                  icon='backward'/>
-
+                        size={'large'}
+                        icon='backward'
+                        onClick={this.handlePreviousSongClick}
+                />
               </Col>
 
               <Col span={2}>
-
                 <Button shape='circle'
                         size={'large'}
                         icon={this.ui.getIconType()}
                         onClick={() => this.ui.updateSongState()} />
-
               </Col>
 
               <Col span={2}>
-
                 <Button shape='circle'
-                  size={'large'}
-                  icon='forward'/>
-
+                        size={'large'}
+                        icon='forward'
+                        onClick={this.handleNextSongClick}
+                />
               </Col>
 
               <Col span={2}>
-
                 <Button href='#'>repeat</Button>
-
               </Col>
 
             </Row>
@@ -116,19 +110,15 @@ class Player extends React.Component {
               align='middle'>
 
               <Col span={22}>
-
                 <Slider min={0}
                         max={this.model.track ? this.model.track.time : 0}
                         value={this.ui.timer}
                         disabled={false}
                         onChange={this.sliderChange} />
-
               </Col>
 
               <Col span={2}>
-
                 <span>{this.trackTimeStatus}</span>
-
               </Col>
 
             </Row>
@@ -136,16 +126,20 @@ class Player extends React.Component {
           </Col>
 
         </Row>
-
       </div>
 
     );
   }
 }
 
+Player.propTypes = {
+  mediator: PropTypes.object
+};
+
 class PlayerUI {
   @observable isPaused = false;
   @observable timer = 0;
+  intervalId;
 
   iconTypes = {
     pause: 'pause',
@@ -164,11 +158,22 @@ class PlayerUI {
 
   @action
   playTrack (trackLength) {
-    setInterval(() => {
+    this.resetTimeTrack();
+    this.intervalId = setInterval(() => {
       if (!this.isPaused && this.timer < trackLength) {
         this.timer++;
+      } else if (this.time >= trackLength) {
+        window.clearInterval(this.intervalId);
       }
     }, 1000);
+  }
+
+  resetTimeTrack = () => {
+    if (this.intervalId !== undefined || this.intervalId !== null) {
+        window.clearInterval(this.intervalId);
+        this.intervalId = null;
+    }
+    this.timer = 0;
   }
 
   secondsToStringTime = (time) => {
@@ -177,23 +182,6 @@ class PlayerUI {
 
   getIconType = () => {
     return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
-  }
-}
-
-class PlayerModel {
-  @observable track = null;
-
-  init = () => {
-    return this.fetchTrack();
-  }
-
-  fetchTrack = () => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            this.track = data;
-            resolve(true);
-        }, 2000);
-    });
   }
 }
 

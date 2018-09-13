@@ -1,39 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { List, Button, Avatar } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
-import './Playlist.css';
+import { observable, action, reaction } from 'mobx';
 
-const data = [
-    {
-        id: 0,
-        title: 'Tytuł1',
-        author: 'Author1',
-        album: 'Chocolate cake dessert sweet roll jujubes',
-        time: '03:14'
-    },
-    {
-        id: 1,
-        title: 'Tytuł2',
-        author: 'Author2',
-        album: 'Lollipop chupa chups tart bonbon',
-        time: '02:30'
-    },
-    {
-        id: 2,
-        title: 'Tytuł3',
-        author: 'Author3',
-        album: 'Gummi bears wafer pastry macaroon icing biscuit',
-        time: '04:02'
-    },
-    {
-        id: 3,
-        title: 'Tytuł4',
-        author: 'Author4',
-        album: 'Jujubes caramels jelly carrot cake',
-        time: '03:18'
-    }
-];
+import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
+import './Playlist.css';
 
 @observer
 class Playlist extends Component {
@@ -45,6 +17,30 @@ class Playlist extends Component {
 
     componentDidMount () {
         this.model.init();
+        reaction(() => this.props.mediator.currentSongPosition,
+                 (position) => this.setSongByPosition(position));
+    }
+
+    setSongByPosition(position) {
+            const alignedPosition = this.alignePosition(position);
+            const song = this.model.playlist[alignedPosition];
+            this.changeSong(song, alignedPosition);
+    }
+
+    alignePosition(position) {
+        if (position < 0) return this.model.playlist.length - 1;
+        if (position > this.model.playlist.length - 1) return 0;
+        return position;
+    }
+
+    changeSong(song, position) {
+        this.ui.updateCurrentSong(song.id);
+        this.props.mediator.setCurrentSong(song.id);
+        this.props.mediator.setCurrentSongPostion(position);
+    }
+
+    getSongPosition(song) {
+      return this.model.playlist.indexOf(song);
     }
 
     iconChange = (id) => {
@@ -64,7 +60,7 @@ class Playlist extends Component {
                              <div key={item.id}>
                             <List.Item>
                                     <List.Item.Meta
-                                        avatar={<Button type='primary' shape='circle' icon={this.iconChange(item.id)} size='large' onClick={() => this.ui.onSongClick(item.id)}/>}
+                                        avatar={<Button type="primary" shape="circle" icon={this.iconChange(item.id)} size="large" onClick={() => this.changeSong(item, this.getSongPosition(item))}/>}
                                         title={item.title}
                                         description={`${item.author}, ${item.album}`}
                                     />
@@ -80,33 +76,22 @@ class Playlist extends Component {
     }
 }
 
+Playlist.propTypes = {
+    mediator: PropTypes.object
+  };
+
 class PlaylistUI {
     @observable
-    currentlyPlaying = null;
+    currentlyPlaying;
+
+    currentSongPosition;
+
     @observable
     isPaused = false;
 
     @action
-    onSongClick = (id) => {
+    updateCurrentSong = (id) => {
         this.currentlyPlaying = id;
-    }
-}
-
-class PlaylistModel {
-    @observable
-    playlist = [];
-
-    init = () => {
-      return this.fetchPlaylist();
-    }
-
-    fetchPlaylist = () => {
-      return new Promise((resolve, reject) => {
-          setTimeout(() => {
-              this.playlist = data;
-              resolve(true);
-          }, 2000);
-      });
     }
 }
 
