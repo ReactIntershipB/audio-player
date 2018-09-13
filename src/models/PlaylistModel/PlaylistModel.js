@@ -16,7 +16,7 @@ export class PlaylistModel extends Model {
     }
 
     findSongs(term) {
-        this.model.getSongsFromAPI(this.model.getAPIBaseURL, term)
+        this.model.getSongsFromAPI(term, 'artist')
             .then(res => this.setPlaylist(res.data))
             .catch(err => console.log(err));
     }

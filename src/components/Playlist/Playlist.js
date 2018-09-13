@@ -54,7 +54,7 @@ export default class Playlist extends Component {
                 shape='circle'
                 icon={this.iconChange(item.id)}
                 size='large'
-                onClick={() => this.ui.setCurrentlyPlaying(item.id)}
+                onClick={() => this.changeSong(item, this.getSongPosition(item))}
             />
         );
     }
