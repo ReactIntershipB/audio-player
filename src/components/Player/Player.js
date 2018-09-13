@@ -1,10 +1,51 @@
 import React from 'react';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
+import { observer } from 'mobx-react';
+import { observable, action } from 'mobx';
 import './Player.css';
 
-class Player extends React.Component {
+const data =  {
+  id: 2,
+  title: "Tytuł3",
+  author: "Author3",
+  album: "Gummi bears wafer pastry macaroon icing biscuit",
+  time: 200
+};
 
-  render () {
+@observer
+class Player extends Component {
+
+  constructor() {
+    super();
+    this.ui = new PlayerUI();
+    this.model = new PlayerModel();
+  }
+  
+  componentDidMount() {
+    const initPromise = this.model.init();
+    initPromise.then(() => {
+      this.ui.playTrack(this.model.track.time)
+    });
+  }
+  
+  sliderChange = (value) => {
+    this.ui.updateTimer(value);
+  }
+  
+  get trackLength() {
+    return this.model.track ? this.model.track.time : 0;
+  }
+
+  get trackTimeStatus() {
+    return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
+  }
+
+  get trackTitle () {
+    return this.model.track ? this.model.track.title : '';
+  }
+
+  render() {
+    
     return (
 
       <div className='player'>
@@ -21,7 +62,7 @@ class Player extends React.Component {
 
             <br />
 
-            <span>Track 1</span>
+            <span>{this.trackTitle}</span>
 
           </Col>
 
@@ -48,9 +89,10 @@ class Player extends React.Component {
               <Col span={2}>
 
                 <Button shape='circle'
-                  size={'large'}
-                  icon='caret-right'/>
-
+                        size={'large'}
+                        icon={this.ui.getIconType()}
+                        onClick={() => this.ui.updateSongState()} />
+                          
               </Col>
 
               <Col span={2}>
@@ -76,14 +118,19 @@ class Player extends React.Component {
 
               <Col span={22}>
 
-                <Slider defaultValue={25} disabled={false} />
-
+              
+                <Slider min={0}
+                        max={this.model.track ? this.model.track.time : 0}
+                        value={this.ui.timer}
+                        disabled={false}
+                        onChange={this.sliderChange} />
+              
               </Col>
 
               <Col span={2}>
-
-                <span>2:05</span>
-
+              
+                <span>{this.trackTimeStatus}</span>
+              
               </Col>
 
             </Row>
@@ -95,6 +142,64 @@ class Player extends React.Component {
       </div>
 
     );
+  }
+}
+
+class PlayerUI {
+  
+  @observable isPaused = false;
+  @observable timer = 0;
+  
+  iconTypes = {
+    pause: 'pause',
+    play: 'caret-right'
+  }
+  
+  @action
+  updateSongState() {
+    this.isPaused = !this.isPaused;
+  }
+
+  @action
+  updateTimer(value) {
+    this.timer = value;
+  }
+  
+  @action
+  playTrack(trackLength) {
+    setInterval(() => {
+      if (!this.isPaused && this.timer < trackLength)
+        this.timer++;
+    }, 1000)
+  }
+
+  secondsToStringTime = (time) => {
+    return `${parseInt(time / 60)}:${time % 60}`;
+  }
+  
+  getIconType = () => {
+    return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
+  }
+}
+
+class PlayerModel {
+  
+  @observable track = null;
+  
+  
+  init = () => {
+    return this.fetchTrack();
+  }
+
+
+  fetchTrack = () => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            this.track = data;
+            console.debug('this.trackt', this.track)
+            resolve(true);
+        }, 2000);
+    });
   }
 }
 
