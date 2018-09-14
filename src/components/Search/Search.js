@@ -61,7 +61,7 @@ export default class Searcher extends Component {
     }
 
     get direction() {
-        return this.model.filterName === 'track' ? '/playlist' : '/search';
+        return this.model.filterName === 'album' ? '/search' : '/playlist';
     }
 
     render () {

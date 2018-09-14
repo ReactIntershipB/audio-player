@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, Button, Avatar } from 'antd';
+import { Avatar } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action, reaction } from 'mobx';
 
 import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
+import List from '../common/List';
 import './Playlist.css';
 
 @observer
@@ -22,9 +23,9 @@ class Playlist extends Component {
     }
 
     setSongByPosition(position) {
-            const alignedPosition = this.alignePosition(position);
-            const song = this.model.playlist[alignedPosition];
-            this.changeSong(song, alignedPosition);
+        const alignedPosition = this.alignePosition(position);
+        const song = this.model.playlist[alignedPosition];
+        this.changeSong(song, alignedPosition);
     }
 
     alignePosition(position) {
@@ -55,21 +56,7 @@ class Playlist extends Component {
                     <h2>Top Hits</h2>
                 </div>
                 <div>
-                        {this.model.playlist.map(item => {
-                         return (
-                             <div key={item.id}>
-                            <List.Item>
-                                    <List.Item.Meta
-                                        avatar={<Button type="primary" shape="circle" icon={this.iconChange(item.id)} size="large" onClick={() => this.changeSong(item, this.getSongPosition(item))}/>}
-                                        title={item.title}
-                                        description={`${item.author}, ${item.album}`}
-                                    />
-                                    <div>{item.time}</div>
-                            </List.Item>
-                            <hr />
-                            </div>
-                      );
-                      })}
+                    <List buttonType={this.iconChange} onClick={this.setSongByPosition} data={this.model.playlist} getDescription={this.ui.getDescription}/>
                 </div>
             </div>
         );
@@ -78,7 +65,7 @@ class Playlist extends Component {
 
 Playlist.propTypes = {
     mediator: PropTypes.object
-  };
+};
 
 class PlaylistUI {
     @observable
@@ -92,6 +79,10 @@ class PlaylistUI {
     @action
     updateCurrentSong = (id) => {
         this.currentlyPlaying = id;
+    }
+
+    getDescription(item) {
+        return `${item.author}, ${item.album}`;
     }
 }
 
