@@ -69,10 +69,8 @@ export default class Playlist extends Component {
                 <div>
                     <List buttonType={this.iconChange} onClick={this.setSongByPosition} data={this.model.playlist} getDescription={this.ui.getDescription}/>
                 </div>
+                </div>
               );
-            })}
-          </div>
-      );
     }
 }
 
