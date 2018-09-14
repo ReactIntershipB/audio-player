@@ -7,6 +7,6 @@ export class SearcherModel extends Model {
 
     @action
     find(term, filterName) {
-        this.getData(term, filterName);
+      this.getData(term, filterName);
     }
 }
