@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action } from 'mobx';
 
 import './Searcher.css';
 import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
@@ -11,29 +10,29 @@ export default class Searcher extends Component {
   constructor() {
     super();
 
-    this.ui = new SearcherUI();
     this.model = new SearcherModel();
   }
 
     get dropdownMenu() {
         return (
-        <Menu
-            className='dropdown-menu'
-            value={this.model.filterName}
-            onClick={this.onFilterClick}
-        >
-        <Menu.Item key="0" value='artist'>
-            Artist
-        </Menu.Item>
-        <Menu.Item key="1" value='album'>
-                    Album
-        </Menu.Item>
-        <Menu.Item key="2" value='track'>
-                    Track
-        </Menu.Item>
-      </Menu>
-    );
-  };
+            <Menu
+                className='dropdown-menu'
+                value={this.model.filterName}
+                onClick={this.onFilterClick}
+                selectedKeys={[this.model.filterName]}
+            >
+            <Menu.Item key="artist" value='artist'>
+                Artist
+            </Menu.Item>
+            <Menu.Item key="album" value='album'>
+                Album
+            </Menu.Item>
+            <Menu.Item key="track" value='track'>
+                Track
+            </Menu.Item>
+        </Menu>
+        );
+    };
 
     get addonSearchIcon() {
         return (
@@ -46,7 +45,6 @@ export default class Searcher extends Component {
     }
 
     onFilterClick = e => {
-      console.log(e.item.props.value);
       this.model.filterName = e.item.props.value;
     }
 
@@ -86,33 +84,9 @@ export default class Searcher extends Component {
             disabled={!this.model.term}
             onClick={this.onSubmitClick}
           >
-                Submit
+            Submit
           </Button>
         </form>
       );
-    }
-}
-
-class SearcherUI {
-    @observable
-    value = '';
-
-    @observable
-    filterName = '1st filter';
-
-    @action
-    setValue = (value) => {
-      this.value = value;
-    }
-
-    @action
-    setFilterName = (value) => {
-      console.log(value);
-      this.filterName = value;
-    }
-
-    @action
-    resetValue = () => {
-      this.value = '';
     }
 }
