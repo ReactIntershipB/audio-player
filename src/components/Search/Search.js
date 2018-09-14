@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action } from 'mobx';
+import { Redirect } from 'react-router-dom';
 
-import './Searcher.css';
-import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
+import './Search.css';
+import { SearchModel } from '../../models/SearchModel/SearchModel';
 
 @observer
 export default class Searcher extends Component {
     constructor() {
         super();
 
-        this.ui = new SearcherUI();
-        this.model = new SearcherModel();
+        this.ui = new SearchUI();
+        this.model = new SearchModel();
     }
 
     get dropdownMenu () {
@@ -55,7 +56,12 @@ export default class Searcher extends Component {
         if (this.model.term !== '') {
             this.model.findSongs(this.model.term, this.model.filterName);
             this.model.term = '';
+            this.ui.updateRedirect();
         }
+    }
+
+    get direction() {
+        return this.model.filterName === 'track' ? '/playlist' : '/search';
     }
 
     render () {
@@ -83,17 +89,20 @@ export default class Searcher extends Component {
             >
                 Submit
             </Button>
+            {this.ui.redirect && <Redirect to={this.direction}/>}
         </form>
         );
     }
 }
 
-class SearcherUI {
+class SearchUI {
     @observable
     value = '';
 
     @observable
     filterName = '1st filter';
+
+    redirect = false;
 
     @action
     setValue = (value) => {
@@ -109,5 +118,12 @@ class SearcherUI {
     @action
     resetValue = () => {
         this.value = '';
+    }
+
+    updateRedirect() {
+        this.redirect = true;
+        setTimeout(() => {
+            this.redirect = false;
+        }, 0);
     }
 }

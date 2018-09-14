@@ -1,7 +1,7 @@
-import { Model } from './../Model';
+import { Model } from '../Model';
 import { observable, action } from 'mobx';
 
-export class SearcherModel extends Model {
+export class SearchModel extends Model {
     constructor() {
         super();
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from './router';
+import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -8,7 +8,7 @@ import './index.css';
 
 ReactDOM.render(
    <BrowserRouter>
-     <Router />
+     <App />
    </BrowserRouter>
    ,
    document.getElementById('root')
