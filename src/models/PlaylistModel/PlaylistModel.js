@@ -10,9 +10,9 @@ export class PlaylistModel extends Model {
     }
 
     find(term) {
-        this.getData(term, 'artist')
-            .then(res => this.setPlaylist(res.data))
-            .catch(err => console.log(err));
+      this.getData(term, 'artist')
+        .then(res => this.setPlaylist(res.data))
+        .catch(err => console.log(err));
     }
 
     @action
