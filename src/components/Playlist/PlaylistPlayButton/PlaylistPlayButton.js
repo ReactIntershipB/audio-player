@@ -1,21 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { Button } from 'antd';
 
-export const PlaylistPlayButton = (props) => {
-  return (
-    <Button
-      type='primary'
-      shape='circle'
-      icon={props.icon}
-      size='large'
-      onClick={props.onClick}
-    />
-  );
+export class PlaylistPlayButton extends Component {
+  onClickHandler = (item) => {
+    console.log(item);
+  }
+
+  render() {
+    return (
+      <Button
+        type='primary'
+        shape='circle'
+        icon={this.props.icon}
+        size='large'
+        onClick={() => this.onClickHandler(this.props.item)}
+      />
+    );
+  }
 };
 
 PlaylistPlayButton.propTypes = {
   item: PropTypes.object,
-  icon: PropTypes.string,
-  onClick: PropTypes.function
+  icon: PropTypes.string
 };

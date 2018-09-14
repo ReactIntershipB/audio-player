@@ -49,7 +49,7 @@ export default class Playlist extends Component {
                       <PlaylistPlayButton
                         item={item}
                         icon={this.iconChange(item.id)}
-                        onClick={this.onClickHandler(item)}
+                        onClick={() => this.onClickHandler(item)}
                       />
                     }
                     title={item.title}
