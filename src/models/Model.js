@@ -1,4 +1,4 @@
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 import axios from 'axios';
 
 import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
@@ -10,9 +10,13 @@ export class Model {
 
     getData = (term, filterName) => {
       return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
-        .then(res => {
-          this.data = res.data.data;
-        })
+        .then(res => this.setData(res.data.data))
         .catch(err => console.log(err));
+    }
+
+    @action
+    setData = (data) => {
+        console.log(data);
+        this.data = data;
     }
 }

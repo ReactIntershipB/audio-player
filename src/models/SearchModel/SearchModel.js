@@ -1,7 +1,7 @@
-import { Model } from './../Model';
+import { Model } from '../Model';
 import { observable, action } from 'mobx';
 
-export class SearcherModel extends Model {
+export class SearchModel extends Model {
     @observable term = '';
     @observable filterName = 'artist';
 
@@ -10,3 +10,5 @@ export class SearcherModel extends Model {
       this.getData(term, filterName);
     }
 }
+
+export const searchModel = new SearchModel();
