@@ -19,6 +19,7 @@ class Player extends React.Component {
       const initPromise = this.model.init(this.props.mediator.currentSongId);
       initPromise.then(() => {
         this.ui.playTrack(this.model.track.time);
+        console.log(this.ui);
       });
     });
   }
@@ -51,17 +52,19 @@ class Player extends React.Component {
     return (
       <div className='player'>
         <Row type='flex'
-             justify='center'
-             align='middle'>
+          justify='center'
+          align='middle'>
 
           <Col span={2}>
+
             <Avatar shape='square'
               size={80}
               icon='star' />
 
             <br />
 
-            <span>{this.trackTitle}</span>
+            <span>Album title</span>
+
           </Col>
 
           <Col span={20}>
@@ -70,36 +73,59 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
+              <span className='title'>{this.trackTitle}</span>
+            </Row>
 
-              <Col span={2}>
-                <Button href='#'>shuffle</Button>
+            <Row
+              type='flex'
+              justify='center'
+              align='middle'>
+
+              <Col
+                span={2}
+                className='btns'>
+
+                <Button>
+                  <i className="fas fa-random"></i>
+                </Button>
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
-                        size={'large'}
-                        icon='backward'
-                        onClick={this.handlePreviousSongClick}
+                  size={'large'}
+                  icon='backward'
+                  onClick={this.handlePreviousSongClick}
                 />
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
-                        size={'large'}
-                        icon={this.ui.getIconType()}
-                        onClick={() => this.ui.updateSongState()} />
+                  size={'large'}
+                  icon={this.ui.getIconType()}
+                  onClick={() => this.ui.updateSongState()} />
               </Col>
 
-              <Col span={2}>
+              <Col
+                span={2}
+                className='btns'>
+
                 <Button shape='circle'
-                        size={'large'}
-                        icon='forward'
-                        onClick={this.handleNextSongClick}
+                  size={'large'}
+                  icon='forward'
+                  onClick={this.handleNextSongClick}
                 />
               </Col>
 
-              <Col span={2}>
-                <Button href='#'>repeat</Button>
+              <Col span={2} className='btns'>
+                <Button>
+                  <i className="fas fa-redo-alt"></i>
+                </Button>
               </Col>
 
             </Row>
@@ -111,10 +137,10 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                        max={this.model.track ? this.model.track.time : 0}
-                        value={this.ui.timer}
-                        disabled={false}
-                        onChange={this.sliderChange} />
+                  max={this.model.track ? this.model.track.time : 0}
+                  value={this.ui.timer}
+                  disabled={false}
+                  onChange={this.sliderChange} />
               </Col>
 
               <Col span={2}>
@@ -170,8 +196,8 @@ class PlayerUI {
 
   resetTimeTrack = () => {
     if (this.intervalId !== undefined || this.intervalId !== null) {
-        window.clearInterval(this.intervalId);
-        this.intervalId = null;
+      window.clearInterval(this.intervalId);
+      this.intervalId = null;
     }
     this.timer = 0;
   }

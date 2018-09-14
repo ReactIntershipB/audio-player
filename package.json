@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.3.1",
     "antd": "^3.9.2",
     "autoprefixer": "7.1.6",
     "axios": "^0.18.0",
@@ -51,7 +52,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint ./src/*"
+    "lint": "eslint ./src/**/*"
   },
   "jest": {
     "collectCoverageFrom": [

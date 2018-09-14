@@ -1,17 +1,18 @@
-import { observable, action } from 'mobx';
+import { observable } from 'mobx';
 import axios from 'axios';
 
 import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
 
 export class Model {
-    @observable isInitialized = false;
+    @observable data = [];
 
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
-    @action
-    getSongsFromAPI = (term, filterName) => {
+    getData = (term, filterName) => {
         return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
-            .then(res => console.log(res.data))
+            .then(res => {
+                this.data = res.data.data;
+            })
             .catch(err => console.log(err));
     }
 }

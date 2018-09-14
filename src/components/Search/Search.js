@@ -9,89 +9,93 @@ import { SearchModel } from '../../models/SearchModel/SearchModel';
 
 @observer
 export default class Searcher extends Component {
-    constructor() {
-        super();
+  constructor() {
+    super();
+    this.ui = new SearchUI();
+    this.model = new SearchModel();
+  }
 
-        this.ui = new SearchUI();
-        this.model = new SearchModel();
-    }
-
-    get dropdownMenu () {
+    get dropdownMenu() {
         return (
-            <Menu
-                className='dropdown-menu'
-                value={this.ui.filterName}
-                onClick={this.onFilterClick}
-            >
-                <Menu.Item key="0" value='artist'>
-                    Artist
-                </Menu.Item>
-                <Menu.Item key="1" value='album'>
+        <Menu
+            className='dropdown-menu'
+            value={this.model.filterName}
+            onClick={this.onFilterClick}
+        >
+        <Menu.Item key="0" value='artist'>
+            Artist
+        </Menu.Item>
+        <Menu.Item key="1" value='album'>
                     Album
-                </Menu.Item>
-                <Menu.Item key="2" value='track'>
+        </Menu.Item>
+        <Menu.Item key="2" value='track'>
                     Track
-                </Menu.Item>
-            </Menu>
-        );
-    };
+        </Menu.Item>
+      </Menu>
+    );
+  };
 
-    get addonSearchIcon () {
+    get addonSearchIcon() {
         return (
             <Icon type="search" />
         );
     };
 
     onInputChange = e => {
-        this.model.term = e.target.value;
+      this.model.term = e.target.value;
     }
 
     onFilterClick = e => {
-        console.log(e.item.props.value);
-        this.model.filterName = e.item.props.value;
+      console.log(e.item.props.value);
+      this.model.filterName = e.item.props.value;
     }
 
     onSubmitClick = e => {
         e.preventDefault();
-        if (this.model.term !== '') {
-            this.model.findSongs(this.model.term, this.model.filterName);
-            this.model.term = '';
+        const { term, filterName } = this.model;
+        if (term !== '') {
+            this.model.find(term, filterName);
+            this.clearInput();
             this.ui.updateRedirect();
         }
+    }
+
+    clearInput = () => {
+        this.model.term = '';
     }
 
     get direction() {
         return this.model.filterName === 'album' ? '/search' : '/playlist';
     }
 
-    render () {
+    render() {
         return (
         <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
-            <Input
-                placeholder="Find some music..."
-                className="searcher-input"
-                onChange={this.onInputChange}
-                value={this.model.term}
-                addonAfter={this.addonSearchIcon}
-            />
-            <Dropdown
-                className='dropdown'
-                overlay={this.dropdownMenu}
-            >
-                <a className="ant-dropdown-link">
-                    <Icon type="down" />
-                </a>
-            </Dropdown>
-            <Button
-                type="primary"
-                disabled={!this.model.term}
-                onClick={this.onSubmitClick}
-            >
+          <Input
+            placeholder="Find some music..."
+            className="searcher-input"
+            onChange={this.onInputChange}
+            value={this.model.term}
+            addonAfter={this.addonSearchIcon}
+          />
+          <Dropdown
+            className='dropdown'
+            overlay={this.dropdownMenu}
+          >
+            <a className="ant-dropdown-link" href="#">
+              <Icon type="down" />
+            </a>
+          </Dropdown>
+          <Button
+            type="primary"
+            disabled={!this.model.term}
+            onClick={this.onSubmitClick}
+          >
                 Submit
-            </Button>
-            {this.ui.redirect && <Redirect to={this.direction}/>}
+          </Button>
+          {this.ui.redirect && <Redirect to={this.direction}/>}
         </form>
-        );
+      );
     }
 }
 
@@ -106,18 +110,18 @@ class SearchUI {
 
     @action
     setValue = (value) => {
-        this.value = value;
+      this.value = value;
     }
 
     @action
     setFilterName = (value) => {
-        console.log(value);
-        this.filterName = value;
+      console.log(value);
+      this.filterName = value;
     }
 
     @action
     resetValue = () => {
-        this.value = '';
+      this.value = '';
     }
 
     updateRedirect() {
