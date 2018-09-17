@@ -10,14 +10,17 @@ export class Model {
 
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
-    getData = (term, filterName) => {
-        this.toggleLoading();
-        return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
-            .then(res => {
-                this.data = res.data.data;
-                this.toggleLoading();
-            })
-            .catch(err => console.log(err));
+    getData = (apiQuery) => {
+      this.toggleLoading();
+      return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
+        .then(res => {
+            this.data = res.data.data;
+            this.toggleLoading();
+        })
+        .catch(err => {
+            console.log(err);
+            this.toggleLoading();
+        });
     }
 
     setData = data => {

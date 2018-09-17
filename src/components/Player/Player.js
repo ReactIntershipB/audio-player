@@ -3,15 +3,25 @@ import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
-
 import './Player.css';
+import { PlayIcon } from './../common/PlayIcon';
 
-@inject('playerModel')
+@inject('appUI', 'songModel')
 @observer
 class Player extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.debug('props', props);
     this.ui = new PlayerUI();
+    // this.props.songModel = new songModel();
+  }
+
+  handleNextSongClick = () => {
+    ;
+  }
+
+  handlePreviousSongClick = () => {
+    ;
   }
 
   sliderChange = (value) => {
@@ -19,7 +29,7 @@ class Player extends React.Component {
   }
 
   get trackLength () {
-     return this.props.playerModel.track ? this.props.playerModel.track.time : 0;
+     return this.props.songModel.track ? this.props.songModel.track.time : 0;
   }
 
   get trackTimeStatus () {
@@ -27,7 +37,7 @@ class Player extends React.Component {
   }
 
   get trackTitle () {
-    return this.props.playerModel.track ? this.props.playerModel.track.title : '';
+    return this.props.songModel.track ? this.props.songModel.track.title : '';
   }
 
   render() {
@@ -38,14 +48,13 @@ class Player extends React.Component {
           align='middle'>
 
           <Col span={2}>
-
             <Avatar shape='square'
               size={80}
               icon='star' />
 
             <br />
 
-            <span>Album title</span>
+            <span>jhjhjhjh</span>
 
           </Col>
 
@@ -87,10 +96,8 @@ class Player extends React.Component {
                 span={2}
                 className='btns'>
 
-                <Button shape='circle'
-                  size={'large'}
-                  icon={this.ui.getIconType()}
-                  onClick={() => this.ui.updateSongState()} />
+                <PlayIcon />
+
               </Col>
 
               <Col
@@ -119,7 +126,7 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                  max={this.props.playerModel.track ? this.props.playerModel.track.time : 0}
+                  max={this.props.songModel.track ? this.props.songModel.track.time : 0}
                   value={this.ui.timer}
                   disabled={false}
                   onChange={this.sliderChange} />
@@ -139,10 +146,6 @@ class Player extends React.Component {
     );
   }
 }
-
-Player.propTypes = {
-  playerModel: PropTypes.object
-};
 
 class PlayerUI {
   @observable isPaused = false;
@@ -192,5 +195,10 @@ class PlayerUI {
     return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
   }
 }
+
+Player.propTypes = {
+  songModel: PropTypes.object,
+  appUI: PropTypes.object
+};
 
 export default Player;

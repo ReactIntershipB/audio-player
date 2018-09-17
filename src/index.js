@@ -5,11 +5,12 @@ import { Provider } from 'mobx-react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 import * as models from './models';
+import { appUI } from './AppUI';
 
 import './index.css';
 
 ReactDOM.render(
-  <Provider {...models}>
+  <Provider {...models} appUI={appUI}>
     <BrowserRouter>
        <Route path='/' component={App} />
     </BrowserRouter>

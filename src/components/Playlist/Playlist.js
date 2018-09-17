@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Avatar } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action, reaction } from 'mobx';
+import { observable, action } from 'mobx';
 
 // import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
 import List from '../common/List';
@@ -13,19 +12,13 @@ export default class Playlist extends Component {
   constructor() {
     super();
     this.ui = new PlaylistUI();
-    // this.model = new PlaylistModel();
   }
 
-  componentDidMount () {
-    reaction(() => this.props.mediator.currentSongPosition,
-            (position) => this.setSongByPosition(position));
+  setSongByPosition(position) {
+      const alignedPosition = this.alignePosition(position);
+      const song = this.model.playlist[alignedPosition];
+      this.changeSong(song, alignedPosition);
   }
-
-    setSongByPosition(position) {
-        const alignedPosition = this.alignePosition(position);
-        const song = this.model.playlist[alignedPosition];
-        this.changeSong(song, alignedPosition);
-    }
 
   alignePosition(position) {
     if (position < 0) return this.model.playlist.length - 1;
@@ -33,10 +26,8 @@ export default class Playlist extends Component {
     return position;
   }
 
-  changeSong(song, position) {
+  changeSong(song) {
     this.ui.updateCurrentSong(song.id);
-    this.props.mediator.setCurrentSong(song.id);
-    this.props.mediator.setCurrentSongPostion(position);
   }
 
   getSongPosition(song) {
@@ -61,10 +52,6 @@ export default class Playlist extends Component {
               );
     }
 }
-
-Playlist.propTypes = {
-    mediator: PropTypes.object
-};
 
 class PlaylistUI {
     @observable

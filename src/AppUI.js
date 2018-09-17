@@ -1,7 +1,20 @@
-import { observable } from 'mobx';
+import { action, observable } from 'mobx';
 
-export default class AppUI {
-  //which type display
-  //get route
-  @observable isPaused = false;
+export class AppUI {
+    @observable isPaused = false;
+    @observable isButtonDisabled = true;
+
+    @action
+    togglePlay () {
+        this.isPaused = !this.isPaused;
+    }
+
+    @action
+    changeButton(term) {
+      if (!term) {
+        this.isButtonDisabled = false;
+      }
+    }
 }
+
+export const appUI = new AppUI();

@@ -5,6 +5,7 @@ export class SearchModel extends Model {
     @observable term = '';
     @observable termText = '';
     @observable filterName = 'artist';
+    staticQueryURL = 'search?q=';
 
     get dataWithoutDuplicates() {
         const albumIds = [];
@@ -18,7 +19,17 @@ export class SearchModel extends Model {
 
     @action
     find(term, filterName) {
-        this.getData(term, filterName);
+      this.getData(`${this.staticQueryURL}${filterName}:"${term}"`);
+    }
+
+    @action
+    inputChange = (term) => {
+      this.term = term;
+    }
+
+    @action
+    filterChange = (filter) => {
+       this.filterName = filter;
     }
 
     @action
