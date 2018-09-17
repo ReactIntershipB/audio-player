@@ -27,7 +27,11 @@ export default class TrackSearchResult extends React.Component {
            );
        } else {
             return (
-                <ListComponent heading={this.props.searchModel.termText} data={this.props.searchModel.data.data} getButtonType={this.getButtonType} handleClick={this.handleClick}/>
+                <ListComponent heading={this.props.searchModel.termText}
+                               data={this.props.searchModel.data.data}
+                               getButtonType={this.getButtonType}
+                               handleClick={this.handleClick}
+                               />
             );
        }
    }

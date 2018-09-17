@@ -72,7 +72,7 @@ class Search extends Component {
             className='dropdown'
             overlay={this.dropdownMenu}
           >
-            <a className="ant-dropdown-link" href="#">
+            <a className="ant-dropdown-link">
               <Icon type="down" />
             </a>
           </Dropdown>

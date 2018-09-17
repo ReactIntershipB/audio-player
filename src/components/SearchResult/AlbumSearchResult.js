@@ -1,8 +1,9 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col, Button } from 'antd';
+import { Card, Row, Col } from 'antd';
 import Spinner from './../common/Spinner';
+import { PlayIcon } from './../common/PlayIcon';
 import './SearchResult.css';
 
 const { Meta } = Card;
@@ -28,7 +29,7 @@ export default class AlbumSearchResult extends React.Component {
                                     <Meta title={item.album.title}
                                           description={
                                               <span>
-                                                  <Button onClick={() => this.handleClick(item.id)} type="primary" shape="circle" icon="caret-right" />
+                                                  <PlayIcon />
                                                   {` ${item.title}`}
                                               </span>
                                             }/>

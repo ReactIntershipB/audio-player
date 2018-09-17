@@ -1,10 +1,9 @@
 import React from 'react';
-import { Icon } from 'antd';
-import './Common.css';
+import { Spin } from 'antd';
 
 const Spinner = () => {
     return (
-        <div className="spinner-container"><Icon type="loading" theme="outlined" /></div>
+        <Spin className="spinner" size="large" />
     );
 };
 

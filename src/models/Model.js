@@ -15,6 +15,7 @@ export class Model {
       return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
         .then(res => {
             this.data = res.data;
+            console.log('@@', this.data);
             this.toggleLoading();
         })
         .catch(err => {
