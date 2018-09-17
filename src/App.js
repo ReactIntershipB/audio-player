@@ -7,12 +7,6 @@ import Search from './components/Search/Search';
 import Player from './components/Player/Player';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    console.log(props);
-  }
-
   render () {
     return (
       <div>

@@ -5,15 +5,9 @@ import PropTypes from 'prop-types';
 
 import './Search.css';
 
-@inject('searchModel')
+@inject('searchModel', 'appUI')
 @observer
 class Search extends Component {
-    constructor(props) {
-        super(props);
-
-        console.log(props);
-    }
-
     get dropdownMenu() {
         return (
             <Menu
@@ -42,11 +36,11 @@ class Search extends Component {
     };
 
     onInputChange = e => {
-      this.props.searchModel.term = e.target.value;
+      this.props.searchModel.inputChange(e.target.value);
     }
 
     onFilterClick = e => {
-      this.props.searchModel.filterName = e.item.props.value;
+      this.props.searchModel.filterChange(e.item.props.value);
     }
 
     onSubmitClick = e => {
@@ -69,7 +63,7 @@ class Search extends Component {
           <Input
             placeholder="Find some music..."
             className="searcher-input"
-            onChange={this.onInputChange}
+            onChange={(e) => this.onInputChange(e)}
             value={this.props.searchModel.term}
             addonAfter={this.addonSearchIcon}
           />
@@ -95,6 +89,7 @@ class Search extends Component {
 
 Search.propTypes = {
   searchModel: PropTypes.object,
+  appUI: PropTypes.object,
   history: PropTypes.object
 };
 

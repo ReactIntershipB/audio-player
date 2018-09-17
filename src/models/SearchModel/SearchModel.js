@@ -9,6 +9,16 @@ export class SearchModel extends Model {
     find(term, filterName) {
       this.getData(term, filterName);
     }
+
+    @action
+    inputChange = (term) => {
+      this.term = term;
+    }
+
+    @action
+    filterChange = (filterName) => {
+      this.filterName = filterName;
+    }
 }
 
 export const searchModel = new SearchModel();

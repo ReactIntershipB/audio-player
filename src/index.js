@@ -10,7 +10,7 @@ import * as models from './models/index';
 import { appUI } from './AppUI';
 
 ReactDOM.render(
-  <Provider appUI={appUI} { ...models}>
+  <Provider {...models} appUI={appUI}>
     <BrowserRouter>
         <Router />
     </BrowserRouter>
