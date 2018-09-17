@@ -5,9 +5,11 @@ export class SearchModel extends Model {
     @observable term = '';
     @observable filterName = 'artist';
 
+    staticQueryURL = 'search?q=';
+
     @action
     find(term, filterName) {
-      this.getData(`search?q=${filterName}:"${term}"`);
+      this.getData(`${this.staticQueryURL}${filterName}:"${term}"`);
     }
 
     @action
