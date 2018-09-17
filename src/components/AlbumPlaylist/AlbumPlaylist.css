@@ -1,6 +1,6 @@
 .playlist-container {
     max-width: 1000px;
-    margin: 20px auto;
+    margin: 20px auto 150px auto;
     padding: 0 20px;
     text-align: left;
 }
@@ -13,4 +13,12 @@
 
 .avatar > :first-child {
     margin-right: 20px;
+}
+
+/*from https://css-tricks.com/examples/hrs/*/
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
