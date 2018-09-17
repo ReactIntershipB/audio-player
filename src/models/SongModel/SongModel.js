@@ -1,4 +1,4 @@
-import { Model } from './../Model';
+import { Model } from '../Model';
 import { observable } from 'mobx';
 
 const data = [
@@ -32,9 +32,9 @@ const data = [
   }
 ];
 
-export class PlayerModel extends Model {
+export class SongModel extends Model {
     @observable
-    track;
+    track = 'test';
 
     init = (songId) => {
       return this.find(songId);
@@ -55,3 +55,5 @@ export class PlayerModel extends Model {
       });
     }
 }
+
+export const songModel = new SongModel();
