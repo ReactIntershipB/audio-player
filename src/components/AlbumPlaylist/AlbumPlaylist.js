@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Alert } from 'antd';
 import { observer, inject } from 'mobx-react';
 
+import { MessageBox } from '../common/MessageBox';
+
+import './AlbumPlaylist.css';
 import Spinner from './../common/Spinner';
 import ListColumn from '../common/ListColumn';
 
@@ -25,7 +28,11 @@ export default class AlbumPlaylist extends Component {
 
   get errorMessage() {
     const { error } = this.props.albumModel.data;
-    return !error ? <Alert message="Album does not exist" type="info" showIcon /> : null;
+    return error
+    ? <MessageBox>
+        <Alert message="Album does not exist" type="info" showIcon />
+      </MessageBox>
+    : null;
   }
 
   render() {
