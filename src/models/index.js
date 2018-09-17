@@ -1,3 +1,4 @@
+export { model } from './Model';
 export { songModel } from './SongModel/SongModel';
-export { PlaylistModel } from './PlaylistModel/PlaylistModel';
-export { SearcherModel } from './SearcherModel/SearcherModel';
+export { playlistModel } from './PlaylistModel/PlaylistModel';
+export { searchModel } from './SearchModel/SearchModel';
