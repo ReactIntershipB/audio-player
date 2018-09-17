@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import { Input, Dropdown, Icon, Menu, Button } from 'antd';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
+import PropTypes from 'prop-types';
 
-import './Searcher.css';
-import { SearcherModel } from '../../models/SearcherModel/SearcherModel';
+import './Search.css';
 
+@inject('searchModel', 'appUI')
 @observer
-export default class Searcher extends Component {
-  constructor() {
-    super();
-
-    this.model = new SearcherModel();
-  }
-
+class Search extends Component {
     get dropdownMenu() {
         return (
             <Menu
                 className='dropdown-menu'
-                value={this.model.filterName}
+                value={this.props.searchModel.filterName}
                 onClick={this.onFilterClick}
-                selectedKeys={[this.model.filterName]}
+                selectedKeys={[this.props.searchModel.filterName]}
             >
             <Menu.Item key="artist" value='artist'>
                 Artist
@@ -41,24 +36,25 @@ export default class Searcher extends Component {
     };
 
     onInputChange = e => {
-      this.model.term = e.target.value;
+      this.props.searchModel.inputChange(e.target.value);
     }
 
     onFilterClick = e => {
-      this.model.filterName = e.item.props.value;
+      this.props.searchModel.filterChange(e.item.props.value);
     }
 
     onSubmitClick = e => {
       e.preventDefault();
-      const { term, filterName } = this.model;
+      const { term, filterName } = this.props.searchModel;
       if (term !== '') {
-        this.model.find(term, filterName);
+        this.props.searchModel.find(term, filterName);
         this.clearInput();
+        this.props.history.push(`${filterName}`);
       }
     }
 
     clearInput = () => {
-      this.model.term = '';
+      this.props.searchModel.term = '';
     }
 
     render() {
@@ -67,8 +63,8 @@ export default class Searcher extends Component {
           <Input
             placeholder="Find some music..."
             className="searcher-input"
-            onChange={this.onInputChange}
-            value={this.model.term}
+            onChange={(e) => this.onInputChange(e)}
+            value={this.props.searchModel.term}
             addonAfter={this.addonSearchIcon}
           />
           <Dropdown
@@ -81,7 +77,7 @@ export default class Searcher extends Component {
           </Dropdown>
           <Button
             type="primary"
-            disabled={!this.model.term}
+            disabled={!this.props.searchModel.term}
             onClick={this.onSubmitClick}
           >
             Submit
@@ -90,3 +86,11 @@ export default class Searcher extends Component {
       );
     }
 }
+
+Search.propTypes = {
+  searchModel: PropTypes.object,
+  appUI: PropTypes.object,
+  history: PropTypes.object
+};
+
+export default Search;

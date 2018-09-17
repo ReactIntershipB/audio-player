@@ -4,13 +4,13 @@ import Router from './router';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import registerServiceWorker from './registerServiceWorker';
-import * as models from './models';
-import { appUI } from './AppUI';
 
 import './index.css';
+import * as models from './models/index';
+import { appUI } from './AppUI';
 
 ReactDOM.render(
-  <Provider appUI={appUI} { ...models}>
+  <Provider {...models} appUI={appUI}>
     <BrowserRouter>
         <Router />
     </BrowserRouter>
