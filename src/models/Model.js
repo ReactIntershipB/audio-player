@@ -8,9 +8,10 @@ export class Model {
 
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
-    getData = (apiQuery, term, filterName) => {
-      return axios.get(`${this.getAPIBaseURL}${apiQuery}${filterName}:"${term}"`)
+    getData = (apiQuery) => {
+      return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
         .then(res => {
+            console.log(res.data);
             this.data = res.data.data;
         })
         .catch(err => console.log(err));
