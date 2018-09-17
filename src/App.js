@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Playlist from './components/Playlist/Playlist';
 import Search from './components/Search/Search';
@@ -8,7 +9,7 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Searcher />
+        <Search history={this.props.history} />
         <Playlist />
         <Player />
       </div>
