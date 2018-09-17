@@ -1,14 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
+import { observer } from 'mobx-react';
+
 import AlbumSearchResult from './components/SearchResult/AlbumSearchResult';
 import TrackSearchResult from './components/SearchResult/TrackSearchResult';
-import Playlist from './components/Playlist/Playlist';
-
-import Search from './components/Search/Search';
+import AlbumPlaylist from './components/AlbumPlaylist/AlbumPlaylist';
 import Player from './components/Player/Player';
-import PropTypes from 'prop-types';
-
-import { observer } from 'mobx-react';
+import Search from './components/Search/Search';
 
 @observer
 class App extends React.Component {
@@ -20,7 +19,7 @@ class App extends React.Component {
           <Route exact path='/search/artist' component={AlbumSearchResult} />
           <Route exact path='/search/album' component={AlbumSearchResult} />
           <Route exact path='/search/track' component={TrackSearchResult} />
-          <Route exact path='/album/:id' component={Playlist} />
+          <Route exact path='/album/:id' component={({ match }) => <AlbumPlaylist match={match} />} />
         </Switch>
         <Player />
       </div>

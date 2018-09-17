@@ -9,7 +9,7 @@ export class SearchModel extends Model {
 
     get dataWithoutDuplicates() {
         const albumIds = [];
-        return this.data.filter(item => {
+        return this.data.data.filter(item => {
             if (albumIds.indexOf(item.album.id) < 0) {
                 albumIds.push(item.album.id);
                 return item;

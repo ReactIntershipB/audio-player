@@ -15,7 +15,8 @@ export class PlayIcon extends React.Component {
             <Button shape='circle'
                 size={'large'}
                 icon={this.iconType}
-                onClick={() => this.props.appUI.togglePlay()} />
+                onClick={() => this.props.appUI.togglePlay()}
+            />
         );
     }
 }

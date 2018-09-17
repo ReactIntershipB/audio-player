@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
-import List from './../common/List';
+import ListComponent from './../common/List';
 import Spinner from './../common/Spinner';
 
 @inject('searchModel', 'songModel')
@@ -27,7 +27,7 @@ export default class TrackSearchResult extends React.Component {
            );
        } else {
             return (
-                <List heading={this.props.searchModel.termText} data={this.props.searchModel.data} getButtonType={this.getButtonType} handleClick={this.handleClick}/>
+                <ListComponent heading={this.props.searchModel.termText} data={this.props.searchModel.data.data} getButtonType={this.getButtonType} handleClick={this.handleClick}/>
             );
        }
    }
