@@ -5,15 +5,13 @@ export class AppUI {
     @observable isButtonDisabled = true;
 
     @action
-    togglePlay () {
+    togglePlay() {
         this.isPaused = !this.isPaused;
     }
 
     @action
-    changeButton(term) {
-      if (!term) {
-        this.isButtonDisabled = false;
-      }
+    enableButton(term) {
+      this.isButtonDisabled = !term;
     }
 }
 

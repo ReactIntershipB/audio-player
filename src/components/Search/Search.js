@@ -37,6 +37,7 @@ class Search extends Component {
 
     onInputChange = e => {
       this.props.searchModel.inputChange(e.target.value);
+      this.props.appUI.enableButton(e.target.value);
     }
 
     onFilterClick = e => {
@@ -77,7 +78,7 @@ class Search extends Component {
           </Dropdown>
           <Button
             type="primary"
-            disabled={!this.props.searchModel.term}
+            disabled={this.props.appUI.isButtonDisabled}
             onClick={this.onSubmitClick}
           >
             Submit
