@@ -4,6 +4,7 @@ import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
+import { autorun } from 'mobx';
 
 @inject('appUI', 'songModel')
 @observer
@@ -11,6 +12,12 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
     this.props.songModel.init();
+
+    autorun(() => {
+      if (this.songLink) {
+        this.props.appUI.togglePause();
+      }
+    });
   }
 
   handleNextSongClick = () => {
@@ -106,7 +113,7 @@ class Player extends React.Component {
                 span={2}
                 className='btns'>
 
-                <PlayIcon disabled={!!this.songLink}/>
+                <PlayIcon disabled={!this.songLink}/>
 
               </Col>
 

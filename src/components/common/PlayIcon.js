@@ -13,13 +13,15 @@ export class PlayIcon extends React.Component {
     render () {
         return (
             <Button shape='circle'
+                disabled={this.props.disabled}
                 size={'large'}
                 icon={this.iconType}
-                onClick={() => this.props.appUI.togglePlay()} />
+                onClick={() => this.props.appUI.togglePause()} />
         );
     }
 }
 
 PlayIcon.propTypes = {
-    appUI: PropTypes.object
+    appUI: PropTypes.object,
+    disabled: PropTypes.bool
 };
