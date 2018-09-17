@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ArtistSearchResult from './components/SearchResult/ArtistSearchResult';
 import AlbumSearchResult from './components/SearchResult/AlbumSearchResult';
 import TrackSearchResult from './components/SearchResult/TrackSearchResult';
 import Playlist from './components/Playlist/Playlist';
@@ -18,10 +17,10 @@ class App extends React.Component {
       <div>
         <Search history={this.props.history}/>
         <Switch>
-          <Route exact path='/search/artist' component={ArtistSearchResult} />
+          <Route exact path='/search/artist' component={AlbumSearchResult} />
           <Route exact path='/search/album' component={AlbumSearchResult} />
           <Route exact path='/search/track' component={TrackSearchResult} />
-          <Route exact path='/playlist/:id' component={Playlist} />
+          <Route exact path='/album/:id' component={Playlist} />
         </Switch>
         <Player />
       </div>

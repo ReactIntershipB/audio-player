@@ -3,9 +3,10 @@ import { observable, action } from 'mobx';
 
 export class SearchModel extends Model {
     @observable term = '';
+    @observable termText = '';
     @observable filterName = 'artist';
 
-    get albumData() {
+    get dataWithoutDuplicates() {
         const albumIds = [];
         return this.data.filter(item => {
             if (albumIds.indexOf(item.album.id) < 0) {
@@ -18,6 +19,11 @@ export class SearchModel extends Model {
     @action
     find(term, filterName) {
         this.getData(term, filterName);
+    }
+
+    @action
+    setTermText = (text) => {
+        this.termText = text;
     }
 }
 

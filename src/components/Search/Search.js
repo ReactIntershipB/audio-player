@@ -15,10 +15,6 @@ export default class Search extends Component {
     this.ui = new SearchUI();
   }
 
-   componentDidMount() {
-     console.log('props', this.props);
-   }
-
     get dropdownMenu() {
         return (
         <Menu
@@ -58,6 +54,7 @@ export default class Search extends Component {
         const { term, filterName } = this.props.searchModel;
         if (term !== '') {
             this.props.searchModel.find(term, filterName);
+            this.props.searchModel.setTermText(term);
             this.clearInput();
             this.props.history.push(this.direction);
         }

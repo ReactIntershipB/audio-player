@@ -47,18 +47,6 @@ export default class Playlist extends Component {
       return this.ui.currentlyPlaying === id ? 'pause' : 'caret-right';
     }
 
-    // getplayButton = (item) => {
-    //     return (
-    //       <Button
-    //         type='primary'
-    //         shape='circle'
-    //         icon={this.iconChange(item.id)}
-    //         size='large'
-    //         onClick={() => this.changeSong(item, this.getSongPosition(item))}
-    //       />
-    //     );
-    //   }
-
     render () {
         return (
             <div className='playlist-container'>
@@ -92,7 +80,7 @@ class PlaylistUI {
       this.currentlyPlaying = id;
     }
 
-    getDescription(item) {
-        return `${item.author}, ${item.album}`;
+    getDescription(author, album) {
+        return `${author}, ${album}`;
     }
 }
