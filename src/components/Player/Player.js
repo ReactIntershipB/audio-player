@@ -4,20 +4,30 @@ import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
-import { autorun } from 'mobx';
+import { reaction, action, observable } from 'mobx';
 
 @inject('appUI', 'songModel')
 @observer
 class Player extends React.Component {
   constructor(props) {
     super(props);
+    this.playerUI = new PlayerUI();
     this.props.songModel.init();
 
-    autorun(() => {
-      if (this.songLink) {
-        this.props.appUI.togglePause();
+    reaction(
+      () => this.props.songModel.songLink,
+      () => {
+          this.props.appUI.togglePause();
+          this.playerUI.play();
       }
-    });
+    );
+
+    reaction(
+      () => this.props.appUI.isPaused,
+      () => {
+        this.playerUI.toggleSong();
+      }
+    );
   }
 
   handleNextSongClick = () => {
@@ -32,28 +42,18 @@ class Player extends React.Component {
     // TO DO
   }
 
-  secondsToStringTime = (time) => {
-    return `${parseInt(time / 60)}:${time % 60}`;
-  }
-
-  get trackLength () {
-    // return this.props.songModel.currentSong.duration ? this.props.songModel.currentSong.duration : 0;
-    return 30;
-  }
-
-  get trackTitle () {
-    return this.props.songModel.track ? this.props.songModel.track.title : '';
-  }
-
-  get songLink () {
-    return this.props.songModel.currentSong.preview;
+  get currentSongTime () {
+    return this.playerUI.timer;
   }
 
   render() {
     return (
       <div className='player'>
 
-        <audio autoPlay src={this.songLink}></audio>
+        <audio id='audioPlayer'
+          autoPlay
+          src={this.props.songModel.songLink}
+        ></audio>
 
         <Row type='flex'
           justify='center'
@@ -76,7 +76,7 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
-              <span className='title'>{this.trackTitle}</span>
+              <span className='title'>{this.props.songModel.songTitle}</span>
             </Row>
 
             <Row
@@ -102,13 +102,16 @@ class Player extends React.Component {
                   icon='backward'
                   onClick={this.handlePreviousSongClick}
                 />
+
               </Col>
 
               <Col
                 span={2}
                 className='btns'>
 
-                <PlayIcon disabled={!this.songLink}/>
+                <PlayIcon
+                  disabled={!this.props.songModel.songLink}
+                />
 
               </Col>
 
@@ -121,6 +124,7 @@ class Player extends React.Component {
                   icon='forward'
                   onClick={this.handleNextSongClick}
                 />
+
               </Col>
 
               <Col span={2} className='btns'>
@@ -138,14 +142,14 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                  max={this.props.songModel.track ? this.props.songModel.track.time : 0}
-                  value={this.props.appUI.timer}
+                  max={this.props.songModel.songLength}
+                  value={this.currentSongTime}
                   disabled={false}
                   onChange={this.sliderChange} />
               </Col>
 
               <Col span={2}>
-                <span>{this.trackTimeStatus}</span>
+                <span>{}</span>
               </Col>
 
             </Row>
@@ -156,6 +160,25 @@ class Player extends React.Component {
       </div>
 
     );
+  }
+}
+
+class PlayerUI {
+  @observable timer = 0;
+  @observable songStatus = false;
+
+  @action toggleSong () {
+    console.log(this.songStatus);
+    this.songStatus = !this.songStatus;
+  }
+
+  @action
+  play() {
+    setInterval(() => {
+      if (this.songStatus) {
+        this.timer++;
+      }
+    }, 1000);
   }
 }
 

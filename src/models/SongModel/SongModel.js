@@ -9,8 +9,20 @@ export class SongModel extends Model {
     }
 
     @computed get currentSong () {
-      console.debug('currentSong', JSON.stringify(this.data));
       return this.data;
+    }
+
+    @computed get songLink () {
+      return this.data.preview;
+    }
+
+    @computed get songTitle () {
+      return this.data.title;
+    }
+
+    @computed get songLength () {
+      // return this.data.duration;
+      return 30;
     }
 }
 

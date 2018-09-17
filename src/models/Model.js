@@ -11,7 +11,6 @@ export class Model {
     getData = (apiQuery) => {
       return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
         .then(res => {
-            console.debug('res', res);
             this.data = res.data;
         })
         .catch(err => console.log(err));
