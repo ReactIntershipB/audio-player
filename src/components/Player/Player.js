@@ -10,7 +10,6 @@ import { PlayIcon } from './../common/PlayIcon';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.ui = new PlayerUI();
     this.props.songModel.init();
   }
 
@@ -23,7 +22,7 @@ class Player extends React.Component {
   }
 
   sliderChange = (value) => {
-    this.ui.updateTimer(value);
+    // this.ui.updateTimer(value);
   }
 
   secondsToStringTime = (time) => {
@@ -36,19 +35,23 @@ class Player extends React.Component {
   }
 
   get trackTimeStatus () {
-    return this.secondsToStringTime(this.ui.timer) + '/' + this.secondsToStringTime(this.trackLength);
+    // return this.secondsToStringTime(this.ui.timer) + '/' + this.secondsToStringTime(this.trackLength);
+    return '';
   }
 
   get trackTitle () {
     return this.props.songModel.track ? this.props.songModel.track.title : '';
   }
 
+  get songLink () {
+    return this.props.songModel.currentSong.preview;
+  }
+
   render() {
     return (
       <div className='player'>
-      {this.props.songModel.currentSong.preview}
 
-        <audio autoPlay src={this.props.songModel.currentSong.preview}></audio>
+        <audio autoPlay src={this.songLink}></audio>
 
         <Row type='flex'
           justify='center'
@@ -61,7 +64,7 @@ class Player extends React.Component {
 
             <br />
 
-            <span>jhjhjhjh</span>
+            <span>Title</span>
 
           </Col>
 
@@ -103,7 +106,7 @@ class Player extends React.Component {
                 span={2}
                 className='btns'>
 
-                <PlayIcon />
+                <PlayIcon disabled={!!this.songLink}/>
 
               </Col>
 
@@ -134,7 +137,7 @@ class Player extends React.Component {
               <Col span={22}>
                 <Slider min={0}
                   max={this.props.songModel.track ? this.props.songModel.track.time : 0}
-                  value={this.ui.timer}
+                  value={this.props.appUI.timer}
                   disabled={false}
                   onChange={this.sliderChange} />
               </Col>
@@ -152,10 +155,6 @@ class Player extends React.Component {
 
     );
   }
-}
-
-class PlayerUI {
-
 }
 
 Player.propTypes = {
