@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from './router';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'mobx-react';
 import registerServiceWorker from './registerServiceWorker';
+import * as models from './models';
+import { appUI } from './AppUI';
 
 import './index.css';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Router />
-  </BrowserRouter>
+  <Provider appUI={appUI} { ...models}>
+    <BrowserRouter>
+        <Router />
+    </BrowserRouter>
+  </Provider>
   ,
   document.getElementById('root')
 );
