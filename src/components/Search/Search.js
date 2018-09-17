@@ -7,11 +7,10 @@ import './Search.css';
 
 @inject('searchModel')
 @observer
-export default class Search extends Component {
+class Search extends Component {
     constructor(props) {
         super(props);
 
-        // this.model = new SearchModel();
         console.log(props);
     }
 
@@ -98,3 +97,5 @@ Search.propTypes = {
   searchModel: PropTypes.object,
   history: PropTypes.object
 };
+
+export default Search;
