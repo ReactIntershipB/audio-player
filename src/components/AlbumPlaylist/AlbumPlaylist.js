@@ -1,45 +1,36 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { List, Avatar, Alert } from 'antd';
+import { List, Avatar, Alert, Spin } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-import { PlaylistPlayButton } from './PlaylistPlayButton/PlaylistPlayButton';
-
+import { PlayIcon } from '../common/PlayIcon';
 import './AlbumPlaylist.css';
 
 @inject('albumModel')
 @observer
 export default class Playlist extends Component {
   componentDidMount() {
-    this.props.albumModel.getData(this.props.match.params.id);
-  }
-
-  get errorMessage() {
-    return (
-      <div>
-        <Alert message="Album does not exist" type="info" showIcon />
-      </div>
-    );
+    this.props.albumModel.find(this.props.match.params.id);
   }
 
   get playlist() {
-    const { album } = this.props.albumModel;
+    const { data, loading } = this.props.albumModel;
     const { albumModel } = this.props;
 
-    return (
-      <div>
+    return (loading || data.error ? null
+      : <div>
         <div className='avatar'>
-          <Avatar shape='square' size={64} src={album.cover_small} />
-          <h2>{album.title}</h2>
+          <Avatar shape='square' size={64} src={data.cover_small} />
+          <h2>{data.title}</h2>
         </div>
         <div>
-          {album.tracks && album.tracks.data.map(item => {
+          {data.tracks && data.tracks.data.map(item => {
             return (
               <div key={item.id}>
                 <List.Item>
                   <List.Item.Meta
                     avatar={
-                      <PlaylistPlayButton/>
+                      <PlayIcon/>
                     }
                     title={item.title}
                     description={item.artist.name}
@@ -55,13 +46,24 @@ export default class Playlist extends Component {
     );
   }
 
+  get spinner() {
+    const { loading } = this.props.albumModel;
+    return loading ? <Spin className="spinner" size="large" /> : null;
+  }
+
+  get errorMessage() {
+    const { error } = this.props.albumModel.data;
+    return error ? <Alert message="Album does not exist" type="info" showIcon /> : null;
+  }
+
   render() {
-    const { album } = this.props.albumModel;
     console.log('RENDER!!!');
 
     return (
       <div className='playlist-container'>
-        {album.error ? this.errorMessage : this.playlist}
+        {this.spinner}
+        {this.errorMessage}
+        {this.playlist}
       </div>
     );
   }

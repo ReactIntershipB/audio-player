@@ -1,21 +1,16 @@
 import { Model } from '../Model';
 import { observable, action } from 'mobx';
-import { CORS_ALLOW_URL } from '../../config/api_config';
-
-import axios from 'axios';
 
 export class AlbumModel extends Model {
-  @observable album = {};
-
-  albumApiUrl = `${CORS_ALLOW_URL}https://api.deezer.com/album/`;
+  @observable loading = true;
 
   @action
-  getData = (albumId) => {
-    return axios.get(`${this.albumApiUrl}${albumId}`)
-      .then(res => {
-        this.album = res.data;
-      })
-      .catch(err => console.log(err));
+  find = (albumId) => {
+    this.loading = true;
+    this.getData(albumId)
+      .then(() => {
+          this.loading = false;
+      });
   }
 
   getDuration = (duration) => {

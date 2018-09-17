@@ -1,6 +1,6 @@
 .playlist-container {
     max-width: 1000px;
-    margin: 20px auto 150px auto;
+    margin: 20px auto 130px auto;
     padding: 0 20px;
     text-align: left;
 }
@@ -21,4 +21,10 @@ hr {
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ant-spin-spinning.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }
