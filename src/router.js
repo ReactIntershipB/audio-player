@@ -1,12 +1,9 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-
+import { Route } from 'react-router-dom';
 import App from './App';
 
 const Router = () => (
-  <Switch>
-    <Route exact path='/' component={App}/>
-  </Switch>
+  <Route path='/' component={App}/>
 );
 
 export default Router;

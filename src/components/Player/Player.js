@@ -13,7 +13,6 @@ class Player extends React.Component {
     super(props);
     console.debug('props', props);
     this.ui = new PlayerUI();
-    // this.props.songModel = new songModel();
   }
 
   handleNextSongClick = () => {
