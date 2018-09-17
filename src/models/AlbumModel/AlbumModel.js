@@ -5,28 +5,6 @@ import { CORS_ALLOW_URL } from '../../config/api_config';
 import axios from 'axios';
 
 export class AlbumModel extends Model {
-  // setSongByPosition(position) {
-  //   const alignedPosition = this.alignPosition(position);
-  //   const song = this.data[alignedPosition];
-  //   this.changeSong(song, alignedPosition);
-  // }
-
-  // alignPosition(position) {
-  //   if (position < 0) return this.data.length - 1;
-  //   if (position > this.data.length - 1) return 0;
-  //   return position;
-  // }
-
-  // changeSong(song, position) {
-  //   this.ui.updateCurrentSong(song.id);
-  //   this.props.mediator.setCurrentSong(song.id);
-  //   this.props.mediator.setCurrentSongPostion(position);
-  // }
-
-  // getSongPosition(song) {
-  //   return this.model.data.indexOf(song);
-  // }
-
   @observable album = {};
 
   albumApiUrl = `${CORS_ALLOW_URL}https://api.deezer.com/album/`;

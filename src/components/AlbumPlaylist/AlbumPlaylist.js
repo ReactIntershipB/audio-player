@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, Avatar, Alert } from 'antd';
 import { observer, inject } from 'mobx-react';
-// import { reaction } from 'mobx';
 
 import { PlaylistPlayButton } from './PlaylistPlayButton/PlaylistPlayButton';
 
@@ -12,9 +11,6 @@ import './AlbumPlaylist.css';
 @observer
 export default class Playlist extends Component {
   componentDidMount() {
-    // reaction(() => this.props.mediator.currentSongPosition,
-    //   (position) => this.model.setSongByPosition(position));
-
     this.props.albumModel.getData(this.props.match.params.id);
   }
 

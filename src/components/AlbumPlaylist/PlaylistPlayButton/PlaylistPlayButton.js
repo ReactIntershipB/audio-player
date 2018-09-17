@@ -6,18 +6,6 @@ import { inject, observer } from 'mobx-react';
 @inject('appUI')
 @observer
 export class PlaylistPlayButton extends Component {
-  // onClickHandler = (item) => {
-  //   if (this.props.mediator.currentSongId) {
-  //     console.log(item);
-  //     console.log(this.props.mediator.currentSongId);
-  //   } else {
-  //   }
-  // }
-
-  // onClickHandler = (item) => {
-  //   this.changeSong(item, this.getSongPosition(item));
-  // }
-
   render() {
     return (
       <Button
