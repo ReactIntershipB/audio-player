@@ -15,5 +15,10 @@
 
 .ant-dropdown .ant-dropdown-menu {
     padding: 0;
-    margin-top:5px;
+    margin-top: 5px;
+}
+
+.ant-dropdown-link,
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+    width: 90px;
 }

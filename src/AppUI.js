@@ -10,10 +10,8 @@ export class AppUI {
     }
 
     @action
-    changeButton(term) {
-      if (!term) {
-        this.isButtonDisabled = false;
-      }
+    enableButton(term) {
+      this.isButtonDisabled = !term;
     }
 }
 
