@@ -9,11 +9,7 @@ export class SearchModel extends Model {
 
     @action
     find(term, filterName) {
-      this.getData(`${this.staticQueryURL}${filterName}:"${term}"`)
-        .then(res => {
-          this.data = res.data;
-        })
-        .catch(err => console.log(err));
+      this.getData(`${this.staticQueryURL}${filterName}:"${term}"`);
     }
 
     @action
