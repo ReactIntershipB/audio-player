@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { List, Button, Avatar } from 'antd';
 import { observer } from 'mobx-react';
-import { observable, action, reaction } from 'mobx';
+import { observable, action } from 'mobx';
 
 import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
 import './Playlist.css';
@@ -13,11 +12,6 @@ export default class Playlist extends Component {
     super();
     this.ui = new PlaylistUI();
     this.model = new PlaylistModel();
-  }
-
-  componentDidMount () {
-    reaction(() => this.props.mediator.currentSongPosition,
-      (position) => this.setSongByPosition(position));
   }
 
   setSongByPosition(position) {
@@ -34,8 +28,6 @@ export default class Playlist extends Component {
 
   changeSong(song, position) {
     this.ui.updateCurrentSong(song.id);
-    this.props.mediator.setCurrentSong(song.id);
-    this.props.mediator.setCurrentSongPostion(position);
   }
 
   getSongPosition(song) {
@@ -86,10 +78,6 @@ export default class Playlist extends Component {
       );
     }
 }
-
-Playlist.propTypes = {
-  mediator: PropTypes.object
-};
 
 class PlaylistUI {
     @observable

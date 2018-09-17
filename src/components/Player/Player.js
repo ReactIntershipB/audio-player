@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import { observable, action, autorun } from 'mobx';
+import { observable, action } from 'mobx';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
 
@@ -16,22 +16,12 @@ class Player extends React.Component {
     // this.props.songModel = new songModel();
   }
 
-  componentDidMount() {
-    autorun(() => {
-      const initPromise = this.props.songModel.init(this.props.mediator.currentSongId);
-      initPromise.then(() => {
-        this.ui.playTrack(this.props.songModel.track.time);
-        console.log(this.ui);
-      });
-    });
-  }
-
   handleNextSongClick = () => {
-    this.props.mediator.getNextSong();
+    ;
   }
 
   handlePreviousSongClick = () => {
-    this.props.mediator.getPreviousSong();
+    ;
   }
 
   sliderChange = (value) => {
@@ -156,10 +146,6 @@ class Player extends React.Component {
     );
   }
 }
-
-Player.propTypes = {
-  mediator: PropTypes.object
-};
 
 class PlayerUI {
   @observable isPaused = false;
