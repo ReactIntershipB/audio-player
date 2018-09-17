@@ -35,8 +35,13 @@ class Search extends Component {
         );
     };
 
+    getFilterName = (filterName) => {
+      return filterName.charAt(0).toUpperCase() + filterName.slice(1);
+    }
+
     onInputChange = e => {
       this.props.searchModel.inputChange(e.target.value);
+      this.props.appUI.enableButton(e.target.value);
     }
 
     onFilterClick = e => {
@@ -72,13 +77,14 @@ class Search extends Component {
             className='dropdown'
             overlay={this.dropdownMenu}
           >
-            <a className="ant-dropdown-link">
+            <Button className="ant-dropdown-link">
+              {this.getFilterName(this.props.searchModel.filterName)}
               <Icon type="down" />
-            </a>
+            </Button>
           </Dropdown>
           <Button
             type="primary"
-            disabled={!this.props.searchModel.term}
+            disabled={this.props.appUI.isButtonDisabled}
             onClick={this.onSubmitClick}
           >
             Submit
