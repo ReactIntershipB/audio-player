@@ -1,35 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
-import { observer } from 'mobx-react';
-import { observable, action, autorun } from 'mobx';
-import { PlayerModel } from '../../models/PlayerModel/PlayerModel';
+import { observer, inject } from 'mobx-react';
+import { observable, action } from 'mobx';
+
 import './Player.css';
 
+@inject('playerModel')
 @observer
 class Player extends React.Component {
   constructor() {
     super();
     this.ui = new PlayerUI();
-    this.model = new PlayerModel();
-  }
-
-  componentDidMount() {
-    autorun(() => {
-      const initPromise = this.model.init(this.props.mediator.currentSongId);
-      initPromise.then(() => {
-        this.ui.playTrack(this.model.track.time);
-        console.log(this.ui);
-      });
-    });
-  }
-
-  handleNextSongClick = () => {
-    this.props.mediator.getNextSong();
-  }
-
-  handlePreviousSongClick = () => {
-    this.props.mediator.getPreviousSong();
   }
 
   sliderChange = (value) => {
@@ -37,7 +19,7 @@ class Player extends React.Component {
   }
 
   get trackLength () {
-    return this.model.track ? this.model.track.time : 0;
+     return this.props.playerModel.track ? this.props.playerModel.track.time : 0;
   }
 
   get trackTimeStatus () {
@@ -45,7 +27,7 @@ class Player extends React.Component {
   }
 
   get trackTitle () {
-    return this.model.track ? this.model.track.title : '';
+    return this.props.playerModel.track ? this.props.playerModel.track.title : '';
   }
 
   render() {
@@ -137,7 +119,7 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                  max={this.model.track ? this.model.track.time : 0}
+                  max={this.props.playerModel.track ? this.props.playerModel.track.time : 0}
                   value={this.ui.timer}
                   disabled={false}
                   onChange={this.sliderChange} />
@@ -159,7 +141,7 @@ class Player extends React.Component {
 }
 
 Player.propTypes = {
-  mediator: PropTypes.object
+  playerModel: PropTypes.object
 };
 
 class PlayerUI {

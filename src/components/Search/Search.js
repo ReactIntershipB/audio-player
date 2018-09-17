@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
-import { Input, Dropdown, Icon, Menu, Button } from 'antd';
-import { observer } from 'mobx-react';
+import PropTypes from 'prop-types';
+import { Icon, Menu, Input, Dropdown, Button } from 'antd';
+import { observer, inject } from 'mobx-react';
 import { observable, action } from 'mobx';
-import { Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';// TODO Instead of that use path
 
 import './Search.css';
-import { SearchModel } from '../../models/SearchModel/SearchModel';
 
+@inject('searchModel')
 @observer
-export default class Searcher extends Component {
-  constructor() {
-    super();
+export default class Search extends Component {
+  constructor(props) {
+    super(props);
     this.ui = new SearchUI();
-    this.model = new SearchModel();
   }
+
+   componentDidMount() {
+     console.log('props', this.props);
+   }
 
     get dropdownMenu() {
         return (
         <Menu
             className='dropdown-menu'
-            value={this.model.filterName}
+            value={this.props.searchModel.filterName}
             onClick={this.onFilterClick}
         >
         <Menu.Item key="0" value='artist'>
@@ -42,59 +46,58 @@ export default class Searcher extends Component {
     };
 
     onInputChange = e => {
-      this.model.term = e.target.value;
+      this.props.searchModel.term = e.target.value;
     }
 
     onFilterClick = e => {
-      console.log(e.item.props.value);
-      this.model.filterName = e.item.props.value;
+      this.props.searchModel.filterName = e.item.props.value;
     }
 
     onSubmitClick = e => {
         e.preventDefault();
-        const { term, filterName } = this.model;
+        const { term, filterName } = this.props.searchModel;
         if (term !== '') {
-            this.model.find(term, filterName);
+            this.props.searchModel.find(term, filterName);
             this.clearInput();
-            this.ui.updateRedirect();
+            this.props.history.push(this.direction);
         }
     }
 
     clearInput = () => {
-        this.model.term = '';
+        this.props.searchModel.term = '';
     }
 
     get direction() {
-        return this.model.filterName === 'album' ? '/search' : '/playlist';
+        return `/search/${this.props.searchModel.filterName}`;
     }
 
     render() {
         return (
-        <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
-          <Input
-            placeholder="Find some music..."
-            className="searcher-input"
-            onChange={this.onInputChange}
-            value={this.model.term}
-            addonAfter={this.addonSearchIcon}
-          />
-          <Dropdown
-            className='dropdown'
-            overlay={this.dropdownMenu}
-          >
-            <a className="ant-dropdown-link" href="#">
-              <Icon type="down" />
-            </a>
-          </Dropdown>
-          <Button
-            type="primary"
-            disabled={!this.model.term}
-            onClick={this.onSubmitClick}
-          >
-                Submit
-          </Button>
-          {this.ui.redirect && <Redirect to={this.direction}/>}
-        </form>
+          <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
+            <Input
+              placeholder="Find some music..."
+              className="searcher-input"
+              onChange={this.onInputChange}
+              value={this.props.searchModel.term}
+              addonAfter={this.addonSearchIcon}
+            />
+            <Dropdown
+              className='dropdown'
+              overlay={this.dropdownMenu}
+            >
+              <a className="ant-dropdown-link" href="#">
+                <Icon type="down" />
+              </a>
+            </Dropdown>
+            <Button
+              type="primary"
+              disabled={!this.props.searchModel.term}
+              onClick={this.onSubmitClick}
+            >
+                  Submit
+            </Button>
+            {this.ui.redirect && <Redirect to={this.direction}/>}
+          </form>
       );
     }
 }
@@ -123,11 +126,9 @@ class SearchUI {
     resetValue = () => {
       this.value = '';
     }
-
-    updateRedirect() {
-        this.redirect = true;
-        setTimeout(() => {
-            this.redirect = false;
-        }, 0);
-    }
 }
+
+Search.propTypes = {
+  searchModel: PropTypes.object,
+  history: PropTypes.object
+};

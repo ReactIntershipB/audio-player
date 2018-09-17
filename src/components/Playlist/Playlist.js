@@ -4,7 +4,7 @@ import { Avatar } from 'antd';
 import { observer } from 'mobx-react';
 import { observable, action, reaction } from 'mobx';
 
-import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
+// import { PlaylistModel } from '../../models/PlaylistModel/PlaylistModel';
 import List from '../common/List';
 import './Playlist.css';
 
@@ -13,12 +13,12 @@ export default class Playlist extends Component {
   constructor() {
     super();
     this.ui = new PlaylistUI();
-    this.model = new PlaylistModel();
+    // this.model = new PlaylistModel();
   }
 
   componentDidMount () {
     reaction(() => this.props.mediator.currentSongPosition,
-      (position) => this.setSongByPosition(position));
+            (position) => this.setSongByPosition(position));
   }
 
     setSongByPosition(position) {

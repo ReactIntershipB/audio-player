@@ -55,3 +55,5 @@ export class PlayerModel extends Model {
       });
     }
 }
+
+export const playerModel = new PlayerModel();

@@ -20,3 +20,5 @@ export class PlaylistModel extends Model {
       this.playlist = [...data];
     }
 }
+
+export const playlistModel = new PlaylistModel();

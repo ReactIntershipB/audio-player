@@ -11,8 +11,13 @@ export class Model {
     getData = (term, filterName) => {
         return axios.get(`${this.getAPIBaseURL}${filterName}:"${term}"`)
             .then(res => {
+                console.log('@@@@@', res.data.data);
                 this.data = res.data.data;
             })
             .catch(err => console.log(err));
+    }
+
+    setData = data => {
+        this.data = data;
     }
 }
