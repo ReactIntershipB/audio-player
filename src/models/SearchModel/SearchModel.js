@@ -5,9 +5,11 @@ export class SearchModel extends Model {
     @observable term = '';
     @observable filterName = 'artist';
 
+    apiQuery = 'search?q=';
+
     @action
     find(term, filterName) {
-      this.getData(term, filterName);
+      this.getData(this.apiQuery, term, filterName);
     }
 
     @action
