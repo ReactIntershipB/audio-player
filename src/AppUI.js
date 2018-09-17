@@ -1,12 +1,17 @@
 import { action, observable } from 'mobx';
 
 export class AppUI {
-    @observable isPaused = false;
+    @observable isPlaying = false;
     @observable isButtonDisabled = true;
 
     @action
-    togglePlay() {
-        this.isPaused = !this.isPaused;
+    togglePlaying() {
+        this.isPlaying = !this.isPlaying;
+    }
+
+    @action
+    updatePlayingStatus(status) {
+      this.isPlaying = status;
     }
 
     @action

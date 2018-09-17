@@ -8,7 +8,7 @@ import './AlbumPlaylist.css';
 
 @inject('albumModel')
 @observer
-export default class Playlist extends Component {
+export default class AlbumPlaylist extends Component {
   componentDidMount() {
     this.props.albumModel.find(this.props.match.params.id);
   }
@@ -30,7 +30,9 @@ export default class Playlist extends Component {
                 <List.Item>
                   <List.Item.Meta
                     avatar={
-                      <PlayIcon/>
+                      <PlayIcon
+                        songId={item.id}
+                      />
                     }
                     title={item.title}
                     description={item.artist.name}
@@ -67,7 +69,7 @@ export default class Playlist extends Component {
   }
 }
 
-Playlist.propTypes = {
+AlbumPlaylist.propTypes = {
   mediator: PropTypes.object,
   albumModel: PropTypes.object,
   match: PropTypes.any

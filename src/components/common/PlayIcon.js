@@ -3,24 +3,36 @@ import { inject, observer } from 'mobx-react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
-@inject('appUI')
+@inject('appUI', 'songModel')
 @observer
 export class PlayIcon extends React.Component {
-    get iconType () {
-        return this.props.appUI.isPaused ? 'caret-right' : 'pause';
+    get iconType() {
+        return this.props.songModel.currentSongId === this.props.songId &&
+               this.props.appUI.isPlaying ? 'pause' : 'caret-right';
     }
 
-    render () {
+    onClickHandler = () => {
+        if (this.props.songModel.currentSongId !== this.props.songId) {
+            this.props.songModel.updateCurrentSongId(this.props.songId);
+            this.props.appUI.updatePlayingStatus(true);
+        } else {
+            this.props.appUI.togglePlaying();
+        }
+    }
+
+    render() {
         return (
             <Button shape='circle'
                 size={'large'}
                 icon={this.iconType}
-                onClick={() => this.props.appUI.togglePlay()}
+                onClick={this.onClickHandler}
             />
         );
     }
 }
 
 PlayIcon.propTypes = {
-    appUI: PropTypes.object
+    appUI: PropTypes.object,
+    songModel: PropTypes.object,
+    songId: PropTypes.number
 };

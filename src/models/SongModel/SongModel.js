@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { observable } from 'mobx';
+import { observable, action } from 'mobx';
 
 const data = [
   {
@@ -36,6 +36,9 @@ export class SongModel extends Model {
     @observable
     track = 'test';
 
+    @observable
+    currentSongId = 0;
+
     init = (songId) => {
       return this.find(songId);
     }
@@ -53,6 +56,11 @@ export class SongModel extends Model {
           if (matchedSong.length) resolve(matchedSong[0]);
         }, 500);
       });
+    }
+
+    @action
+    updateCurrentSongId = (id) => {
+      this.currentSongId = id;
     }
 }
 
