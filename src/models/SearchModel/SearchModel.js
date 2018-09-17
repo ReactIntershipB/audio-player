@@ -8,13 +8,16 @@ export class SearchModel extends Model {
     staticQueryURL = 'search?q=';
 
     get dataWithoutDuplicates() {
-        const albumIds = [];
-        return this.data.data.filter(item => {
-            if (albumIds.indexOf(item.album.id) < 0) {
-                albumIds.push(item.album.id);
-                return item;
-            }
-        });
+        if (this.data.data) {
+            const albumIds = [];
+            return this.data.data.filter(item => {
+                if (albumIds.indexOf(item.album.id) < 0) {
+                    albumIds.push(item.album.id);
+                    return item;
+                }
+            });
+        }
+        return [];
     }
 
     @action

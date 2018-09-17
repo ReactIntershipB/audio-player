@@ -1,16 +1,10 @@
 import { Model } from '../Model';
-import { observable, action } from 'mobx';
+import { action } from 'mobx';
 
 export class AlbumModel extends Model {
-  @observable loading = true;
-
   @action
   find = (albumId) => {
-    this.loading = true;
-    this.getData(`album/${albumId}`)
-      .then(() => {
-          this.loading = false;
-      });
+    this.getData(`album/${albumId}`);
   }
 
   getDuration = (duration) => {

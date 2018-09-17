@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { action, observable } from 'mobx';
 import axios from 'axios';
 
 import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
@@ -21,10 +21,6 @@ export class Model {
             console.log(err);
             this.toggleLoading();
         });
-    }
-
-    setData = data => {
-        this.data = data;
     }
 
     @action
