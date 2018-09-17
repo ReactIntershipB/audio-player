@@ -1,6 +1,4 @@
 import React from 'react';
-import Mediator from './services/Mediator';
-import PropTypes from 'prop-types';
 
 import Playlist from './components/Playlist/Playlist';
 import Search from './components/Search/Search';
@@ -10,9 +8,9 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <Search history={this.props.history}/>
-        <Playlist mediator={Mediator} />
-        <Player mediator={Mediator}/>
+        <Searcher />
+        <Playlist />
+        <Player />
       </div>
     );
   }
