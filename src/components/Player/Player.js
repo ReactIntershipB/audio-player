@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
 
@@ -11,9 +10,8 @@ import { PlayIcon } from './../common/PlayIcon';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    console.debug('props', props);
     this.ui = new PlayerUI();
-    // this.props.songModel = new songModel();
+    this.props.songModel.init();
   }
 
   handleNextSongClick = () => {
@@ -28,12 +26,17 @@ class Player extends React.Component {
     this.ui.updateTimer(value);
   }
 
+  secondsToStringTime = (time) => {
+    return `${parseInt(time / 60)}:${time % 60}`;
+  }
+
   get trackLength () {
-    return this.props.songModel.track ? this.props.songModel.track.time : 0;
+    // return this.props.songModel.currentSong.duration ? this.props.songModel.currentSong.duration : 0;
+    return 30;
   }
 
   get trackTimeStatus () {
-    return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
+    return this.secondsToStringTime(this.ui.timer) + '/' + this.secondsToStringTime(this.trackLength);
   }
 
   get trackTitle () {
@@ -43,6 +46,10 @@ class Player extends React.Component {
   render() {
     return (
       <div className='player'>
+      {this.props.songModel.currentSong.preview}
+
+        <audio autoPlay src={this.props.songModel.currentSong.preview}></audio>
+
         <Row type='flex'
           justify='center'
           align='middle'>
@@ -148,52 +155,7 @@ class Player extends React.Component {
 }
 
 class PlayerUI {
-  @observable isPaused = false;
-  @observable timer = 0;
-  intervalId;
 
-  iconTypes = {
-    pause: 'pause',
-    play: 'caret-right'
-  }
-
-  @action
-  updateSongState () {
-    this.isPaused = !this.isPaused;
-  }
-
-  @action
-  updateTimer (value) {
-    this.timer = value;
-  }
-
-  @action
-  playTrack (trackLength) {
-    this.resetTimeTrack();
-    this.intervalId = setInterval(() => {
-      if (!this.isPaused && this.timer < trackLength) {
-        this.timer++;
-      } else if (this.time >= trackLength) {
-        window.clearInterval(this.intervalId);
-      }
-    }, 1000);
-  }
-
-  resetTimeTrack = () => {
-    if (this.intervalId !== undefined || this.intervalId !== null) {
-      window.clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-    this.timer = 0;
-  }
-
-  secondsToStringTime = (time) => {
-    return `${parseInt(time / 60)}:${time % 60}`;
-  }
-
-  getIconType = () => {
-    return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
-  }
 }
 
 Player.propTypes = {
