@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Playlist from './components/Playlist/Playlist';
-import Searcher from './components/Searcher/Searcher';
+import Search from './components/Search/Search';
 import Player from './components/Player/Player';
 
 class App extends React.Component {
@@ -15,5 +15,9 @@ class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  history: PropTypes.object
+};
 
 export default App;
