@@ -7,7 +7,7 @@ export class AlbumModel extends Model {
   @action
   find = (albumId) => {
     this.loading = true;
-    this.getData(albumId)
+    this.getData(`album/${albumId}`)
       .then(() => {
           this.loading = false;
       });

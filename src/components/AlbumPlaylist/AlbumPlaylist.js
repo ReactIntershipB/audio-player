@@ -57,8 +57,6 @@ export default class Playlist extends Component {
   }
 
   render() {
-    console.log('RENDER!!!');
-
     return (
       <div className='playlist-container'>
         {this.spinner}
