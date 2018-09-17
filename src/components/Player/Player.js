@@ -29,7 +29,7 @@ class Player extends React.Component {
   }
 
   sliderChange = (value) => {
-    // this.ui.updateTimer(value);
+    // TO DO
   }
 
   secondsToStringTime = (time) => {
@@ -39,11 +39,6 @@ class Player extends React.Component {
   get trackLength () {
     // return this.props.songModel.currentSong.duration ? this.props.songModel.currentSong.duration : 0;
     return 30;
-  }
-
-  get trackTimeStatus () {
-    // return this.secondsToStringTime(this.ui.timer) + '/' + this.secondsToStringTime(this.trackLength);
-    return '';
   }
 
   get trackTitle () {
