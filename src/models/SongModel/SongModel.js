@@ -6,7 +6,6 @@ export class SongModel extends Model {
     @observable currentSongId = 0;
 
     init = () => {
-      console.debug('cuurenid', this.currentSongId);
       this.getData(`/track/3135556`);
     }
 
