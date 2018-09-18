@@ -17,13 +17,13 @@ class Player extends React.Component {
     reaction(
       () => this.props.songModel.songLink,
       () => {
-          this.props.appUI.togglePause();
+          this.props.appUI.togglePlaying();
           this.playerUI.play();
       }
     );
 
     reaction(
-      () => this.props.appUI.isPaused,
+      () => this.props.appUI.isPlaying,
       () => {
         this.playerUI.toggleSong();
       }
