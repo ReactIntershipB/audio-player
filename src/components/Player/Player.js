@@ -168,7 +168,6 @@ class PlayerUI {
   @observable songStatus = false;
 
   @action toggleSong () {
-    console.log(this.songStatus);
     this.songStatus = !this.songStatus;
   }
 

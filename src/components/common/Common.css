@@ -8,12 +8,87 @@
 
 .no-results-container i {
     font-size: 9em;
-    color: cadetblue;
+    color: #096dd9;
 }
 
 .no-results-container p {
     font-size: 2em;
     margin-top: 2%;
-    color: white;
-    text-shadow: 1px 1px 1px black;
+}
+
+.playlist-container {
+    max-height: 70vh;
+    margin: 2vh auto;
+    padding: 0 20px;
+    text-align: left;
+    overflow: auto;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.avatar > :first-child {
+    margin-right: 20px;
+}
+
+/*from https://css-tricks.com/examples/hrs/*/
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ant-spin-spinning.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+span {
+    white-space: nowrap;
+}
+.ant-layout.ant-layout {
+    width: 99vw;
+    margin: 0 auto;
+    background-color: white;
+}
+.ant-layout-header.ant-layout-header {
+    height: 10vh;
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+}
+.ant-layout-content.ant-layout-content {
+    height: 73vh;
+    background-color: white;
+}
+.ant-layout-footer.ant-layout-footer {
+    background-color: white;
+    padding: 0;
+    height: 17vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .ant-layout.ant-layout {
+        width: 90vw;
+    }
+} 
+
+@media only screen and (min-width: 992px) {
+    .ant-layout.ant-layout {
+        width: 80vw;
+    }
+} 
+
+@media only screen and (min-width: 1200px) {
+    .ant-layout.ant-layout {
+        width: 70vw;
+    }
 }
