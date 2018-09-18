@@ -9,13 +9,14 @@ import ListComponent from '../common/List';
 
 @inject('albumModel')
 @observer
-export default class Playlist extends Component {
+export default class AlbumPlaylist extends Component {
   componentDidMount() {
     this.props.albumModel.find(this.props.match.params.id);
   }
 
   get playlist() {
     const { data, loading } = this.props.albumModel;
+
     return (loading || data.error || !data.tracks ? null : <ListComponent heading={'tak'} data={data.tracks.data} avatar={data.cover_small}/>);
   }
 
@@ -40,7 +41,7 @@ export default class Playlist extends Component {
   }
 }
 
-Playlist.propTypes = {
+AlbumPlaylist.propTypes = {
   mediator: PropTypes.object,
   albumModel: PropTypes.object,
   match: PropTypes.any
