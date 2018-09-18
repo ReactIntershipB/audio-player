@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Alert } from 'antd';
 import { observer, inject } from 'mobx-react';
-
-import { MessageBox } from '../common/MessageBox';
 
 import './AlbumPlaylist.css';
 import Spinner from './../common/Spinner';
-import ListColumn from '../common/ListColumn';
+import ListComponent from '../common/List';
+import { ResultsMessage } from '../common/ResultsMessage';
 
 @inject('albumModel')
 @observer
@@ -18,7 +16,8 @@ export default class AlbumPlaylist extends Component {
 
   get playlist() {
     const { data, loading } = this.props.albumModel;
-    return (loading || data.error || !data.tracks ? null : <ListColumn heading={data.title} data={data.tracks.data} avatar={data.cover_small}/>);
+
+    return (loading || data.error || !data.tracks ? this.resultsMessage : <ListComponent heading={data.title} data={data.tracks.data} avatar={data.cover_small}/>);
   }
 
   get spinner() {
@@ -26,20 +25,14 @@ export default class AlbumPlaylist extends Component {
     return loading ? <Spinner /> : null;
   }
 
-  get errorMessage() {
-    const { error } = this.props.albumModel.data;
-    return error
-    ? <MessageBox>
-        <Alert message="Album does not exist" type="info" showIcon />
-      </MessageBox>
-    : null;
+  get resultsMessage() {
+    return this.props.albumModel.loading ? null : <ResultsMessage />;
   }
 
   render() {
     return (
       <div>
         {this.spinner}
-        {this.errorMessage}
         {this.playlist}
       </div>
     );
