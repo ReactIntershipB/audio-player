@@ -7,8 +7,11 @@ import { Button } from 'antd';
 @observer
 export class PlayIcon extends React.Component {
     get iconType() {
-        return this.props.songModel.currentSongId === this.props.songId &&
-               this.props.appUI.isPlaying ? 'pause' : 'caret-right';
+        return this.isCurrentSong && this.props.appUI.isPlaying ? 'pause' : 'caret-right';
+    }
+
+    get isCurrentSong() {
+        return this.props.songId === this.props.songModel.currentSongId;
     }
 
     onClickHandler = () => {
@@ -22,7 +25,8 @@ export class PlayIcon extends React.Component {
 
     render() {
         return (
-            <Button shape='circle'
+            <Button
+                shape='circle'
                 size={'large'}
                 icon={this.iconType}
                 onClick={this.onClickHandler}
