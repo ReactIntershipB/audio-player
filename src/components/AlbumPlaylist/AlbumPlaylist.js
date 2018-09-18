@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { Alert } from 'antd';
 
-import './AlbumPlaylist.css';
 import Spinner from './../common/Spinner';
-import ListComponent from '../common/List';
+import ListComponent from '../common/ListColumn';
 import { MessageBox } from '../common/MessageBox';
 import { ResultsMessage } from '../common/ResultsMessage';
 
@@ -34,7 +33,7 @@ export default class AlbumPlaylist extends Component {
   get errorMessage() {
     return this.props.albumModel.isError
     ? <MessageBox>
-      <Alert message="Something went wrong with download data. Please try refresh the page." type="warning" showIcon />
+      <Alert message="Something went wrong with download data. Please try to refresh the page." type="warning" showIcon />
     </MessageBox>
     : null;
   }
