@@ -41,7 +41,9 @@ class Search extends Component {
 
     fetchData = () => {
       const { term, type } = this.props.match.params;
-      this.props.searchModel.find(term, type);
+      if (term && type) {
+        this.props.searchModel.find(term, type);
+      }
     }
 
     getFilterName = (filterName) => {

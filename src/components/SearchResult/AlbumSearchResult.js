@@ -14,8 +14,8 @@ export default class AlbumSearchResult extends React.Component {
     }
 
    get startComponent() {
-        const { termText } = this.props.searchModel;
-        return termText === '' ? <Start /> : null;
+        const { termText, loading, dataWithoutDuplicates } = this.props.searchModel;
+        return termText === '' && !loading && dataWithoutDuplicates.leegth === 0 ? < Start / > : null;
    }
 
    get spinner() {
@@ -24,8 +24,8 @@ export default class AlbumSearchResult extends React.Component {
    }
 
    get listComponent() {
-       const { loading, termText, dataWithoutDuplicates } = this.props.searchModel;
-       return !loading && termText !== '' ? <ListGrid data={dataWithoutDuplicates}/> : null;
+       const { loading, dataWithoutDuplicates } = this.props.searchModel;
+       return !loading && dataWithoutDuplicates.length > 0 ? <ListGrid data={dataWithoutDuplicates}/> : null;
    }
 
    render() {
