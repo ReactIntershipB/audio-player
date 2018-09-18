@@ -5,24 +5,24 @@ import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
 
 export class Model {
     @observable data = [];
-
+    @observable isError = false;
     @observable loading = false;
 
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
 
+    @action
     getData = (apiQuery) => {
-      this.toggleLoading();
-      return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
-        .then(res => {
-            if (!res.data.error) {
+        this.toggleLoading();
+        return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
+            .then(res => {
                 this.data = res.data;
-            }
-            this.toggleLoading();
-        })
-        .catch(err => {
-            console.log(err);
-            this.toggleLoading();
-        });
+                console.log('@@', this.data);
+                this.toggleLoading();
+            })
+            .catch(() => {
+                this.isError = true;
+                this.toggleLoading();
+            });
     }
 
     @action
