@@ -50,7 +50,7 @@ class Search extends Component {
 
     onInputChange = e => {
       this.props.searchModel.inputChange(e.target.value);
-      this.props.appUI.enableButton(e.target.value);
+      this.props.appUI.changeButtonStatus(e.target.value);
     }
 
     onFilterClick = e => {
@@ -66,7 +66,7 @@ class Search extends Component {
         this.props.searchModel.find(term, filterName);
         this.props.searchModel.setTermText(term);
         this.clearInput();
-        this.props.appUI.enableButton(e.target.value);
+        this.props.appUI.changeButtonStatus(e.target.value);
         this.props.history.push(`/search/${filterName}/${term}`);
       }
     }
