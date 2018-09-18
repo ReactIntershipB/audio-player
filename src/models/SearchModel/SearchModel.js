@@ -5,6 +5,7 @@ export class SearchModel extends Model {
     @observable term = '';
     @observable termText = '';
     @observable filterName = 'artist';
+
     staticQueryURL = 'search?q=';
 
     get dataList() {

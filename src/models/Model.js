@@ -5,7 +5,6 @@ import { CORS_ALLOW_URL, BASE_URL } from '../config/api_config';
 
 export class Model {
     @observable data = [];
-
     @observable loading = false;
 
     getAPIBaseURL = `${CORS_ALLOW_URL}${BASE_URL}`;
@@ -14,9 +13,7 @@ export class Model {
       this.toggleLoading();
       return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
         .then(res => {
-            if (!res.data.error) {
-                this.data = res.data;
-            }
+            this.data = res.data;
             this.toggleLoading();
         })
         .catch(err => {
