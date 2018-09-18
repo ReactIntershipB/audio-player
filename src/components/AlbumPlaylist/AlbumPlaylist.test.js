@@ -3,7 +3,6 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 
 import AlbumPlaylist from './AlbumPlaylist';
-import { appUI } from '../../AppUI';
 import * as models from './mockStore';
 
 describe('AlbumPlaylist', () => {
@@ -16,7 +15,7 @@ describe('AlbumPlaylist', () => {
 
     const albumPlaylist = renderer
       .create(
-        <Provider {...models} appUI={appUI}>
+        <Provider {...models} appUI={{}}>
           <AlbumPlaylist match={match} />
         </Provider>)
       .toJSON();
