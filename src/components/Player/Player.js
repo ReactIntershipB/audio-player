@@ -191,10 +191,6 @@ class PlayerUI {
     this.initTimer();
   }
 
-  @action toggleSong () {
-    this.songIsPlaying = !this.songIsPlaying;
-  }
-
   @action playSong() {
     this.songIsPlaying = true;
   }
