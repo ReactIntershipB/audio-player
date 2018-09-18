@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Router from './router';
-import { BrowserRouter } from 'react-router-dom';
+import App from './App';
 import { Provider } from 'mobx-react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
+import * as models from './models';
+import { appUI } from './AppUI';
 
 import './index.css';
-import * as models from './models/index';
-import { appUI } from './AppUI';
 
 ReactDOM.render(
   <Provider {...models} appUI={appUI}>
     <BrowserRouter>
-        <Router />
+       <Route path='/' component={App} />
     </BrowserRouter>
-  </Provider>
-  ,
-  document.getElementById('root')
+  </Provider>,
+   document.getElementById('root')
 );
 registerServiceWorker();
