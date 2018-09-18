@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import './SearchResult.css';
 import './../common/Common.css';
 
-import Spinner from './../common/Spinner';
+import Spinner from './../common/Spinner/Spinner';
 import { Start } from './../common/Start';
 import { ListComponent } from './../common/ListComponent';
 
