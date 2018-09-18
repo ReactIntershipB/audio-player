@@ -2,17 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import { observable, action } from 'mobx';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
+import { reaction, action, observable } from 'mobx';
 
 @inject('appUI', 'songModel')
 @observer
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    console.debug('props', props);
-    this.ui = new PlayerUI();
+    this.playerUI = new PlayerUI();
+    this.props.songModel.init();
+
+    reaction(
+      () => this.props.songModel.songLink,
+      () => {
+          this.props.appUI.togglePause();
+          this.playerUI.play();
+      }
+    );
+
+    reaction(
+      () => this.props.appUI.isPaused,
+      () => {
+        this.playerUI.toggleSong();
+      }
+    );
   }
 
   handleNextSongClick = () => {
@@ -24,24 +39,22 @@ class Player extends React.Component {
   }
 
   sliderChange = (value) => {
-    this.ui.updateTimer(value);
+    // TO DO
   }
 
-  get trackLength () {
-     return this.props.songModel.track ? this.props.songModel.track.time : 0;
-  }
-
-  get trackTimeStatus () {
-    return this.ui.secondsToStringTime(this.ui.timer) + '/' + this.ui.secondsToStringTime(this.trackLength);
-  }
-
-  get trackTitle () {
-    return this.props.songModel.track ? this.props.songModel.track.title : '';
+  get currentSongTime () {
+    return this.playerUI.timer;
   }
 
   render() {
     return (
       <div className='player'>
+
+        <audio id='audioPlayer'
+          autoPlay
+          src={this.props.songModel.songLink}
+        ></audio>
+
         <Row type='flex'
           justify='center'
           align='middle'>
@@ -53,7 +66,7 @@ class Player extends React.Component {
 
             <br />
 
-            <span>jhjhjhjh</span>
+            <span>Title</span>
 
           </Col>
 
@@ -63,7 +76,7 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
-              <span className='title'>{this.trackTitle}</span>
+              <span className='title'>{this.props.songModel.songTitle}</span>
             </Row>
 
             <Row
@@ -89,13 +102,16 @@ class Player extends React.Component {
                   icon='backward'
                   onClick={this.handlePreviousSongClick}
                 />
+
               </Col>
 
               <Col
                 span={2}
                 className='btns'>
 
-                <PlayIcon />
+                <PlayIcon
+                  disabled={!this.props.songModel.songLink}
+                />
 
               </Col>
 
@@ -108,6 +124,7 @@ class Player extends React.Component {
                   icon='forward'
                   onClick={this.handleNextSongClick}
                 />
+
               </Col>
 
               <Col span={2} className='btns'>
@@ -125,14 +142,14 @@ class Player extends React.Component {
 
               <Col span={22}>
                 <Slider min={0}
-                  max={this.props.songModel.track ? this.props.songModel.track.time : 0}
-                  value={this.ui.timer}
+                  max={this.props.songModel.songLength}
+                  value={this.currentSongTime}
                   disabled={false}
                   onChange={this.sliderChange} />
               </Col>
 
               <Col span={2}>
-                <span>{this.trackTimeStatus}</span>
+                <span>{}</span>
               </Col>
 
             </Row>
@@ -147,51 +164,21 @@ class Player extends React.Component {
 }
 
 class PlayerUI {
-  @observable isPaused = false;
   @observable timer = 0;
-  intervalId;
+  @observable songStatus = false;
 
-  iconTypes = {
-    pause: 'pause',
-    play: 'caret-right'
+  @action toggleSong () {
+    console.log(this.songStatus);
+    this.songStatus = !this.songStatus;
   }
 
   @action
-  updateSongState () {
-    this.isPaused = !this.isPaused;
-  }
-
-  @action
-  updateTimer (value) {
-    this.timer = value;
-  }
-
-  @action
-  playTrack (trackLength) {
-    this.resetTimeTrack();
-    this.intervalId = setInterval(() => {
-      if (!this.isPaused && this.timer < trackLength) {
+  play() {
+    setInterval(() => {
+      if (this.songStatus) {
         this.timer++;
-      } else if (this.time >= trackLength) {
-        window.clearInterval(this.intervalId);
       }
     }, 1000);
-  }
-
-  resetTimeTrack = () => {
-    if (this.intervalId !== undefined || this.intervalId !== null) {
-      window.clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
-    this.timer = 0;
-  }
-
-  secondsToStringTime = (time) => {
-    return `${parseInt(time / 60)}:${time % 60}`;
-  }
-
-  getIconType = () => {
-    return this.isPaused ? this.iconTypes.play : this.iconTypes.pause;
   }
 }
 

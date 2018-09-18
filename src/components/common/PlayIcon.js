@@ -26,6 +26,7 @@ export class PlayIcon extends React.Component {
     render() {
         return (
             <Button
+                disabled={this.props.disabled}
                 shape='circle'
                 size={'large'}
                 icon={this.iconType}
@@ -37,6 +38,7 @@ export class PlayIcon extends React.Component {
 
 PlayIcon.propTypes = {
     appUI: PropTypes.object,
+    disabled: PropTypes.bool,
     songModel: PropTypes.object,
     songId: PropTypes.number
 };
