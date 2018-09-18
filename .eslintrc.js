@@ -5,5 +5,8 @@ module.exports = {
         "semi": [2, "always"],
         "indent": 0,
         "space-before-function-paren": "off",
+    },
+    "env": {
+        "jest": true
     }
 };
