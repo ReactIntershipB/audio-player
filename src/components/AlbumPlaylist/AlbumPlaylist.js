@@ -8,14 +8,14 @@ import ListColumn from '../common/ListColumn';
 
 @inject('albumModel')
 @observer
-export default class Playlist extends Component {
+export default class AlbumPlaylist extends Component {
   componentDidMount() {
     this.props.albumModel.find(this.props.match.params.id);
   }
 
   get playlist() {
     const { data, loading } = this.props.albumModel;
-    return (loading || data.error || !data.tracks ? null : <ListColumn heading={'tak'} data={data.tracks.data} avatar={data.cover_small}/>);
+    return (loading || data.error || !data.tracks ? null : <ListColumn heading={data.title} data={data.tracks.data} avatar={data.cover_small}/>);
   }
 
   get spinner() {
@@ -39,7 +39,7 @@ export default class Playlist extends Component {
   }
 }
 
-Playlist.propTypes = {
+AlbumPlaylist.propTypes = {
   mediator: PropTypes.object,
   albumModel: PropTypes.object,
   match: PropTypes.any

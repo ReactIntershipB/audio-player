@@ -1,13 +1,29 @@
-import { Model } from './../Model';
-import { observable, action } from 'mobx';
+import { Model } from '../Model';
+import { observable, computed, action } from 'mobx';
 
-class SongModel extends Model {
-    @observable
-    currentSongId = 0;
+export class SongModel extends Model {
+    @observable song = {};
+    @observable currentSongId = 0;
 
-    @action
-    setCurrentSongId(id) {
-       this.currentSongId = id;
+    init = () => {
+      this.getData('/track/3135556');
+    }
+
+    @computed get songLink () {
+      return this.data.preview;
+    }
+
+    @computed get songTitle () {
+      return this.data.title;
+    }
+
+    @computed get songLength () {
+      // return this.data.duration;
+      return 30;
+    }
+
+    @action setCurrentSongId(id) {
+      this.currentSongId = id;
     }
 }
 

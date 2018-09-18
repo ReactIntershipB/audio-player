@@ -25,7 +25,6 @@ export default class AlbumSearchResult extends React.Component {
 
    get listComponent() {
        const { loading, termText, dataWithoutDuplicates } = this.props.searchModel;
-       console.log('dadsf', dataWithoutDuplicates);
        return !loading && termText !== '' ? <ListGrid data={dataWithoutDuplicates}/> : null;
    }
 
