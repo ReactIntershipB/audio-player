@@ -29,7 +29,7 @@ export default class AlbumSearchResult extends React.Component {
                                     <Meta title={item.album.title}
                                           description={
                                               <span>
-                                                  <PlayIcon />
+                                                  <PlayIcon songId={item.id}/>
                                                   {` ${item.title}`}
                                               </span>
                                             }/>
