@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import ListComponent from './../common/List';
 import Spinner from './../common/Spinner';
+import { Start } from './../common/Start';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -15,25 +16,30 @@ export default class TrackSearchResult extends React.Component {
       return this.props.songModel.currentSongId === id ? 'pause' : 'caret-right';
    }
 
+   get spinner() {
+       const { loading } = this.props.searchModel;
+       return loading ? <Spinner /> : null;
+   }
+
+   get beforeSearch() {
+       const { termText } = this.props.searchModel;
+       return termText === '' ? <Start /> : null;
+   }
+
+   get listComponent() {
+       const { termText, loading } = this.props.searchModel;
+       return !loading && termText !== '' ? <ListComponent heading={this.props.searchModel.termText} data={this.props.searchModel.dataList}
+                                                           getButtonType={this.getButtonType} handleClick={this.handleClick} /> : null;
+   }
+
    render() {
-       if (this.props.searchModel.loading) {
-           return <Spinner />;
-       } else if (this.props.searchModel.termText === '') {
-           return (
-                <div className="no-serach-term-container">
-                   <i className="fas fa-music"></i>
-                   <p>Listen To Your Favourite Music</p>
-                 </div>
-           );
-       } else {
-            return (
-                <ListComponent heading={this.props.searchModel.termText}
-                               data={this.props.searchModel.data.data}
-                               getButtonType={this.getButtonType}
-                               handleClick={this.handleClick}
-                               />
-            );
-       }
+       return (
+           <div>
+                { this.spinner }
+                { this.beforeSearch }
+                { this.listComponent }
+           </div>
+       );
    }
 }
 
