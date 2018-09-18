@@ -7,18 +7,19 @@ export class SearchModel extends Model {
     @observable filterName = 'artist';
     staticQueryURL = 'search?q=';
 
+    get dataList() {
+        return this.data.data ? this.data.data : [];
+    }
+
     get dataWithoutDuplicates() {
-        if (this.data.data) {
-            const albumIds = []; // TODO reduce
-            return this.data.data.filter(item => {
-                if (albumIds.indexOf(item.album.id) < 0) {
-                    albumIds.push(item.album.id);
-                    return item;
-                }
-            });
-        } else {
-            return [];
-        }
+        const ids = [];
+        return this.dataList.reduce((result, nextItem) => {
+            if (ids.indexOf(nextItem.album.id) < 0) {
+                ids.push(nextItem.album.id);
+                return [...result, nextItem];
+            }
+            return result;
+        }, []);
     }
 
     @action

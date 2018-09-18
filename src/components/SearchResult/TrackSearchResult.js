@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
-import ListComponent from './../common/List';
+import ListColumn from '../common/ListColumn';
 import Spinner from './../common/Spinner';
+import { Start } from './../common/Start';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -15,25 +16,34 @@ export default class TrackSearchResult extends React.Component {
       return this.props.songModel.currentSongId === id ? 'pause' : 'caret-right';
    }
 
-   render() {
-       if (this.props.searchModel.loading) {
-           return <Spinner />;
-       } else if (this.props.searchModel.termText === '') {
-           return (
-                <div className="no-serach-term-container">
-                   <i className="fas fa-music"></i>
-                   <p>Listen To Your Favourite Music</p>
-                 </div>
-           );
+   get startComponent() {
+        const { termText } = this.props.searchModel;
+        return termText === '' ? <Start /> : null;
+   }
+
+   get spinner() {
+       const { loading } = this.props.searchModel;
+       return loading ? <Spinner /> : null;
+   }
+
+   get listComponent() {
+       const { termText, loading, dataList } = this.props.searchModel;
+
+       if (!loading && termText !== '') {
+          return <ListColumn heading={termText} data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} />;
        } else {
-            return (
-                <ListComponent heading={this.props.searchModel.termText}
-                               data={this.props.searchModel.data.data}
-                               getButtonType={this.getButtonType}
-                               handleClick={this.handleClick}
-                               />
-            );
+          return null;
        }
+   }
+
+   render() {
+       return (
+           <React.Fragment>
+                { this.spinner }
+                { this.startComponent }
+                { this.listComponent }
+           </React.Fragment>
+       );
    }
 }
 

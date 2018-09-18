@@ -1,12 +1,7 @@
 .searcher-wrapper {
-    margin-top: 30px;
+    width: 80%;
     display: flex;
-    justify-content: center;
     align-items: center;
-}
-
-.searcher-wrapper .ant-input-group-wrapper {
-    width: 30%;
 }
 
 .dropdown {
