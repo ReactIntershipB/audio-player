@@ -28,7 +28,7 @@ const ListComponent = ({ heading, data, avatar }) => {
                         <div key={item.id}>
                         <List.Item>
                                 <List.Item.Meta
-                                    avatar={<PlayIcon />}
+                                    avatar={<PlayIcon songId={item.id}/>}
                                     title={item.title}
                                     description={ui.getDescription(item.artist.name, title)}/>
                                 <div>{ui.getDuration(item.duration)}</div>
