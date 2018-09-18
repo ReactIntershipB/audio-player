@@ -3,9 +3,23 @@ import { observable, action } from 'mobx';
 
 export class SearchModel extends Model {
     @observable term = '';
+    @observable termText = '';
     @observable filterName = 'artist';
-
     staticQueryURL = 'search?q=';
+
+    get dataWithoutDuplicates() {
+        if (this.data.data) {
+            const albumIds = []; // TODO reduce
+            return this.data.data.filter(item => {
+                if (albumIds.indexOf(item.album.id) < 0) {
+                    albumIds.push(item.album.id);
+                    return item;
+                }
+            });
+        } else {
+            return [];
+        }
+    }
 
     @action
     find(term, filterName) {
@@ -18,8 +32,13 @@ export class SearchModel extends Model {
     }
 
     @action
-    filterChange = (filterName) => {
-      this.filterName = filterName;
+    filterChange = (filter) => {
+       this.filterName = filter;
+    }
+
+    @action
+    setTermText = (text) => {
+        this.termText = text;
     }
 }
 

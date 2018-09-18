@@ -28,7 +28,7 @@ class Player extends React.Component {
   }
 
   get trackLength () {
-    return this.props.songModel.track ? this.props.songModel.track.time : 0;
+     return this.props.songModel.track ? this.props.songModel.track.time : 0;
   }
 
   get trackTimeStatus () {

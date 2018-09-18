@@ -53,8 +53,9 @@ class Search extends Component {
       const { term, filterName } = this.props.searchModel;
       if (term !== '') {
         this.props.searchModel.find(term, filterName);
+        this.props.searchModel.setTermText(term);
         this.clearInput();
-        this.props.history.push(`${filterName}`);
+        this.props.history.push(`/search/${filterName}`);
       }
     }
 
