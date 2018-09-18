@@ -38,7 +38,7 @@ export class PlayIcon extends React.Component {
 
 PlayIcon.propTypes = {
     appUI: PropTypes.object,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
     songModel: PropTypes.object,
     songId: PropTypes.number
 };

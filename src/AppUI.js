@@ -1,7 +1,6 @@
 import { action, observable } from 'mobx';
 
 export class AppUI {
-
     @observable isPlaying = false;
     @observable isButtonDisabled = true;
 
