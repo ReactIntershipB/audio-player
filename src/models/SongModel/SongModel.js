@@ -59,7 +59,7 @@ export class SongModel extends Model {
     }
 
     @action
-    updateCurrentSongId = (id) => {
+    setCurrentSongId(id) {
       this.currentSongId = id;
     }
 }

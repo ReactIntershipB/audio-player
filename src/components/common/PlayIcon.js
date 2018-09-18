@@ -16,7 +16,7 @@ export class PlayIcon extends React.Component {
 
     onClickHandler = () => {
         if (this.props.songModel.currentSongId !== this.props.songId) {
-            this.props.songModel.updateCurrentSongId(this.props.songId);
+            this.props.songModel.setCurrentSongId(this.props.songId);
             this.props.appUI.updatePlayingStatus(true);
         } else {
             this.props.appUI.togglePlaying();
