@@ -28,8 +28,12 @@ export default class TrackSearchResult extends React.Component {
 
    get listComponent() {
        const { termText, loading, dataList } = this.props.searchModel;
-       return !loading && termText !== '' ? <ListColumn heading={termText} data={dataList}
-                                                        getButtonType={this.getButtonType} handleClick={this.handleClick} /> : null;
+
+       if (!loading && termText !== '') {
+          return <ListColumn heading={termText} data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} />;
+       } else {
+          return null;
+       }
    }
 
    render() {
