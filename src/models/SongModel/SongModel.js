@@ -1,5 +1,4 @@
 import { Model } from './../Model';
-
 import { observable, action } from 'mobx';
 
 class SongModel extends Model {
