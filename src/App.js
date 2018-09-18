@@ -38,7 +38,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default App;

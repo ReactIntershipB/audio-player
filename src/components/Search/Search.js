@@ -8,6 +8,16 @@ import './Search.css';
 @inject('searchModel', 'appUI')
 @observer
 class Search extends Component {
+    componentDidMount() {
+      this.fetchData();
+    }
+
+    componentDidUpdate(prevProps) {
+      // if (this.props.searchModel.term !== prevProps.term || this.props.searchModel.filterName !== prevProps.filterName) {
+      //   this.fetchData(this.props.searchModel.term, this.props.searchModel.filterName);
+      // }
+    }
+
     get dropdownMenu() {
         return (
             <Menu
@@ -34,6 +44,12 @@ class Search extends Component {
             <Icon type="search" />
         );
     };
+
+    fetchData = (term, filterName) => {
+      if (term && filterName) {
+        this.props.searchModel.find(this.props.match(term, filterName));
+      }
+    }
 
     getFilterName = (filterName) => {
       return filterName.charAt(0).toUpperCase() + filterName.slice(1);
@@ -69,7 +85,7 @@ class Search extends Component {
           <Input
             placeholder="Find some music..."
             className="searcher-input"
-            onChange={(e) => this.onInputChange(e)}
+            onChange={this.onInputChange}
             value={this.props.searchModel.term}
             addonAfter={this.addonSearchIcon}
           />
@@ -97,7 +113,8 @@ class Search extends Component {
 Search.propTypes = {
   searchModel: PropTypes.object,
   appUI: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default Search;
