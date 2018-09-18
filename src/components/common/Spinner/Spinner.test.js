@@ -7,6 +7,7 @@ describe('<Spinner />', () => {
     const spinner = renderer
     .create(<Spinner />)
     .toJSON();
+
   expect(spinner).toMatchSnapshot();
   });
 });

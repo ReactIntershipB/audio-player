@@ -19,6 +19,7 @@ describe('AlbumPlaylist', () => {
           <AlbumPlaylist match={match} />
         </Provider>)
       .toJSON();
+
     expect(albumPlaylist).toMatchSnapshot();
   });
 });
