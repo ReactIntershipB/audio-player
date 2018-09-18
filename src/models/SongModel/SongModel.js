@@ -1,15 +1,12 @@
 import { Model } from '../Model';
-import { observable, computed } from 'mobx';
+import { observable, computed, action } from 'mobx';
 
 export class SongModel extends Model {
     @observable song = {};
+    @observable currentSongId = 0;
 
     init = () => {
       this.getData('/track/3135556');
-    }
-
-    @computed get currentSong () {
-      return this.data;
     }
 
     @computed get songLink () {
@@ -23,6 +20,10 @@ export class SongModel extends Model {
     @computed get songLength () {
       // return this.data.duration;
       return 30;
+    }
+
+    @action setCurrentSongId(id) {
+      this.currentSongId = id;
     }
 }
 
