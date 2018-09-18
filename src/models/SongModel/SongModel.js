@@ -6,7 +6,7 @@ export class SongModel extends Model {
     @observable currentSongId = 0;
 
     init = () => {
-      this.getData('/track/3135556');
+      // this.getData('/track/3135556');
     }
 
     @computed get songLink () {

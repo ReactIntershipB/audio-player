@@ -13,11 +13,11 @@ export const ListGrid = ({ data }) => {
                 {data.map(item => {
                     return (
                         <Col span={8} key={item.album.id} className="list-item">
-                            <Card style={{ minWidth: '10vw', maxWidth: '17vw' }} cover={<img alt={item.album.title} src={item.album.cover} />} >
+                            <Card style={{ minWidth: '10vw', maxWidth: '17vw' }} cover={<img alt={item.album.title} src={item.album.cover_big} />} >
                                 <Meta title={item.album.title}
                                     description={
                                         <span>
-                                            <PlayIcon />
+                                            <PlayIcon songId={item.id}/>
                                             {` ${item.title}`}
                                         </span>
                                         }/>
