@@ -1,12 +1,10 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import { Card, Row, Col } from 'antd';
 import Spinner from './../common/Spinner';
-import { PlayIcon } from './../common/PlayIcon';
+import { Start } from './../common/Start';
+import { ListGrid } from './../common/ListGrid';
 import './SearchResult.css';
-
-const { Meta } = Card;
 
 @inject('searchModel', 'songModel')
 @observer
@@ -15,32 +13,30 @@ export default class AlbumSearchResult extends React.Component {
      this.props.songModel.setCurrentSongId(id);
    }
 
+   get startComponent() {
+        const { termText } = this.props.searchModel;
+        return termText === '' ? <Start /> : null;
+   }
+
+   get spinner() {
+        const { loading } = this.props.searchModel;
+        return loading ? <Spinner /> : null;
+   }
+
+   get listComponent() {
+       const { loading, termText, dataWithoutDuplicates } = this.props.searchModel;
+       console.log('dadsf', dataWithoutDuplicates);
+       return !loading && termText !== '' ? <ListGrid data={dataWithoutDuplicates}/> : null;
+   }
+
    render() {
-       if (this.props.searchModel.loading) {
-           return <Spinner />;
-       } else {
-            return (
-                <div className="list-container">
-                <Row type="flex" justify="center" align="middle">
-                    {this.props.searchModel.dataWithoutDuplicates.map(item => {
-                        return (
-                            <Col span={4} key={item.album.id} className="list-item">
-                                <Card style={{ width: 240 }} cover={<img alt={item.album.title} src={item.album.cover} />} >
-                                    <Meta title={item.album.title}
-                                          description={
-                                              <span>
-                                                  <PlayIcon />
-                                                  {` ${item.title}`}
-                                              </span>
-                                            }/>
-                                </Card>
-                            </Col>
-                        );
-                    })}
-                </Row>
-                </div>
-            );
-       }
+       return (
+           <div>
+              { this.startComponent }
+              { this.spinner }
+              { this.listComponent }
+           </div>
+       );
    }
 }
 

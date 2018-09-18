@@ -17,12 +17,12 @@
 
 .no-serach-term-container i {
     font-size: 9em;
-    color: cadetblue;
+    color: deepskyblue;
 }
 
 .no-serach-term-container p {
     font-size: 2em;
     margin-top: 2%;
     color: white;
-    text-shadow: 2px 2px 2px cadetblue;
+    text-shadow: 2px 2px 2px deepskyblue;
 }
