@@ -12,12 +12,6 @@ class Search extends Component {
       this.fetchData();
     }
 
-    componentDidUpdate(prevProps) {
-      // if (this.props.searchModel.term !== prevProps.term || this.props.searchModel.filterName !== prevProps.filterName) {
-      //   this.fetchData(this.props.searchModel.term, this.props.searchModel.filterName);
-      // }
-    }
-
     get dropdownMenu() {
         return (
             <Menu
@@ -45,10 +39,9 @@ class Search extends Component {
         );
     };
 
-    fetchData = (term, filterName) => {
-      if (term && filterName) {
-        this.props.searchModel.find(this.props.match(term, filterName));
-      }
+    fetchData = () => {
+      const { term, type } = this.props.match.params;
+      this.props.searchModel.find(term, type);
     }
 
     getFilterName = (filterName) => {
@@ -65,13 +58,16 @@ class Search extends Component {
     }
 
     onSubmitClick = e => {
-      e.preventDefault();
+      e && e.preventDefault();
+
       const { term, filterName } = this.props.searchModel;
+
       if (term !== '') {
         this.props.searchModel.find(term, filterName);
         this.props.searchModel.setTermText(term);
         this.clearInput();
-        this.props.history.push(`/search/${filterName}`);
+        this.props.appUI.enableButton(e.target.value);
+        this.props.history.push(`/search/${filterName}/${term}`);
       }
     }
 

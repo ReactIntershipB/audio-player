@@ -9,9 +9,9 @@ import './SearchResult.css';
 @inject('searchModel', 'songModel')
 @observer
 export default class AlbumSearchResult extends React.Component {
-   handleClick = (id) => {
-     this.props.songModel.setCurrentSongId(id);
-   }
+    handleClick = (id) => {
+        this.props.songModel.setCurrentSongId(id);
+    }
 
    get startComponent() {
         const { termText } = this.props.searchModel;
@@ -41,6 +41,5 @@ export default class AlbumSearchResult extends React.Component {
 
 AlbumSearchResult.propTypes = {
     searchModel: PropTypes.object,
-    songModel: PropTypes.object,
-    history: PropTypes.object
+    songModel: PropTypes.object
 };
