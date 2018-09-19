@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { PlayIcon } from './PlayIcon';
 import './Common.css';
 
-const ListComponent = ({ heading, data, avatar }) => {
+const ListComponent = ({ heading, data }) => {
   const ui = new ListUi();
     return (
       <div className="playlist-container">
@@ -13,10 +13,10 @@ const ListComponent = ({ heading, data, avatar }) => {
             return (
               <div key={item.id}>
                 <div className="list-column-item-content">
-                  <PlayIcon songId="item.id" />
+                  <PlayIcon songId={item.id} />
                   <div className="list-column-item-content-heading">
                     <p>{`${item.artist.name} - ${item.title}`}</p>
-                    <p>{item.album.title}</p>
+                    {item.album && <p>{item.album.title}</p>}
                   </div>
                   <p>{ui.getDuration(item.duration)}</p>
                 </div>
