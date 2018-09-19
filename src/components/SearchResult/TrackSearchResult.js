@@ -5,6 +5,7 @@ import ListColumn from '../common/ListColumn';
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import './../common/Common.css';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -39,18 +40,20 @@ export default class TrackSearchResult extends React.Component {
 
    render() {
        return (
-        <ReactCSSTransitionGroup
+           <React.Fragment>
+                { this.spinner }
+                { this.startComponent }
+                <ReactCSSTransitionGroup
             transitionName="slide"
             transitionAppear={true}
             transitionAppearTimeout={500}
             transitionEnterTimeout={300}
             transitionLeaveTimeout={300}
         >
-            {this.spinner}
-            {this.startComponent}
-            {this.listComponent}
-        </ReactCSSTransitionGroup>
-        );
+                { this.listComponent }
+                </ReactCSSTransitionGroup>
+           </React.Fragment>
+       );
    }
 }
 

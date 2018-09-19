@@ -36,6 +36,20 @@
     align-items: flex-end;
 }
 
+.slider-container p {
+    color: white;
+    z-index: 100000;
+    text-align: center;
+    margin: 0;
+    height: 21px;
+}
+
+.slider-duration-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
 .ant-slider.ant-slider {
     width: 100%;
     margin: 0;
@@ -68,11 +82,4 @@
     border-color: #8F2D56;
     -webkit-box-shadow: 0 0 0 5px #8F2D56;
     box-shadow: 0 0 0 3px #8F2D56;
-}
-
-.slider-container p {
-    color: white;
-    z-index: 100000;
-    text-align: center;
-    margin: 0;
 }

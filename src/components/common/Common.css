@@ -40,14 +40,14 @@
 
 .list-grid-card-container {
     border: 1px solid lightgray;
-    flex-basis: 48%;
+    width: 48%;
     height: 40vh;
     margin-bottom: 2%;
     background-color: rgba(211, 211, 211, .2);
 }
 
 .list-grid-card-content {
-    height: 75%;
+    height: 83%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -64,7 +64,12 @@
     color: black;
     text-align: center;
     margin-top: 1px;
-    font-size: 1.1em;
+    font-size: .9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin-top: 10px;
 }
 
 .list-column-container {

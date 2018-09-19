@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route } from 'react-router-dom';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
 import AlbumSearchResult from './components/SearchResult/AlbumSearchResult';
 import TrackSearchResult from './components/SearchResult/TrackSearchResult';
@@ -10,13 +10,24 @@ import Player from './components/Player/Player';
 import Search from './components/Search/Search';
 import './App.css';
 
+@inject('songModel')
 @observer
 class App extends React.Component {
+  get background() {
+    const src = this.props.songModel.data.album ? this.props.songModel.data.album.cover_xl : null;
+
+    if (src) {
+      return <div className="background-image" style={{ backgroundImage: `url(${src})` }}></div>;
+    } else {
+      return <div className="background-image"></div>;
+    }
+  }
+
   render() {
     return (
       <div className="player-container">
         <div className="top-layer-container">
-          <div className="background-image"></div>
+          {this.background}
           <Switch>
             <Route path='/search/:type/:term' component={Search} />
             <Route component={Search} />
@@ -38,7 +49,8 @@ class App extends React.Component {
 
 App.propTypes = {
   history: PropTypes.object,
-  match: PropTypes.object
+  match: PropTypes.object,
+  songModel: PropTypes.object
 };
 
 export default App;

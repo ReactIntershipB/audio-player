@@ -93,10 +93,13 @@ class Player extends React.Component {
     return (
       <div className='player'>
         <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
-        <p className="player-title">{songTitle || 'TITLE'}</p>
+        <p className="player-title">{songTitle || ''}</p>
         <div className="slider-container">
           <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
-          <span>{this.songTimeStatus}</span> <p>{songDurationString}</p>
+          <div className="slider-duration-container">
+             <p>{currentSongId ? this.songTimeStatus : ' '}</p>
+             <p>{currentSongId ? songDurationString : ' '}</p>
+          </div>
         </div>
         <div className="buttons-container">
           <Button>
