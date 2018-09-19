@@ -12,14 +12,15 @@ import './Player.css';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.props.songModel.init();
-    this.playerUI = new PlayerUI(this.props.songModel.songLength);
+    this.props.songModel.find();
+    this.playerUI = new PlayerUI();
+    this.playerUI.setTimer(this.props.songModel.songLength);
 
     reaction(
       () => this.props.appUI.isPlaying,
       () => {
         if (this.props.appUI.isPlaying) {
-          if (this.props.songModel.songLink.length) {
+          if (this.props.songModel.songLoaded) {
             this.playerUI.playSong();
             this.audioRef.play();
           }
@@ -55,6 +56,7 @@ class Player extends React.Component {
   render() {
     return (
       <div className='player'>
+
         <audio id='audioPlayer'
           ref={this.onAudioRef}
           src={this.props.songModel.songLink}
@@ -83,7 +85,8 @@ class Player extends React.Component {
             <Row
               type='flex'
               justify='center'
-              align='middle'>
+              align='middle'
+            >
 
               <span className='title'>{this.props.songModel.songTitle}</span>
 
@@ -92,11 +95,13 @@ class Player extends React.Component {
             <Row
               type='flex'
               justify='center'
-              align='middle'>
+              align='middle'
+            >
 
               <Col
                 span={2}
-                className='btns'>
+                className='btns'
+              >
 
                 <Button>
                   <i className="fas fa-random"></i>
@@ -124,6 +129,7 @@ class Player extends React.Component {
 
                 <PlayIcon
                   disabled={!this.props.songModel.songLink}
+                  songId={this.props.songModel.currentSongId}
                 />
 
               </Col>

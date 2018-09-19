@@ -2,10 +2,9 @@ import { Model } from '../Model';
 import { observable, computed, action } from 'mobx';
 
 export class SongModel extends Model {
-    @observable song = {};
     @observable currentSongId = 0;
 
-    init = () => {
+    find () {
       this.getData(`/track/3135556`);
     }
 
@@ -20,6 +19,10 @@ export class SongModel extends Model {
     @computed get songLength () {
       // return this.data.duration;
       return 30; // Hardcoded data for demo version of API
+    }
+
+    @computed get songLoaded () {
+      return !!this.data.preview;
     }
 
     @action setCurrentSongId(id) {

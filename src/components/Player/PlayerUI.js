@@ -4,7 +4,7 @@ export class PlayerUI {
     @observable timer = 0;
     @observable songIsPlaying = false;
 
-    constructor (songDuration) {
+    setTimer (songDuration) {
         this.songDuration = songDuration;
         this.initTimer();
     }
@@ -17,15 +17,24 @@ export class PlayerUI {
         this.songIsPlaying = false;
     }
 
-    @action
+    @action reset () {
+        this.timer = 0;
+        this.songIsPlaying = false;
+    }
+
+    @action timerStep () {
+        this.timer = this.timer + 0.1;
+    }
+
     initTimer() {
         setInterval(() => {
-        if (this.songIsPlaying && this.timer < this.songDuration) {
-            this.timer = this.timer + 0.1;
-        } else if (this.songIsPlaying && this.timer >= this.songDuration) {
-            this.timer = 0;
-            this.songIsPlaying = false;
-        }
+            if (this.songIsPlaying) {
+                if (this.timer < this.songDuration) {
+                    this.timerStep();
+                } else {
+                    this.reset();
+                }
+            }
         }, 100);
     }
 
