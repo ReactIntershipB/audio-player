@@ -2,66 +2,108 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction, action, observable } from 'mobx';
+import { reaction } from 'mobx';
+import { PlayerUI } from './PlayerUI';
+import './Player.css';
 
-@inject('appUI', 'songModel')
+@inject('appUI', 'songModel', 'albumModel')
 @observer
 class Player extends React.Component {
   constructor(props) {
     super(props);
     this.playerUI = new PlayerUI();
-    this.props.songModel.init();
 
     reaction(
-      () => this.props.songModel.songLink,
+      () => this.props.songModel.currentSongId,
+      () => this.props.songModel.find()
+    );
+
+    reaction(
+      () => this.props.songModel.data,
       () => {
-          this.props.appUI.togglePlaying();
-          this.playerUI.play();
+        this.playerUI.reset();
+        this.playerUI.setTimer(this.props.songModel.songLength);
+        this.playerUI.playSong();
       }
     );
 
     reaction(
-      () => this.props.appUI.isPaused,
+      () => this.props.appUI.isPlaying,
       () => {
-        this.playerUI.toggleSong();
+        if (this.props.songModel.songLoaded) {
+          if (this.props.appUI.isPlaying) {
+            this.playerUI.playSong();
+            this.audioRef.play();
+          } else {
+            this.playerUI.pauseSong();
+            this.audioRef.pause();
+          }
+        }
       }
     );
   }
 
   handleNextSongClick = () => {
-    ;
+    this.changeSong('next');
   }
 
   handlePreviousSongClick = () => {
-    ;
+    this.changeSong('previous');
+  }
+
+  changeSong (direction) {
+    const currentSongId = this.props.songModel.currentSongId;
+    this.playerUI.reset();
+    this.audioRef.pause();
+
+    this.props.albumModel.songsIdList.map(
+      (songId, index) => {
+        if (songId === currentSongId) {
+          if (direction === 'previous') {
+            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index - 1]);
+          } else if (direction === 'next') {
+            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index + 1]);
+          }
+          return null;
+        }
+      }
+    );
   }
 
   sliderChange = (value) => {
-    // TO DO
+    this.audioRef.currentTime = value;
+    this.playerUI.updateTimer(value);
   }
 
   get currentSongTime () {
     return this.playerUI.timer;
   }
 
+  get songTimeStatus () {
+    return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+  }
+
+  onAudioRef = (audio) => {
+    this.audioRef = audio;
+  }
+
   render() {
-    const { songLink, songTitle, songLength, songDurationString } = this.props.songModel;
+    const { songLink, songTitle, songLength, songDurationString, currentSongId } = this.props.songModel;
     return (
       <div className='player'>
-        <audio id='audioPlayer' autoPlay src={songLink}></audio>
+        <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
         <p className="player-title">{songTitle || 'TITLE'}</p>
         <div className="slider-container">
           <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
-          <p>{songDurationString}</p>
+          <span>{this.songTimeStatus}</span> <p>{songDurationString}</p>
         </div>
         <div className="buttons-container">
           <Button>
             <i className="fas fa-random"></i>
           </Button>
           <Button shape='circle' size={'large'} icon='backward' onClick={this.handlePreviousSongClick} />
-          <PlayIcon disabled={!this.props.songModel.songLink} />
+          <PlayIcon disabled={!songLink} songId={currentSongId}/>
           <Button shape='circle' size={'large'} icon='forward' onClick={this.handleNextSongClick} />
           <Button>
             <i className="fas fa-redo-alt"></i>
@@ -72,27 +114,10 @@ class Player extends React.Component {
   }
 }
 
-class PlayerUI {
-  @observable timer = 0;
-  @observable songStatus = false;
-
-  @action toggleSong () {
-    this.songStatus = !this.songStatus;
-  }
-
-  @action
-  play() {
-    setInterval(() => {
-      if (this.songStatus) {
-        this.timer++;
-      }
-    }, 1000);
-  }
-}
-
 Player.propTypes = {
   songModel: PropTypes.object,
-  appUI: PropTypes.object
+  appUI: PropTypes.object,
+  albumModel: PropTypes.object
 };
 
 export default Player;

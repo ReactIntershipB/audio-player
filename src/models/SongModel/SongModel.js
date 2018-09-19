@@ -2,11 +2,10 @@ import { Model } from '../Model';
 import { observable, computed, action } from 'mobx';
 
 export class SongModel extends Model {
-    @observable song = {};
     @observable currentSongId = 0;
 
-    init = () => {
-      // this.getData('/track/3135556');
+    find () {
+      this.getData(`/track/${this.currentSongId}`);
     }
 
     @computed get songLink () {
@@ -23,7 +22,11 @@ export class SongModel extends Model {
     }
 
     @computed get songDurationString() {
-      return `${parseInt(220 / 60)} : ${220 % 60}`;
+      return `0 : ${30 % 60}`;
+    }
+
+    @computed get songLoaded () {
+      return !!this.data.preview;
     }
 
     @action setCurrentSongId(id) {
