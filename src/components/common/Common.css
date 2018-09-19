@@ -126,6 +126,10 @@ hr {
     border-color: #8F2D56;
 }
 
+.spinner-container .ant-spin-dot i {
+    background-color: #D81159;
+}
+
 @media only screen and (min-width: 768px) {
     .list-grid-card-container {
         height: 31vh;
