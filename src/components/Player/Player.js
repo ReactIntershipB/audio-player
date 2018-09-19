@@ -52,6 +52,10 @@ class Player extends React.Component {
       <div className='player'>
         <audio id='audioPlayer' autoPlay src={songLink}></audio>
         <p className="player-title">{songTitle || 'TITLE'}</p>
+        <div className="slider-container">
+          <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
+          <p>{songLength}</p>
+        </div>
         <div className="buttons-container">
           <Button>
             <i className="fas fa-random"></i>
@@ -62,10 +66,6 @@ class Player extends React.Component {
           <Button>
             <i className="fas fa-redo-alt"></i>
           </Button>
-        </div>
-        <div className="slider-container">
-          <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
-          <span>{songLength}</span>
         </div>
       </div>
     );
