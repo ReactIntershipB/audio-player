@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react';
 import ListColumn from '../common/ListColumn';
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -38,11 +39,17 @@ export default class TrackSearchResult extends React.Component {
 
    render() {
        return (
-           <React.Fragment>
+        <ReactCSSTransitionGroup
+        transitionName="slide"
+        transitionAppear={true}
+        transitionAppearTimeout={500}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+    >
                 { this.spinner }
                 { this.startComponent }
                 { this.listComponent }
-           </React.Fragment>
+           </ReactCSSTransitionGroup>
        );
    }
 }

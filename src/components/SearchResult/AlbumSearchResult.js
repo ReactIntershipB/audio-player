@@ -1,10 +1,13 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import './SearchResult.css';
+
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
 import { ListGrid } from './../common/ListGrid';
-import './SearchResult.css';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -30,11 +33,17 @@ export default class AlbumSearchResult extends React.Component {
 
    render() {
        return (
-           <React.Fragment>
-              { this.startComponent }
-              { this.spinner }
-              { this.listComponent }
-           </React.Fragment>
+        <ReactCSSTransitionGroup
+            transitionName="slide"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+        >
+            {this.startComponent}
+            {this.spinner}
+            {this.listComponent}
+        </ReactCSSTransitionGroup>
        );
    }
 }
