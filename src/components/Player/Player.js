@@ -47,14 +47,14 @@ class Player extends React.Component {
   }
 
   render() {
-    const { songLink, songTitle, songLength } = this.props.songModel;
+    const { songLink, songTitle, songLength, songDurationString } = this.props.songModel;
     return (
       <div className='player'>
         <audio id='audioPlayer' autoPlay src={songLink}></audio>
         <p className="player-title">{songTitle || 'TITLE'}</p>
         <div className="slider-container">
           <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
-          <p>{songLength}</p>
+          <p>{songDurationString}</p>
         </div>
         <div className="buttons-container">
           <Button>

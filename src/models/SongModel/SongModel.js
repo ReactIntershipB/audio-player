@@ -19,7 +19,11 @@ export class SongModel extends Model {
 
     @computed get songLength () {
       // return this.data.duration;
-      return '2:30';
+      return 220;
+    }
+
+    @computed get songDurationString() {
+      return `${parseInt(220 / 60)} : ${220 % 60}`;
     }
 
     @action setCurrentSongId(id) {
