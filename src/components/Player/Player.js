@@ -12,21 +12,33 @@ import './Player.css';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.props.songModel.find();
     this.playerUI = new PlayerUI();
-    this.playerUI.setTimer(this.props.songModel.songLength);
+
+    reaction(
+      () => this.props.songModel.currentSongId,
+      () => this.props.songModel.find()
+    );
+
+    reaction(
+      () => this.props.songModel.data,
+      () => {
+        this.playerUI.reset();
+        this.playerUI.setTimer(this.props.songModel.songLength);
+        this.playerUI.playSong();
+      }
+    );
 
     reaction(
       () => this.props.appUI.isPlaying,
       () => {
-        if (this.props.appUI.isPlaying) {
-          if (this.props.songModel.songLoaded) {
+        if (this.props.songModel.songLoaded) {
+          if (this.props.appUI.isPlaying) {
             this.playerUI.playSong();
             this.audioRef.play();
+          } else {
+            this.playerUI.pauseSong();
+            this.audioRef.pause();
           }
-        } else {
-          this.playerUI.pauseSong();
-          this.audioRef.pause();
         }
       }
     );
@@ -58,6 +70,7 @@ class Player extends React.Component {
       <div className='player'>
 
         <audio id='audioPlayer'
+          autoPlay
           ref={this.onAudioRef}
           src={this.props.songModel.songLink}
         ></audio>
@@ -183,6 +196,7 @@ class Player extends React.Component {
           </Col>
 
         </Row>
+
       </div>
 
     );

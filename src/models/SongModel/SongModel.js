@@ -5,7 +5,8 @@ export class SongModel extends Model {
     @observable currentSongId = 0;
 
     find () {
-      this.getData(`/track/3135556`);
+      console.log(this.currentSongId);
+      this.getData(`/track/${this.currentSongId}`);
     }
 
     @computed get songLink () {
@@ -26,6 +27,7 @@ export class SongModel extends Model {
     }
 
     @action setCurrentSongId(id) {
+      console.log(`CurrentID has been set to ${id}`);
       this.currentSongId = id;
     }
 }
