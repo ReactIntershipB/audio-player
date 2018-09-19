@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 
 import AlbumPlaylist from './AlbumPlaylist';
-import * as mockStore from './mockStore';
+import * as mockStore from './mockStorePlaylist';
 
 describe('AlbumPlaylist', () => {
   const match = {
@@ -16,6 +16,7 @@ describe('AlbumPlaylist', () => {
     const albumModel = new mockStore.AlbumModel();
     const songModel = {};
     const playerModel = {};
+    const appUI = {};
 
     const albumPlaylist = renderer
       .create(
@@ -23,11 +24,12 @@ describe('AlbumPlaylist', () => {
           albumModel={albumModel}
           songModel={songModel}
           playerModel={playerModel}
-          appUI={{}}
+          appUI={appUI}
         >
           <AlbumPlaylist match={match} />
-        </Provider>)
-      .toJSON();
+        </Provider>
+        ).toJSON();
+
     expect(albumPlaylist).toMatchSnapshot();
   });
 
@@ -35,6 +37,7 @@ describe('AlbumPlaylist', () => {
     const albumModel = new mockStore.AlbumModel();
     const songModel = {};
     const playerModel = {};
+    const appUI = {};
     const find = albumModel.find;
 
     renderer
@@ -43,7 +46,7 @@ describe('AlbumPlaylist', () => {
           albumModel={albumModel}
           songModel={songModel}
           playerModel={playerModel}
-          appUI={{}}
+          appUI={appUI}
         >
           <AlbumPlaylist match={match} />
         </Provider>
