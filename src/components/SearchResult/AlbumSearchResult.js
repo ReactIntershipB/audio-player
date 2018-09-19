@@ -15,7 +15,7 @@ export default class AlbumSearchResult extends React.Component {
 
    get startComponent() {
         const { termText, loading, dataWithoutDuplicates } = this.props.searchModel;
-        return termText === '' && !loading && dataWithoutDuplicates.leegth === 0 ? < Start / > : null;
+        return termText === '' && !loading && dataWithoutDuplicates.leegth === 0 ? < Start /> : null;
    }
 
    get spinner() {
@@ -30,11 +30,11 @@ export default class AlbumSearchResult extends React.Component {
 
    render() {
        return (
-           <div>
+           <React.Fragment>
               { this.startComponent }
               { this.spinner }
               { this.listComponent }
-           </div>
+           </React.Fragment>
        );
    }
 }
