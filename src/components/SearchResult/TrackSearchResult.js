@@ -8,13 +8,13 @@ import { Start } from './../common/Start';
 @inject('searchModel', 'songModel')
 @observer
 export default class TrackSearchResult extends React.Component {
-   handleClick = (item) => {
-      this.props.songModel.setCurrentSongId(item.id);
-   }
+    componentDidMount() {
+        this.props.searchModel.setTermText(this.props.match.params.term);
+    }
 
-   getButtonType = (id) => {
-      return this.props.songModel.currentSongId === id ? 'pause' : 'caret-right';
-   }
+    handleClick = (item) => {
+        this.props.songModel.setCurrentSongId(item.id);
+    }
 
    get startComponent() {
         const { termText } = this.props.searchModel;
@@ -49,5 +49,6 @@ export default class TrackSearchResult extends React.Component {
 
 TrackSearchResult.propTypes = {
     searchModel: PropTypes.object,
-    songModel: PropTypes.object
+    songModel: PropTypes.object,
+    match: PropTypes.object
 };

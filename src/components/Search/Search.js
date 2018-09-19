@@ -8,6 +8,10 @@ import './Search.css';
 @inject('searchModel', 'appUI')
 @observer
 class Search extends Component {
+    componentDidMount() {
+      this.fetchData();
+    }
+
     get dropdownMenu() {
         return (
             <Menu
@@ -35,13 +39,20 @@ class Search extends Component {
         );
     };
 
+    fetchData = () => {
+      const { term, type } = this.props.match.params;
+      if (term && type) {
+        this.props.searchModel.find(term, type);
+      }
+    }
+
     getFilterName = (filterName) => {
       return filterName.charAt(0).toUpperCase() + filterName.slice(1);
     }
 
     onInputChange = e => {
       this.props.searchModel.inputChange(e.target.value);
-      this.props.appUI.enableButton(e.target.value);
+      this.props.appUI.changeButtonStatus(e.target.value);
     }
 
     onFilterClick = e => {
@@ -49,13 +60,16 @@ class Search extends Component {
     }
 
     onSubmitClick = e => {
-      e.preventDefault();
+      e && e.preventDefault();
+
       const { term, filterName } = this.props.searchModel;
+
       if (term !== '') {
         this.props.searchModel.find(term, filterName);
         this.props.searchModel.setTermText(term);
         this.clearInput();
-        this.props.history.push(`/search/${filterName}`);
+        this.props.appUI.changeButtonStatus(e.target.value);
+        this.props.history.push(`/search/${filterName}/${term}`);
       }
     }
 
@@ -69,7 +83,7 @@ class Search extends Component {
           <Input
             placeholder="Find some music..."
             className="searcher-input"
-            onChange={(e) => this.onInputChange(e)}
+            onChange={this.onInputChange}
             value={this.props.searchModel.term}
             addonAfter={this.addonSearchIcon}
           />
@@ -97,7 +111,8 @@ class Search extends Component {
 Search.propTypes = {
   searchModel: PropTypes.object,
   appUI: PropTypes.object,
-  history: PropTypes.object
+  history: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default Search;

@@ -15,7 +15,7 @@ export class AppUI {
     }
 
     @action
-    enableButton(term) {
+    changeButtonStatus(term) {
       this.isButtonDisabled = !term;
     }
 }

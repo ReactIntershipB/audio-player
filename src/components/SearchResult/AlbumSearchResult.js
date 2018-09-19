@@ -9,13 +9,13 @@ import './SearchResult.css';
 @inject('searchModel', 'songModel')
 @observer
 export default class AlbumSearchResult extends React.Component {
-   handleClick = (id) => {
-     this.props.songModel.setCurrentSongId(id);
-   }
+    handleClick = (id) => {
+        this.props.songModel.setCurrentSongId(id);
+    }
 
    get startComponent() {
-        const { termText } = this.props.searchModel;
-        return termText === '' ? <Start /> : null;
+        const { termText, loading, dataWithoutDuplicates } = this.props.searchModel;
+        return termText === '' && !loading && dataWithoutDuplicates.leegth === 0 ? < Start / > : null;
    }
 
    get spinner() {
@@ -24,8 +24,8 @@ export default class AlbumSearchResult extends React.Component {
    }
 
    get listComponent() {
-       const { loading, termText, dataWithoutDuplicates } = this.props.searchModel;
-       return !loading && termText !== '' ? <ListGrid data={dataWithoutDuplicates}/> : null;
+       const { loading, dataWithoutDuplicates } = this.props.searchModel;
+       return !loading && dataWithoutDuplicates.length > 0 ? <ListGrid data={dataWithoutDuplicates}/> : null;
    }
 
    render() {
@@ -41,6 +41,5 @@ export default class AlbumSearchResult extends React.Component {
 
 AlbumSearchResult.propTypes = {
     searchModel: PropTypes.object,
-    songModel: PropTypes.object,
-    history: PropTypes.object
+    songModel: PropTypes.object
 };

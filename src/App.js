@@ -15,17 +15,20 @@ const { Header, Footer, Content } = Layout;
 
 @observer
 class App extends React.Component {
-  render () {
+  render() {
     return (
       <Layout>
         <Header>
-           <Search history={this.props.history}/>
+           <Switch>
+            <Route path='/search/:type/:term' component={Search} />
+            <Route component={Search} />
+          </Switch>
         </Header>
         <Content className="content-container">
           <Switch>
-            <Route exact path='/search/artist' component={AlbumSearchResult} />
-            <Route exact path='/search/album' component={AlbumSearchResult} />
-            <Route exact path='/search/track' component={TrackSearchResult} />
+            <Route path='/search/artist/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
+            <Route path='/search/album/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
+            <Route path='/search/track/:term' component={({ match }) => <TrackSearchResult match={match} />} />
             <Route exact path='/album/:id' component={({ match }) => <AlbumPlaylist match={match} />} />
           </Switch>
         </Content>
@@ -38,7 +41,8 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  history: PropTypes.object
+  history: PropTypes.object,
+  match: PropTypes.object
 };
 
 export default App;
