@@ -6,7 +6,7 @@ export class SongModel extends Model {
     @observable currentSongId = 0;
 
     init = () => {
-      // this.getData('/track/3135556');
+      this.getData(`/track/3135556`);
     }
 
     @computed get songLink () {
@@ -19,7 +19,7 @@ export class SongModel extends Model {
 
     @computed get songLength () {
       // return this.data.duration;
-      return 30;
+      return 30; // Hardcoded data for demo version of API
     }
 
     @action setCurrentSongId(id) {

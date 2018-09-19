@@ -11,21 +11,21 @@ import { reaction, action, observable } from 'mobx';
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.playerUI = new PlayerUI();
     this.props.songModel.init();
+    this.playerUI = new PlayerUI(this.props.songModel.songLength);
 
     reaction(
-      () => this.props.songModel.songLink,
+      () => this.props.appUI.isPlaying,
       () => {
-          this.props.appUI.togglePlaying();
-          this.playerUI.play();
-      }
-    );
-
-    reaction(
-      () => this.props.appUI.isPaused,
-      () => {
-        this.playerUI.toggleSong();
+        if (this.props.appUI.isPlaying) {
+          if (this.props.songModel.songLink.length) {
+            this.playerUI.playSong();
+            this.audioRef.play();
+          }
+        } else {
+          this.playerUI.pauseSong();
+          this.audioRef.pause();
+        }
       }
     );
   }
@@ -39,30 +39,37 @@ class Player extends React.Component {
   }
 
   sliderChange = (value) => {
-    // TO DO
+    this.audioRef.currentTime = value;
+    this.playerUI.updateTimer(value);
   }
 
   get currentSongTime () {
     return this.playerUI.timer;
   }
 
+  onAudioRef = (audio) => {
+    this.audioRef = audio;
+  }
+
   render() {
     return (
       <div className='player'>
-
         <audio id='audioPlayer'
-          autoPlay
+          ref={this.onAudioRef}
           src={this.props.songModel.songLink}
         ></audio>
 
         <Row type='flex'
           justify='center'
-          align='middle'>
+          align='middle'
+        >
 
           <Col span={2}>
+
             <Avatar shape='square'
               size={80}
-              icon='star' />
+              icon='star'
+            />
 
             <br />
 
@@ -76,7 +83,9 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
+
               <span className='title'>{this.props.songModel.songTitle}</span>
+
             </Row>
 
             <Row
@@ -91,11 +100,13 @@ class Player extends React.Component {
                 <Button>
                   <i className="fas fa-random"></i>
                 </Button>
+
               </Col>
 
               <Col
                 span={2}
-                className='btns'>
+                className='btns'
+              >
 
                 <Button shape='circle'
                   size={'large'}
@@ -107,7 +118,8 @@ class Player extends React.Component {
 
               <Col
                 span={2}
-                className='btns'>
+                className='btns'
+              >
 
                 <PlayIcon
                   disabled={!this.props.songModel.songLink}
@@ -117,7 +129,8 @@ class Player extends React.Component {
 
               <Col
                 span={2}
-                className='btns'>
+                className='btns'
+              >
 
                 <Button shape='circle'
                   size={'large'}
@@ -128,9 +141,11 @@ class Player extends React.Component {
               </Col>
 
               <Col span={2} className='btns'>
+
                 <Button>
                   <i className="fas fa-redo-alt"></i>
                 </Button>
+
               </Col>
 
             </Row>
@@ -138,18 +153,22 @@ class Player extends React.Component {
             <Row
               type='flex'
               justify='center'
-              align='middle'>
+              align='middle'
+            >
 
               <Col span={22}>
+
                 <Slider min={0}
                   max={this.props.songModel.songLength}
                   value={this.currentSongTime}
                   disabled={false}
-                  onChange={this.sliderChange} />
+                  onChange={this.sliderChange}
+                />
+
               </Col>
 
               <Col span={2}>
-                <span>{}</span>
+                {/* <span>TO DO</span> */}
               </Col>
 
             </Row>
@@ -165,19 +184,36 @@ class Player extends React.Component {
 
 class PlayerUI {
   @observable timer = 0;
-  @observable songStatus = false;
+  @observable songIsPlaying = false;
 
-  @action toggleSong () {
-    this.songStatus = !this.songStatus;
+  constructor (songDuration) {
+    this.songDuration = songDuration;
+    this.initTimer();
+  }
+
+  @action playSong() {
+    this.songIsPlaying = true;
+  }
+
+  @action pauseSong() {
+    this.songIsPlaying = false;
   }
 
   @action
-  play() {
+  initTimer() {
     setInterval(() => {
-      if (this.songStatus) {
-        this.timer++;
+      if (this.songIsPlaying && this.timer < this.songDuration) {
+        this.timer = this.timer + 0.1;
+      } else if (this.songIsPlaying && this.timer >= this.songDuration) {
+        this.timer = 0;
+        this.songIsPlaying = false;
       }
-    }, 1000);
+    }, 100);
+  }
+
+  @action
+  updateTimer (value) {
+    this.timer = value;
   }
 }
 
