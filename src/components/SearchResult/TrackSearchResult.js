@@ -40,17 +40,17 @@ export default class TrackSearchResult extends React.Component {
    render() {
        return (
         <ReactCSSTransitionGroup
-        transitionName="slide"
-        transitionAppear={true}
-        transitionAppearTimeout={500}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
-    >
-                { this.spinner }
-                { this.startComponent }
-                { this.listComponent }
-           </ReactCSSTransitionGroup>
-       );
+            transitionName="slide"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnterTimeout={300}
+            transitionLeaveTimeout={300}
+        >
+            {this.spinner}
+            {this.startComponent}
+            {this.listComponent}
+        </ReactCSSTransitionGroup>
+        );
    }
 }
 
