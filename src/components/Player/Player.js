@@ -56,15 +56,21 @@ class Player extends React.Component {
     this.playerUI.reset();
     this.audioRef.pause();
 
-    const targetSongIndex = this.props.albumModel.songsIdList.findIndex(
+    const songsIdList = this.props.albumModel.songsIdList;
+
+    const currentSongIndex = songsIdList.findIndex(
       (songId) => songId === this.props.songModel.currentSongId
     );
 
+    let targetSongIndex;
+
     if (direction === 'previous') {
-      this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[targetSongIndex - 1]);
+      targetSongIndex = (currentSongIndex - 1) >= 0 ? (currentSongIndex - 1) : (songsIdList.length - 1);
     } else if (direction === 'next') {
-      this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[targetSongIndex + 1]);
+      targetSongIndex = (currentSongIndex + 1) < songsIdList.length ? (currentSongIndex + 1) : 0;
     }
+
+    this.props.songModel.setCurrentSongId(songsIdList[targetSongIndex]);
   }
 
   sliderChange = (value) => {
