@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { observable } from 'mobx';
 
 export const mockData = {
     id: 302127,
@@ -22,16 +22,11 @@ export class AlbumModel {
     @observable data = [];
     @observable loading = false;
 
-    @action
-    find = () => {
+    find = jest.fn(() => {
         this.getData();
-    }
+    });
 
     getData = () => {
         this.data = mockData;
     }
 }
-
-export const albumModel = new AlbumModel();
-export const songModel = {};
-export const playerModel = {};
