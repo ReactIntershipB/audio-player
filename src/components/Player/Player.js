@@ -7,7 +7,7 @@ import { reaction } from 'mobx';
 import { PlayerUI } from './PlayerUI';
 import './Player.css';
 
-@inject('appUI', 'songModel')
+@inject('appUI', 'songModel', 'albumModel')
 @observer
 class Player extends React.Component {
   constructor(props) {
@@ -45,11 +45,30 @@ class Player extends React.Component {
   }
 
   handleNextSongClick = () => {
-    ;
+    this.changeSong('next');
   }
 
   handlePreviousSongClick = () => {
-    ;
+    this.changeSong('previous');
+  }
+
+  changeSong (direction) {
+    const currentSongId = this.props.songModel.currentSongId;
+    this.playerUI.reset();
+    this.audioRef.pause();
+
+    this.props.albumModel.songsIdList.map(
+      (songId, index) => {
+        if (songId === currentSongId) {
+          if (direction === 'previous') {
+            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index - 1]);
+          } else if (direction === 'next') {
+            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index + 1]);
+          }
+          return null;
+        }
+      }
+    );
   }
 
   sliderChange = (value) => {
@@ -209,7 +228,8 @@ class Player extends React.Component {
 
 Player.propTypes = {
   songModel: PropTypes.object,
-  appUI: PropTypes.object
+  appUI: PropTypes.object,
+  albumModel: PropTypes.object
 };
 
 export default Player;
