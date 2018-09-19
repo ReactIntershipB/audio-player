@@ -1,0 +1,96 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListColumn should match snapshot 1`] = `
+<div
+  className="playlist-container"
+>
+  <div
+    className="avatar"
+  >
+    <span
+      className="ant-avatar ant-avatar-square ant-avatar-image"
+      style={
+        Object {
+          "fontSize": 18,
+          "height": 64,
+          "lineHeight": "64px",
+          "width": 64,
+        }
+      }
+    >
+      <img
+        alt={undefined}
+        onError={[Function]}
+        src="https://e-cdns-images.dzcdn.net/images/cover/2e018122cb56986277102d2041a592c8/56x56-000000-80-0-0.jpg"
+      />
+    </span>
+    <h2>
+      Discovery
+    </h2>
+  </div>
+  <div>
+    <div>
+      <div
+        className="ant-list-item"
+      >
+        <div
+          className="ant-list-item-meta"
+        >
+          <div
+            className="ant-list-item-meta-avatar"
+          >
+            <button
+              className="ant-btn ant-btn-circle ant-btn-lg ant-btn-icon-only"
+              disabled={undefined}
+              onClick={[Function]}
+              type="button"
+            >
+              <i
+                className="anticon anticon-caret-right"
+              >
+                <svg
+                  aria-hidden="true"
+                  className=""
+                  data-icon="caret-right"
+                  fill="currentColor"
+                  height="1em"
+                  onClick={undefined}
+                  style={undefined}
+                  viewBox="0 0 1024 1024"
+                  width="1em"
+                >
+                  <path
+                    d="M392.7 76.3l489.1 403.1a42.53 42.53 0 0 1 0 63.4L392.7 947.7c-27.4 24.4-70.8 5-70.8-31.7V107.9c.1-36.6 43.4-56.1 70.8-31.6z"
+                  />
+                </svg>
+              </i>
+            </button>
+          </div>
+          <div
+            className="ant-list-item-meta-content"
+          >
+            <h4
+              className="ant-list-item-meta-title"
+            >
+              One More Time
+            </h4>
+            <div
+              className="ant-list-item-meta-description"
+            >
+              Daft Punk - One More Time
+            </div>
+          </div>
+        </div>
+        <div
+          className="ant-list-item-content"
+        >
+          <div>
+            5:20
+          </div>
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+`;

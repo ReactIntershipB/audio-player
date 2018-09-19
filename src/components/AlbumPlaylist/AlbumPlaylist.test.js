@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 
 import AlbumPlaylist from './AlbumPlaylist';
-import * as models from './mockStore';
+import * as models from '../../models/mockStore';
 
 describe('AlbumPlaylist', () => {
   it('should match snapshot', () => {
