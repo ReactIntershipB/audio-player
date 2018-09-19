@@ -12,7 +12,7 @@
 }
 
 .background-image {
-    background-image: url(/static/media/sea.9b9da7b5.jpg);
+    background-image: url(./../../images/sea.jpg);
     background-repeat: no-repeat;
     filter: blur(1px) grayscale(80%);
     position: absolute;
@@ -21,101 +21,22 @@
     width: 100%;
 }
 
-.content-container {
-    height: 40vh;
+/* Animation for slide down container */
+.slide-appear {
+    opacity: 0;
+    transition: opacity .7s ease-in;
 }
 
-/* .no-results-container {
-    display: flex;
-    height: 70vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.slide-appear.slide-appear-active {
+    opacity: 1;
 }
 
-.no-results-container i {
-    font-size: 9em;
-    color: #096dd9;
+.slide-enter {
+    max-height: 0;
+    transition: all 1s ease-in;
 }
 
-.no-results-container p {
-    font-size: 2em;
-    margin-top: 2%;
+.slide-enter.slide-enter-active {
+    max-height: 40vh;
 }
 
-.playlist-container {
-    max-height: 70vh;
-    margin: 2vh auto;
-    padding: 0 20px;
-    text-align: left;
-    overflow: auto;
-}
-
-.avatar {
-    display: flex;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.avatar > :first-child {
-    margin-right: 20px;
-}
-
-/*from https://css-tricks.com/examples/hrs/*/
-/* hr {
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.ant-spin-spinning.spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-span {
-    white-space: nowrap;
-}
-.ant-layout.ant-layout {
-    width: 99vw;
-    margin: 0 auto;
-    background-color: white;
-}
-.ant-layout-header.ant-layout-header {
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    background-color: lightgray;
-}
-.ant-layout-content.ant-layout-content {
-    height: 73vh;
-    background-color: white;
-}
-.ant-layout-footer.ant-layout-footer {
-    background-color: white;
-    padding: 0;
-    height: 17vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-@media only screen and (min-width: 768px) {
-    .ant-layout.ant-layout {
-        width: 90vw;
-    }
-} 
-
-@media only screen and (min-width: 992px) {
-    .ant-layout.ant-layout {
-        width: 80vw;
-    }
-} 
-
-@media only screen and (min-width: 1200px) {
-    .ant-layout.ant-layout {
-        width: 70vw;
-    }
-} */ 

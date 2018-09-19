@@ -50,7 +50,7 @@ class Player extends React.Component {
     return (
       <div className='player'>
         <audio id='audioPlayer' autoPlay src={this.props.songModel.songLink}></audio>
-        <p className="palyer-title">Title</p>
+        <p className="player-title">Title</p>
         <div className="buttons-container">
           <Button>
             <i className="fas fa-random"></i>
@@ -85,14 +85,11 @@ class Player extends React.Component {
                 span={2}
                 className='btns'>
 
-                
               </Col>
 
               <Col
                 span={2}
                 className='btns'>
-
-                
 
               </Col>
 

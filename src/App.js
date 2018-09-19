@@ -23,14 +23,12 @@ class App extends React.Component {
           </Switch>
           <Player />
         </div>
-        <div className="content-container">
-          <Switch>
-            <Route path='/search/artist/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
-            <Route path='/search/album/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
-            <Route path='/search/track/:term' component={({ match }) => <TrackSearchResult match={match} />} />
-            <Route exact path='/album/:id' component={({ match }) => <AlbumPlaylist match={match} />} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route path='/search/artist/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
+          <Route path='/search/album/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
+          <Route path='/search/track/:term' component={({ match }) => <TrackSearchResult match={match} />} />
+          <Route exact path='/album/:id' component={({ match }) => <AlbumPlaylist match={match} />} />
+        </Switch>
       </div>
     );
   }
