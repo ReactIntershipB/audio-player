@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction, action, observable } from 'mobx';
+import { reaction } from 'mobx';
+import { PlayerUI } from './PlayerUI';
+import './Player.css';
 
 @inject('appUI', 'songModel')
 @observer
@@ -179,41 +180,6 @@ class Player extends React.Component {
       </div>
 
     );
-  }
-}
-
-class PlayerUI {
-  @observable timer = 0;
-  @observable songIsPlaying = false;
-
-  constructor (songDuration) {
-    this.songDuration = songDuration;
-    this.initTimer();
-  }
-
-  @action playSong() {
-    this.songIsPlaying = true;
-  }
-
-  @action pauseSong() {
-    this.songIsPlaying = false;
-  }
-
-  @action
-  initTimer() {
-    setInterval(() => {
-      if (this.songIsPlaying && this.timer < this.songDuration) {
-        this.timer = this.timer + 0.1;
-      } else if (this.songIsPlaying && this.timer >= this.songDuration) {
-        this.timer = 0;
-        this.songIsPlaying = false;
-      }
-    }, 100);
-  }
-
-  @action
-  updateTimer (value) {
-    this.timer = value;
   }
 }
 
