@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import './SearchResult.css';
+import './../common/Common.css';
 
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';

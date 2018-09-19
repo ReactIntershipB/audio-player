@@ -10,13 +10,14 @@ const ListComponent = ({ heading, data, avatar }) => {
         <div className="list-column-container">
           <h2 className="list-column-title">{heading}</h2>
           {data.map(item => {
-            const { title } = item.album ? item.album : item;
             return (
-              <div key={item.id} className="list-column-item-container">
+              <div key={item.id}>
                 <div className="list-column-item-content">
                   <PlayIcon songId="item.id" />
-                  <h3>{title}</h3>
-                  <p>{ui.getDescription(item.artist.name, title)}</p>
+                  <div className="list-column-item-content-heading">
+                    <p>{`${item.artist.name} - ${item.title}`}</p>
+                    <p>{item.album.title}</p>
+                  </div>
                   <p>{ui.getDuration(item.duration)}</p>
                 </div>
                 <hr />
