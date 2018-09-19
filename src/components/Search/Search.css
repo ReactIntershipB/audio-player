@@ -10,11 +10,21 @@
     display: -ms-flexbox;
     display: flex;
     -ms-flex-align: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .ant-input-affix-wrapper.search-input {
     width: 60%;
+    margin-bottom: 10px;
+}
+
+.radio-group-input {
+   margin-bottom: 10px; 
+}
+
+.ant-radio-button-wrapper {
+    width: 70px;
 }
 
 .search-input .ant-btn-primary,
