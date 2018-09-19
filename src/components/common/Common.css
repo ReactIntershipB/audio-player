@@ -12,7 +12,7 @@
 }
 
 .background-image {
-    background-image: url(/static/media/sea.9b9da7b5.jpg);
+    background-image: url(./../../sea.jpg);
     background-repeat: no-repeat;
     filter: blur(1px) grayscale(80%);
     position: absolute;

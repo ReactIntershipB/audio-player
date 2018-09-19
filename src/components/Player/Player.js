@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Col, Row, Slider } from 'antd';
+import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
@@ -47,106 +47,27 @@ class Player extends React.Component {
   }
 
   render() {
+    const { songLink, songTitle, songLength } = this.props.songModel;
     return (
       <div className='player'>
-        <audio id='audioPlayer' autoPlay src={this.props.songModel.songLink}></audio>
-        <p className="palyer-title">Title</p>
+        <audio id='audioPlayer' autoPlay src={songLink}></audio>
+        <p className="player-title">{songTitle || 'TITLE'}</p>
         <div className="buttons-container">
           <Button>
             <i className="fas fa-random"></i>
           </Button>
-          <Button shape='circle'
-                  size={'large'}
-                  icon='backward'
-                  onClick={this.handlePreviousSongClick}
-                />
+          <Button shape='circle' size={'large'} icon='backward' onClick={this.handlePreviousSongClick} />
+          <PlayIcon disabled={!this.props.songModel.songLink} />
+          <Button shape='circle' size={'large'} icon='forward' onClick={this.handleNextSongClick} />
+          <Button>
+            <i className="fas fa-redo-alt"></i>
+          </Button>
         </div>
         <div className="slider-container">
-
+          <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
+          <span>{songLength}</span>
         </div>
-        <Row type='flex'
-          justify='center'
-          align='middle'>
-
-          <Col span={20}>
-
-            <Row
-              type='flex'
-              justify='center'
-              align='middle'>
-              <span className='title'>{this.props.songModel.songTitle}</span>
-            </Row>
-
-            <Row
-              type='flex'
-              justify='center'
-              align='middle'>
-              <Col
-                span={2}
-                className='btns'>
-
-                
-              </Col>
-
-              <Col
-                span={2}
-                className='btns'>
-
-                
-
-              </Col>
-
-              <Col
-                span={2}
-                className='btns'>
-
-                <PlayIcon
-                  disabled={!this.props.songModel.songLink}
-                />
-
-              </Col>
-
-              <Col
-                span={2}
-                className='btns'>
-
-                <Button shape='circle'
-                  size={'large'}
-                  icon='forward'
-                  onClick={this.handleNextSongClick}
-                />
-
-              </Col>
-
-              <Col span={2} className='btns'>
-                <Button>
-                  <i className="fas fa-redo-alt"></i>
-                </Button>
-              </Col>
-
-            </Row>
-
-            <Row type='flex' justify='center' align='middle'>
-
-              <Col span={22}>
-                <Slider min={0}
-                  max={this.props.songModel.songLength}
-                  value={this.currentSongTime}
-                  disabled={false}
-                  onChange={this.sliderChange} />
-              </Col>
-
-              <Col span={2}>
-                <span>{}</span>
-              </Col>
-
-            </Row>
-
-          </Col>
-
-        </Row>
       </div>
-
     );
   }
 }
