@@ -67,6 +67,31 @@
     font-size: 1.1em;
 }
 
+.list-column-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-column-title {
+
+}
+
+.list-column-item-container {
+
+}
+
+.list-column-item-content {
+
+}
+
+hr {
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
 @media only screen and (min-width: 768px) {
     .list-grid-card-container {
         height: 31vh;
@@ -114,13 +139,6 @@
 }
 
 /*from https://css-tricks.com/examples/hrs/*/
-/* hr {
-    border: 0;
-    height: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-} */
-
 
 /*
 span {
