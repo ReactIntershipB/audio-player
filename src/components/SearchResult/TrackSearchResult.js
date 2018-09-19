@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
+
 import ListColumn from '../common/ListColumn';
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 import './../common/Common.css';
 
 @inject('searchModel', 'songModel')
@@ -41,17 +42,9 @@ export default class TrackSearchResult extends React.Component {
    render() {
        return (
            <React.Fragment>
-                { this.spinner }
-                { this.startComponent }
-                <ReactCSSTransitionGroup
-            transitionName="slide"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-        >
-                { this.listComponent }
-                </ReactCSSTransitionGroup>
+            {this.spinner}
+            {this.startComponent}
+            {this.listComponent}
            </React.Fragment>
        );
    }

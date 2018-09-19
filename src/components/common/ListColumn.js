@@ -1,31 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FadeIn from 'react-fade-in';
+
 import { PlayIcon } from './PlayIcon';
+
 import './Common.css';
 
 const ListComponent = ({ heading, data }) => {
   const ui = new ListUi();
     return (
-      <div className="playlist-container">
-        <div className="list-column-container">
-          <h2 className="list-column-title">{heading}</h2>
-          {data.map(item => {
-            return (
-              <div key={item.id}>
-                <div className="list-column-item-content">
-                  <PlayIcon songId={item.id} />
-                  <div className="list-column-item-content-heading">
-                    <p>{`${item.artist.name} - ${item.title}`}</p>
-                    {item.album && <p>{item.album.title}</p>}
+      <FadeIn>
+        <div className="playlist-container">
+          <div className="list-column-container">
+            <h2 className="list-column-title">{heading}</h2>
+            {data.map(item => {
+              return (
+                <div key={item.id}>
+                  <div className="list-column-item-content">
+                    <PlayIcon songId={item.id} />
+                    <div className="list-column-item-content-heading">
+                      <p>{`${item.artist.name} - ${item.title}`}</p>
+                      {item.album && <p>{item.album.title}</p>}
+                    </div>
+                    <p>{ui.getDuration(item.duration)}</p>
                   </div>
-                  <p>{ui.getDuration(item.duration)}</p>
+                  <hr />
                 </div>
-                <hr />
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
+      </FadeIn>
     );
 };
 
