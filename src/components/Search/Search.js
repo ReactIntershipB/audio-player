@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Input, Dropdown, Icon, Menu, Button } from 'antd';
+import { Icon, Menu, Input, Radio } from 'antd';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-
 import './Search.css';
+
+const RadioGroup = Radio.Group;
 
 @inject('searchModel', 'appUI')
 @observer
-class Search extends Component {
+class SearchComponent extends Component {
     componentDidMount() {
       this.fetchData();
     }
@@ -55,21 +56,19 @@ class Search extends Component {
       this.props.appUI.changeButtonStatus(e.target.value);
     }
 
-    onFilterClick = e => {
-      this.props.searchModel.filterChange(e.item.props.value);
+    onFilterClick = value => {
+      this.props.searchModel.filterChange(value.target.value);
     }
 
-    onSubmitClick = e => {
-      e && e.preventDefault();
+    onSubmitClick = value => {
+      const { filterName } = this.props.searchModel;
 
-      const { term, filterName } = this.props.searchModel;
-
-      if (term !== '') {
-        this.props.searchModel.find(term, filterName);
-        this.props.searchModel.setTermText(term);
+      if (value !== '') {
+        this.props.searchModel.find(value, filterName);
+        this.props.searchModel.setTermText(value);
         this.clearInput();
-        this.props.appUI.changeButtonStatus(e.target.value);
-        this.props.history.push(`/search/${filterName}/${term}`);
+        this.props.appUI.changeButtonStatus(value);
+        this.props.history.push(`/search/${filterName}/${value}`);
       }
     }
 
@@ -78,41 +77,47 @@ class Search extends Component {
     }
 
     render() {
+      const { filterName } = this.props.searchModel;
       return (
-        <form className='searcher-wrapper' onSubmit={this.onSubmitClick}>
-          <Input
-            placeholder="Find some music..."
-            className="searcher-input"
-            onChange={this.onInputChange}
-            value={this.props.searchModel.term}
-            addonAfter={this.addonSearchIcon}
-          />
-          <Dropdown
-            className='dropdown'
-            overlay={this.dropdownMenu}
-          >
-            <Button className="ant-dropdown-link">
-              {this.getFilterName(this.props.searchModel.filterName)}
-              <Icon type="down" />
-            </Button>
-          </Dropdown>
-          <Button
-            type="primary"
-            disabled={this.props.appUI.isButtonDisabled}
-            onClick={this.onSubmitClick}
-          >
-            Submit
-          </Button>
-        </form>
+        <div className="search-container">
+            <div className='search-form-container'>
+            <Input.Search
+              placeholder="input search text"
+              onSearch={value => this.onSubmitClick(value)}
+              enterButton
+              />
+            <RadioGroup onChange={this.onFilterClick} value={filterName}>
+              <Radio value={'artist'}>Artist</Radio>
+              <Radio value={'album'}>Album</Radio>
+              <Radio value={'track'}>Track</Radio>
+            </RadioGroup>
+            {/* <Dropdown
+              className='dropdown'
+              overlay={this.dropdownMenu}
+            >
+              <Button className="ant-dropdown-link">
+                {this.getFilterName(this.props.searchModel.filterName)}
+                <Icon type="down" />
+              </Button>
+            </Dropdown> */}
+            {/* <Button
+              type="primary"
+              disabled={this.props.appUI.isButtonDisabled}
+              onClick={this.onSubmitClick}
+            >
+              Submit
+            </Button> */}
+          </div>
+        </div>
       );
     }
 }
 
-Search.propTypes = {
+SearchComponent.propTypes = {
   searchModel: PropTypes.object,
   appUI: PropTypes.object,
   history: PropTypes.object,
   match: PropTypes.object
 };
 
-export default Search;
+export default SearchComponent;

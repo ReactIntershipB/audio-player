@@ -7,3 +7,10 @@ body {
     font-family: sans-serif;
     height: auto;
   }
+
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

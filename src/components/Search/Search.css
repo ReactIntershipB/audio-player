@@ -1,10 +1,21 @@
-.searcher-wrapper {
-    width: 80%;
-    display: flex;
-    align-items: center;
+.search-container {
+    position: absolute;
+    top: 3%;
+    width: 100%;
+    padding: 0 2%;
 }
 
-.dropdown {
+.search-form-container {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+/* .dropdown {
     margin: 0 20px;
 }
 
@@ -16,4 +27,4 @@
 .ant-dropdown-link,
 .ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
     width: 90px;
-}
+} */

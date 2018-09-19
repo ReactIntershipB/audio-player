@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Avatar, Button, Col, Row, Slider } from 'antd';
+import { Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
@@ -49,26 +49,24 @@ class Player extends React.Component {
   render() {
     return (
       <div className='player'>
+        <audio id='audioPlayer' autoPlay src={this.props.songModel.songLink}></audio>
+        <p className="palyer-title">Title</p>
+        <div className="buttons-container">
+          <Button>
+            <i className="fas fa-random"></i>
+          </Button>
+          <Button shape='circle'
+                  size={'large'}
+                  icon='backward'
+                  onClick={this.handlePreviousSongClick}
+                />
+        </div>
+        <div className="slider-container">
 
-        <audio id='audioPlayer'
-          autoPlay
-          src={this.props.songModel.songLink}
-        ></audio>
-
+        </div>
         <Row type='flex'
           justify='center'
           align='middle'>
-
-          <Col span={2}>
-            <Avatar shape='square'
-              size={80}
-              icon='star' />
-
-            <br />
-
-            <span>Title</span>
-
-          </Col>
 
           <Col span={20}>
 
@@ -83,25 +81,18 @@ class Player extends React.Component {
               type='flex'
               justify='center'
               align='middle'>
-
               <Col
                 span={2}
                 className='btns'>
 
-                <Button>
-                  <i className="fas fa-random"></i>
-                </Button>
+                
               </Col>
 
               <Col
                 span={2}
                 className='btns'>
 
-                <Button shape='circle'
-                  size={'large'}
-                  icon='backward'
-                  onClick={this.handlePreviousSongClick}
-                />
+                
 
               </Col>
 
@@ -135,10 +126,7 @@ class Player extends React.Component {
 
             </Row>
 
-            <Row
-              type='flex'
-              justify='center'
-              align='middle'>
+            <Row type='flex' justify='center' align='middle'>
 
               <Col span={22}>
                 <Slider min={0}

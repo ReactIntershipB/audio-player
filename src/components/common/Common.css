@@ -1,4 +1,31 @@
-.no-results-container {
+.player-container {
+    border: 1px solid rgba(216,216,216);
+    width: 30vw;
+    border-radius: 5px 5px;
+    position: absolute;
+}
+
+.top-layer-container {
+    height: 40vh;
+    position: relative;
+    width: 100%;
+}
+
+.background-image {
+    background-image: url(/static/media/sea.9b9da7b5.jpg);
+    background-repeat: no-repeat;
+    filter: blur(1px) grayscale(80%);
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.content-container {
+    height: 40vh;
+}
+
+/* .no-results-container {
     display: flex;
     height: 70vh;
     flex-direction: column;
@@ -35,7 +62,7 @@
 }
 
 /*from https://css-tricks.com/examples/hrs/*/
-hr {
+/* hr {
     border: 0;
     height: 0;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -91,4 +118,4 @@ span {
     .ant-layout.ant-layout {
         width: 70vw;
     }
-}
+} */ 
