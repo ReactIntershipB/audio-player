@@ -1,31 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col, Card } from 'antd';
 import { PlayIcon } from './PlayIcon';
 import './Common.css';
-
-const { Meta } = Card;
 
 export const ListGrid = ({ data }) => {
     return (
         <div className="playlist-container">
-            <Row type="flex" justify="flex-start" align="top">
-                {data.map(item => {
-                    return (
-                        <Col span={8} key={item.album.id} className="list-item">
-                            <Card style={{ minWidth: '10vw', maxWidth: '17vw' }} cover={<img alt={item.album.title} src={item.album.cover_big} />} >
-                                <Meta title={item.album.title}
-                                    description={
-                                        <span>
-                                            <PlayIcon songId={item.id}/>
-                                            {` ${item.title}`}
-                                        </span>
-                                        }/>
-                            </Card>
-                        </Col>
-                    );
-                })}
-            </Row>
+          <div className="list-grid-container">
+            {data.map(item => {
+              return (
+                 <div key={item.album.id} className="list-grid-card-container">
+                     <div className="list-grid-card-content" style={{ backgroundImage: 'url(' + item.album.cover_big + ')' }}>
+                         <PlayIcon songId={item.id}/>
+                     </div>
+                     <h3 className="list-grid-card-title">{item.album.title}</h3>
+                 </div>
+              );
+            })}
+          </div>
         </div>
     );
 };

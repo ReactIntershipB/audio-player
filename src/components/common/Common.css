@@ -1,31 +1,85 @@
-.player-container {
-    border: 1px solid rgba(216,216,216);
-    width: 99vw;
-    border-radius: 5px 5px;
-    position: absolute;
-}
-
-.top-layer-container {
-    height: 40vh;
-    position: relative;
-    width: 100%;
-}
-
-.background-image {
-    background-image: url(./../../images/sea.jpg);
-    background-repeat: no-repeat;
-    filter: blur(1px) grayscale(80%);
-    position: absolute;
-    top: 0;
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100%;
-    width: 100%;
 }
 
-.content-container {
-    height: 50vh;
+/* Animation for slide down container */
+.slide-appear {
+    opacity: 0;
+    transition: opacity .7s ease-in;
+}
+
+.slide-appear.slide-appear-active {
+    opacity: 1;
+}
+
+.slide-enter {
+    max-height: 0;
+    transition: all 1s ease-in;
+}
+
+.slide-enter.slide-enter-active {
+    max-height: 40vh;
+}
+
+.playlist-container {
+    height: 100%;
     width: 100%;
     padding: 1%;
 }
+
+.list-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-flow: wrap;
+    align-items: center;
+}
+
+.list-grid-card-container {
+    border: 1px solid lightgray;
+    flex-basis: 48%;
+    height: 40vh;
+    margin-bottom: 2%;
+    background-color: rgba(211, 211, 211, .2);
+}
+
+.list-grid-card-content {
+    height: 75%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-grid-card-content button {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.list-grid-card-title {
+    color: black;
+    text-align: center;
+    margin-top: 1px;
+    font-size: 1.1em;
+}
+
+@media only screen and (min-width: 768px) {
+    .list-grid-card-container {
+        height: 31vh;
+    }
+} 
+
+@media only screen and (min-width: 992px) {
+    .list-grid-card-container {
+        height: 23vh;
+    }
+} 
+
+
 
 /* .no-results-container {
     display: flex;
@@ -59,32 +113,6 @@
     margin-bottom: 40px;
 }
 
-/* Animation for slide down container */
-.slide-appear {
-    opacity: 0;
-    transition: opacity .7s ease-in;
-}
-
-.slide-appear.slide-appear-active {
-    opacity: 1;
-}
-
-.slide-enter {
-    max-height: 0;
-    transition: all 1s ease-in;
-}
-
-.slide-enter.slide-enter-active {
-    max-height: 40vh;
-}
-
-.playlist-container {
-    height: 50vh;
-    width: 100%;
-    padding: 1%;
-    overflow: auto;
-}
-
 /*from https://css-tricks.com/examples/hrs/*/
 /* hr {
     border: 0;
@@ -92,12 +120,7 @@
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 } */
-.spinner-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+
 
 /*
 span {
@@ -127,26 +150,4 @@ span {
     align-items: center;
 } */
 
-@media only screen and (min-width: 480px) {
-    .player-container {
-        width: 80vw;
-    }
-}
 
-@media only screen and (min-width: 768px) {
-    .player-container {
-        width: 70vw;
-    }
-} 
-
-@media only screen and (min-width: 992px) {
-    .player-container {
-        width: 50vw;
-    }
-} 
-
-@media only screen and (min-width: 1200px) {
-    .player-container {
-        width: 30vw;
-    }
-}
