@@ -2,29 +2,43 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
-import './Player.css';
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction, action, observable } from 'mobx';
+import { reaction } from 'mobx';
+import { PlayerUI } from './PlayerUI';
+import './Player.css';
 
 @inject('appUI', 'songModel')
 @observer
 class Player extends React.Component {
   constructor(props) {
     super(props);
-    this.props.songModel.init();
-    this.playerUI = new PlayerUI(this.props.songModel.songLength);
+    this.playerUI = new PlayerUI();
+
+    reaction(
+      () => this.props.songModel.currentSongId,
+      () => this.props.songModel.find()
+    );
+
+    reaction(
+      () => this.props.songModel.data,
+      () => {
+        this.playerUI.reset();
+        this.playerUI.setTimer(this.props.songModel.songLength);
+        this.playerUI.playSong();
+      }
+    );
 
     reaction(
       () => this.props.appUI.isPlaying,
       () => {
-        if (this.props.appUI.isPlaying) {
-          if (this.props.songModel.songLink.length) {
+        if (this.props.songModel.songLoaded) {
+          if (this.props.appUI.isPlaying) {
             this.playerUI.playSong();
             this.audioRef.play();
+          } else {
+            this.playerUI.pauseSong();
+            this.audioRef.pause();
           }
-        } else {
-          this.playerUI.pauseSong();
-          this.audioRef.pause();
         }
       }
     );
@@ -47,6 +61,10 @@ class Player extends React.Component {
     return this.playerUI.timer;
   }
 
+  get songTimeStatus () {
+    return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+  }
+
   onAudioRef = (audio) => {
     this.audioRef = audio;
   }
@@ -54,7 +72,9 @@ class Player extends React.Component {
   render() {
     return (
       <div className='player'>
+
         <audio id='audioPlayer'
+          autoPlay
           ref={this.onAudioRef}
           src={this.props.songModel.songLink}
         ></audio>
@@ -82,7 +102,8 @@ class Player extends React.Component {
             <Row
               type='flex'
               justify='center'
-              align='middle'>
+              align='middle'
+            >
 
               <span className='title'>{this.props.songModel.songTitle}</span>
 
@@ -91,11 +112,13 @@ class Player extends React.Component {
             <Row
               type='flex'
               justify='center'
-              align='middle'>
+              align='middle'
+            >
 
               <Col
                 span={2}
-                className='btns'>
+                className='btns'
+              >
 
                 <Button>
                   <i className="fas fa-random"></i>
@@ -123,6 +146,7 @@ class Player extends React.Component {
 
                 <PlayIcon
                   disabled={!this.props.songModel.songLink}
+                  songId={this.props.songModel.currentSongId}
                 />
 
               </Col>
@@ -168,7 +192,7 @@ class Player extends React.Component {
               </Col>
 
               <Col span={2}>
-                {/* <span>TO DO</span> */}
+                <span>{this.songTimeStatus}</span>
               </Col>
 
             </Row>
@@ -176,44 +200,10 @@ class Player extends React.Component {
           </Col>
 
         </Row>
+
       </div>
 
     );
-  }
-}
-
-class PlayerUI {
-  @observable timer = 0;
-  @observable songIsPlaying = false;
-
-  constructor (songDuration) {
-    this.songDuration = songDuration;
-    this.initTimer();
-  }
-
-  @action playSong() {
-    this.songIsPlaying = true;
-  }
-
-  @action pauseSong() {
-    this.songIsPlaying = false;
-  }
-
-  @action
-  initTimer() {
-    setInterval(() => {
-      if (this.songIsPlaying && this.timer < this.songDuration) {
-        this.timer = this.timer + 0.1;
-      } else if (this.songIsPlaying && this.timer >= this.songDuration) {
-        this.timer = 0;
-        this.songIsPlaying = false;
-      }
-    }, 100);
-  }
-
-  @action
-  updateTimer (value) {
-    this.timer = value;
   }
 }
 
