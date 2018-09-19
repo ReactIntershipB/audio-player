@@ -48,6 +48,11 @@
 	background-color: #555;
 }
 
+.content-container::-webkit-scrollbar-thumb:horizontal:active,
+.content-container::-webkit-scrollbar-thumb:vertical:active { 
+    background-color: #D81159;
+}
+
 @media only screen and (min-width: 480px) {
     .player-container {
         width: 80vw;
