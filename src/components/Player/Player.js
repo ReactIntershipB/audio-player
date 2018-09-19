@@ -61,6 +61,10 @@ class Player extends React.Component {
     return this.playerUI.timer;
   }
 
+  get songTimeStatus () {
+    return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+  }
+
   onAudioRef = (audio) => {
     this.audioRef = audio;
   }
@@ -188,7 +192,7 @@ class Player extends React.Component {
               </Col>
 
               <Col span={2}>
-                {/* <span>TO DO</span> */}
+                <span>{this.songTimeStatus}</span>
               </Col>
 
             </Row>

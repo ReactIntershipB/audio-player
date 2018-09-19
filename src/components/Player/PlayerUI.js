@@ -18,6 +18,7 @@ export class PlayerUI {
     }
 
     @action reset () {
+        clearInterval(this.timerInterval);
         this.timer = 0;
         this.songIsPlaying = false;
     }
@@ -27,7 +28,7 @@ export class PlayerUI {
     }
 
     initTimer() {
-        setInterval(() => {
+        this.timerInterval = setInterval(() => {
             if (this.songIsPlaying) {
                 if (this.timer < this.songDuration) {
                     this.timerStep();
