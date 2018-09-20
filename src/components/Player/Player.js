@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
+
 import { PlayIcon } from './../common/PlayIcon';
 import { reaction } from 'mobx';
 import { PlayerUI } from './PlayerUI';
+
 import './Player.css';
 
 @inject('appUI', 'songModel', 'albumModel')
@@ -54,6 +56,7 @@ class Player extends React.Component {
 
   changeSong (direction) {
     const currentSongId = this.props.songModel.currentSongId;
+
     this.playerUI.reset();
     this.audioRef.pause();
 
@@ -90,6 +93,7 @@ class Player extends React.Component {
 
   render() {
     const { songLink, songTitle, songLength, songDurationString, currentSongId } = this.props.songModel;
+
     return (
       <div className='player'>
         <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
