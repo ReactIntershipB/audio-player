@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction } from 'mobx';
+import { reaction, when } from 'mobx';
 import { PlayerUI } from './PlayerUI';
 import './Player.css';
 
@@ -14,12 +14,10 @@ class Player extends React.Component {
     super(props);
     this.playerUI = new PlayerUI();
 
-    reaction(
+    when(
       () => this.playerUI.getNextSong,
       () => {
-        if (this.playerUI.getNextSong === true) {
-          this.changeSongByDirection('next');
-        }
+        this.changeSongByDirection('next');
       }
     );
 
