@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import './SearchResult.css';
 import './../common/Common.css';
@@ -34,17 +33,11 @@ export default class AlbumSearchResult extends React.Component {
 
    render() {
        return (
-        <ReactCSSTransitionGroup
-            transitionName="slide"
-            transitionAppear={true}
-            transitionAppearTimeout={500}
-            transitionEnterTimeout={300}
-            transitionLeaveTimeout={300}
-        >
-            {this.startComponent}
-            {this.spinner}
-            {this.listComponent}
-        </ReactCSSTransitionGroup>
+            <React.Fragment>
+                {this.startComponent}
+                {this.spinner}
+                {this.listComponent}
+            </React.Fragment>
        );
    }
 }

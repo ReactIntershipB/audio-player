@@ -1,6 +1,6 @@
 .player {
     width: 100%;
-    height: 100%;
+    height: 150%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -68,12 +68,14 @@
     border-color: #8F2D56;
 }
 
-.buttons-container .ant-btn:active, .ant-btn.active {
+.buttons-container .ant-btn:active,
+.buttons-container .ant-btn.active {
     color: #8F2D56;
     border-color: #8F2D56;
 }
 
-.buttons-container .ant-btn:hover, .ant-btn:focus {
+.buttons-container .ant-btn:hover,
+.buttons-container .ant-btn:focus {
     color: #D81159;
     border-color: #D81159;
 }

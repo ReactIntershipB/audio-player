@@ -182,6 +182,22 @@ hr {
     font-family: 'Lora', serif;
 }
 
+.play-button.ant-btn:hover,
+.play-button.ant-btn:focus {
+    color: #D81159;
+    border-color: #D81159;
+}
+
+.play-button.ant-btn:active,
+.play-button.ant-btn.active {
+    color: #8F2D56;
+    border-color: #8F2D56;
+}
+
+.spinner-container .ant-spin-dot i {
+    background-color: #D81159;
+}
+
 @media only screen and (min-width: 768px) {
     .list-grid-card-container {
         height: 31vh;
