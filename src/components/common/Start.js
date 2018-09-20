@@ -6,7 +6,7 @@ import './Common.css';
 export const Start = () => {
     return (
         <div className="playlist-container">
-            <div className="list-column-container">
+            {/* <div className="list-column-container">
                 <div>
                     <div className="list-column-item-content">
                         <Link to={''}>
@@ -18,7 +18,7 @@ export const Start = () => {
                     </div>
                     <hr />
                 </div>
-            </div>
+            </div> */}
             <div className="list-column-container">
                 <div>
                     <div className="list-column-item-content">

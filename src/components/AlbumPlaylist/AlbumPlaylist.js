@@ -28,7 +28,7 @@ export default class AlbumPlaylist extends Component {
   get errorMessage() {
     return this.props.albumModel.isError
     ? <MessageBox>
-      <Alert message="Something went wrong with download data. Please try to refresh the page." type="warning" showIcon />
+      <Alert message="Something went wrong with download data. Please try to refresh the page." type="error" showIcon />
     </MessageBox>
     : null;
   }

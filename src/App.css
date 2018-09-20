@@ -70,3 +70,7 @@
 .content-container::-webkit-scrollbar-thumb:vertical:active { 
     background-color: #D81159;
 }
+
+#message-box {
+    position: absolute;
+}

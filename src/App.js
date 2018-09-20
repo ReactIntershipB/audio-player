@@ -11,22 +11,22 @@ import Search from './components/Search/Search';
 import { Start } from './components/common/Start';
 import './App.css';
 
-@inject('songModel')
+@inject('songModel', 'albumModel')
 @observer
 class App extends React.Component {
   get background() {
     const src = this.backgroundSrc;
-    console.log('src', src);
+
     if (src) {
       return <div className="background-image" style={{ backgroundImage: `url(${src})` }}></div>;
     }
   }
 
   get backgroundSrc() {
-     if (this.props.songModel.data.album) {
+     if (this.props.albumModel.data) {
+        return this.props.albumModel.data.cover_xl;
+     } else if (this.props.songModel.data) {
          return this.props.songModel.data.album.cover_xl;
-     } else if (this.props.songModel.data.type === 'album') {
-         return this.props.songModel.data.cover_xl;
      }
      return null;
   }
@@ -60,7 +60,8 @@ class App extends React.Component {
 App.propTypes = {
   history: PropTypes.object,
   match: PropTypes.object,
-  songModel: PropTypes.object
+  songModel: PropTypes.object,
+  albumModel: PropTypes.object
 };
 
 export default App;
