@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 
-import ListColumn from './ListColumn';
+import { ListColumn, ListUi } from './ListColumn';
 
 const mockData = {
     id: 302127,
@@ -24,18 +24,20 @@ const mockData = {
 
 describe('ListColumn', () => {
     it('should match snapshot', () => {
-        const albumModel = {};
-        const songModel = {};
-        const playerModel = {};
-        const appUI = {};
+        const props = {
+            albumModel: {},
+            songModel: {},
+            playerModel: {},
+            appUI: {}
+        };
 
         const listColumn = renderer
             .create(
                 <Provider
-                    albumModel={albumModel}
-                    songModel={songModel}
-                    playerModel={playerModel}
-                    appUI={appUI}
+                    albumModel={props.albumModel}
+                    songModel={props.songModel}
+                    playerModel={props.playerModel}
+                    appUI={props.appUI}
                 >
                     <ListColumn
                         heading={mockData.title}
@@ -46,5 +48,27 @@ describe('ListColumn', () => {
             .toJSON();
 
         expect(listColumn).toMatchSnapshot();
+    });
+});
+
+describe('ListUi', () => {
+    describe('formatNumber', () => {
+            const listUi = new ListUi();
+
+        it('should return passed number', () => {
+            const mockDurationSec = 50;
+
+            const formatNumber = listUi.formatNumber(mockDurationSec);
+
+            expect(formatNumber).toEqual(mockDurationSec);
+        });
+
+        it('should return passed number with zero at the front.', () => {
+            const mockDurationSec = 1;
+
+            const formatNumber = listUi.formatNumber(mockDurationSec);
+
+            expect(formatNumber).toEqual(`0${mockDurationSec}`);
+        });
     });
 });

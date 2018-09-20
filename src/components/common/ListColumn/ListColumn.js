@@ -6,7 +6,7 @@ import { PlayIcon } from './PlayIcon';
 import './Common.css';
 import { ResultsMessage } from './ResultsMessage';
 
-const ListComponent = ({ heading, data, avatar }) => {
+export const ListColumn = ({ heading, data, avatar }) => {
   const ui = new ListUi();
   if (data.length === 0) {
       return (
@@ -41,7 +41,7 @@ const ListComponent = ({ heading, data, avatar }) => {
   }
 };
 
-ListComponent.propTypes = {
+ListColumn.propTypes = {
     heading: PropTypes.string,
     getButtonType: PropTypes.func,
     handleClick: PropTypes.func,
@@ -49,7 +49,7 @@ ListComponent.propTypes = {
     avatar: PropTypes.string
 };
 
-class ListUi {
+export class ListUi {
     getDuration = (duration) => {
         const durationMin = Math.floor(duration / 60);
         const durationSec = duration % 60;
@@ -69,5 +69,3 @@ class ListUi {
         return `${author} - ${album}`;
     }
 }
-
-export default ListComponent;
