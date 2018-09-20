@@ -3,6 +3,9 @@ import { observable, action } from 'mobx';
 export class PlayerUI {
     @observable timer = 0;
     @observable songIsPlaying = false;
+    @observable getNextSong = false;
+    @observable repeat = false;
+    @observable randomize = false;
 
     setTimer (songDuration) {
         this.songDuration = songDuration;
@@ -28,12 +31,14 @@ export class PlayerUI {
     }
 
     initTimer() {
+        this.getNextSong = false;
         this.timerInterval = setInterval(() => {
             if (this.songIsPlaying) {
                 if (this.timer < this.songDuration) {
                     this.timerStep();
                 } else {
                     this.reset();
+                    this.getNextSong = true;
                 }
             }
         }, 100);
@@ -42,5 +47,17 @@ export class PlayerUI {
     @action
     updateTimer (value) {
         this.timer = value;
+    }
+
+    @action
+    toggleRepeatOption () {
+        this.repeat = !this.repeat;
+        this.randomize = this.randomize && this.repeat ? false : this.randomize;
+    }
+
+    @action
+    toggleRandomizeOption () {
+        this.randomize = !this.randomize;
+        this.repeat = this.repeat && this.randomize ? false : this.repeat;
     }
 }

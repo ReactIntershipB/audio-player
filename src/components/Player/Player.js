@@ -15,6 +15,15 @@ class Player extends React.Component {
     this.playerUI = new PlayerUI();
 
     reaction(
+      () => this.playerUI.getNextSong,
+      () => {
+        if (this.playerUI.getNextSong === true) {
+          this.changeSongByDirection('next');
+        }
+      }
+    );
+
+    reaction(
       () => this.props.songModel.currentSongId,
       () => this.props.songModel.find()
     );
@@ -52,9 +61,48 @@ class Player extends React.Component {
     this.changeSong('previous');
   }
 
-  changeSong (direction) {
+  handleRepeatClick = () => {
+    this.playerUI.toggleRepeatOption();
+  }
+
+  handleRandomizeClick = () => {
+    this.playerUI.toggleRandomizeOption();
+  }
+
+  stopSong () {
     this.playerUI.reset();
     this.audioRef.pause();
+    this.audioRef.currentTime = 0;
+  }
+
+  changeSong (direction) {
+    if (this.playerUI.repeat) {
+      this.changeSongByRepeat();
+    } else if (this.playerUI.randomize) {
+      this.changeSongByRandom();
+    } else {
+      this.changeSongByDirection(direction);
+    }
+  }
+
+  changeSongByRepeat () {
+    this.stopSong();
+    this.playerUI.setTimer(this.props.songModel.songLength);
+    this.playerUI.playSong();
+    this.audioRef.play();
+  }
+
+  changeSongByRandom () {
+    this.stopSong();
+
+    const songsIdList = this.props.albumModel.songsIdList;
+    const targetSongIndex = Math.floor((Math.random() * songsIdList.length) + 1);
+
+    this.props.songModel.setCurrentSongId(songsIdList[targetSongIndex]);
+  }
+
+  changeSongByDirection (direction) {
+    this.stopSong();
 
     const songsIdList = this.props.albumModel.songsIdList;
 
@@ -84,6 +132,14 @@ class Player extends React.Component {
 
   get songTimeStatus () {
     return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+  }
+
+  get randomButtonStyle() {
+    return this.playerUI.randomize ? { color: 'orange' } : { color: 'grey' };
+  }
+
+  get repeatButtonStyle() {
+    return this.playerUI.repeat ? { color: 'orange' } : { color: 'grey' };
   }
 
   onAudioRef = (audio) => {
@@ -141,8 +197,11 @@ class Player extends React.Component {
                 className='btns'
               >
 
-                <Button>
-                  <i className="fas fa-random"></i>
+                <Button onClick={this.handleRandomizeClick}>
+                  <i
+                    className="fas fa-random"
+                    style={this.randomButtonStyle}
+                  ></i>
                 </Button>
 
               </Col>
@@ -187,8 +246,11 @@ class Player extends React.Component {
 
               <Col span={2} className='btns'>
 
-                <Button>
-                  <i className="fas fa-redo-alt"></i>
+                <Button onClick={this.handleRepeatClick}>
+                  <i
+                    className="fas fa-redo-alt"
+                    style={this.repeatButtonStyle}
+                  ></i>
                 </Button>
 
               </Col>
