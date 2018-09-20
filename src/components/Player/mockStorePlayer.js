@@ -37,40 +37,7 @@ class MockModel {
 export class SongModel extends MockModel {
     @observable currentSongId = 0;
 
-    get songLink() {
-        return this.data.preview;
-    }
-
-    get songTitle() {
-        return this.data.title;
-    }
-
     get songLength() {
         return 30;
-    }
-
-    get songLoaded() {
-        return !!this.data.preview;
-    }
-
-    setCurrentSongId(id) {
-        this.currentSongId = id;
-    }
-}
-
-export class AppUI {
-    @observable isPlaying = false;
-    @observable isButtonDisabled = true;
-
-    togglePlaying() {
-        this.isPlaying = !this.isPlaying;
-    }
-
-    updatePlayingStatus(status) {
-      this.isPlaying = status;
-    }
-
-    changeButtonStatus(term) {
-      this.isButtonDisabled = !term;
     }
 }

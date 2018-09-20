@@ -114,6 +114,7 @@ exports[`Player should match snapshot 1`] = `
         >
           <button
             className="ant-btn ant-btn-circle ant-btn-lg ant-btn-icon-only"
+            data-testid="play-button"
             disabled={true}
             onClick={[Function]}
             type="button"

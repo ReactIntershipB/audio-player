@@ -32,6 +32,7 @@ export class PlayIcon extends React.Component {
                 size={'large'}
                 icon={this.iconType}
                 onClick={this.onClickHandler}
+                data-testid='play-button'
             />
         );
     }

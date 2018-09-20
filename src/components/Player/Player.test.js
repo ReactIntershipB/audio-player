@@ -7,18 +7,20 @@ import * as mockStore from './mockStorePlayer';
 
 describe('Player', () => {
     it('should match snapshot', () => {
-        const albumModel = {};
-        const songModel = new mockStore.SongModel();
-        const playerModel = {};
-        const appUI = new mockStore.AppUI();
+        const props = {
+            albumModel: {},
+            songModel: new mockStore.SongModel(),
+            playerModel: {},
+            appUI: {}
+        };
 
         const player = renderer
             .create(
                 <Provider
-                    albumModel={albumModel}
-                    songModel={songModel}
-                    playerModel={playerModel}
-                    appUI={appUI}
+                    albumModel={props.albumModel}
+                    songModel={props.songModel}
+                    playerModel={props.playerModel}
+                    appUI={props.appUI}
                 >
                     <Player />
                 </Provider>
