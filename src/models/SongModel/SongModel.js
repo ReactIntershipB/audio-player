@@ -28,27 +28,6 @@ export class SongModel extends Model {
     @action setCurrentSongId (id) {
       this.currentSongId = id;
     }
-
-    @action changeSongRandomly (songsIdList) {
-      const targetSongIndex = Math.floor((Math.random() * songsIdList.length) + 1);
-      this.currentSongId = songsIdList[targetSongIndex];
-    }
-
-    @action changeSongByDirection (songsIdList, direction) {
-      const currentSongIndex = songsIdList.findIndex(
-        (songId) => songId === this.currentSongId
-      );
-
-      let targetSongIndex;
-
-      if (direction === 'previous') {
-        targetSongIndex = (currentSongIndex - 1) >= 0 ? (currentSongIndex - 1) : (songsIdList.length - 1);
-      } else if (direction === 'next') {
-        targetSongIndex = (currentSongIndex + 1) < songsIdList.length ? (currentSongIndex + 1) : 0;
-      }
-
-      this.currentSongId = songsIdList[targetSongIndex];
-    }
 }
 
 export const songModel = new SongModel();

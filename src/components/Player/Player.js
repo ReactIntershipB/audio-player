@@ -17,7 +17,7 @@ class Player extends React.Component {
     when(
       () => this.playerUI.getNextSong,
       () => {
-        this.changeSongByDirection('next');
+        this.changeSong('next');
       }
     );
 
@@ -78,9 +78,13 @@ class Player extends React.Component {
     if (this.playerUI.repeat) {
       this.changeSongByRepeat();
     } else if (this.playerUI.randomize) {
-      this.props.songModel.changeSongRandomly(this.props.albumModel.songsIdList);
+      this.props.songModel.setCurrentSongId(
+        this.props.albumModel.changeSongRandomly()
+      );
     } else {
-      this.props.songModel.changeSongByDirection(this.props.albumModel.songsIdList, direction);
+      this.props.songModel.setCurrentSongId(
+        this.props.albumModel.changeSongByDirection(direction, this.props.songModel.currentSongId)
+      );
     }
   }
 
