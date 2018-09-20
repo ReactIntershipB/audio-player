@@ -2,9 +2,9 @@
     width: 450px;
     border-radius: 10px;
     position: absolute;
-    -webkit-box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
-    -moz-box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
-    box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
+    -webkit-box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
+    box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
     background-image: url(./images/red_gradient.png);
     background-repeat: no-repeat;
     background-position: center;
