@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Start to match snapshot 1`] = `
+<div
+  className="no-serach-term-container"
+>
+  <i
+    className="fas fa-music"
+  />
+  <p>
+    Listen To Your Favourite Music
+  </p>
+</div>
+`;
