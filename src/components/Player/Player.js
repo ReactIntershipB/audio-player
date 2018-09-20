@@ -74,49 +74,20 @@ class Player extends React.Component {
   }
 
   changeSong (direction) {
+    this.stopSong();
     if (this.playerUI.repeat) {
       this.changeSongByRepeat();
     } else if (this.playerUI.randomize) {
-      this.changeSongByRandom();
+      this.props.songModel.changeSongRandomly(this.props.albumModel.songsIdList);
     } else {
-      this.changeSongByDirection(direction);
+      this.props.songModel.changeSongByDirection(this.props.albumModel.songsIdList, direction);
     }
   }
 
   changeSongByRepeat () {
-    this.stopSong();
     this.playerUI.setTimer(this.props.songModel.songLength);
     this.playerUI.playSong();
     this.audioRef.play();
-  }
-
-  changeSongByRandom () {
-    this.stopSong();
-
-    const songsIdList = this.props.albumModel.songsIdList;
-    const targetSongIndex = Math.floor((Math.random() * songsIdList.length) + 1);
-
-    this.props.songModel.setCurrentSongId(songsIdList[targetSongIndex]);
-  }
-
-  changeSongByDirection (direction) {
-    this.stopSong();
-
-    const songsIdList = this.props.albumModel.songsIdList;
-
-    const currentSongIndex = songsIdList.findIndex(
-      (songId) => songId === this.props.songModel.currentSongId
-    );
-
-    let targetSongIndex;
-
-    if (direction === 'previous') {
-      targetSongIndex = (currentSongIndex - 1) >= 0 ? (currentSongIndex - 1) : (songsIdList.length - 1);
-    } else if (direction === 'next') {
-      targetSongIndex = (currentSongIndex + 1) < songsIdList.length ? (currentSongIndex + 1) : 0;
-    }
-
-    this.props.songModel.setCurrentSongId(songsIdList[targetSongIndex]);
   }
 
   sliderChange = (value) => {
