@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Avatar, Button, Col, Row, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction } from 'mobx';
+import { reaction, when } from 'mobx';
 import { PlayerUI } from './PlayerUI';
 import './Player.css';
 
@@ -13,6 +13,13 @@ class Player extends React.Component {
   constructor(props) {
     super(props);
     this.playerUI = new PlayerUI();
+
+    when(
+      () => this.playerUI.getNextSong,
+      () => {
+        this.changeSong('next');
+      }
+    );
 
     reaction(
       () => this.props.songModel.currentSongId,
@@ -52,23 +59,39 @@ class Player extends React.Component {
     this.changeSong('previous');
   }
 
-  changeSong (direction) {
-    const currentSongId = this.props.songModel.currentSongId;
+  handleRepeatClick = () => {
+    this.playerUI.toggleRepeatOption();
+  }
+
+  handleRandomizeClick = () => {
+    this.playerUI.toggleRandomizeOption();
+  }
+
+  stopSong () {
     this.playerUI.reset();
     this.audioRef.pause();
+    this.audioRef.currentTime = 0;
+  }
 
-    this.props.albumModel.songsIdList.map(
-      (songId, index) => {
-        if (songId === currentSongId) {
-          if (direction === 'previous') {
-            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index - 1]);
-          } else if (direction === 'next') {
-            this.props.songModel.setCurrentSongId(this.props.albumModel.songsIdList[index + 1]);
-          }
-          return null;
-        }
-      }
-    );
+  changeSong (direction) {
+    this.stopSong();
+    if (this.playerUI.repeat) {
+      this.changeSongByRepeat();
+    } else if (this.playerUI.randomize) {
+      this.props.songModel.setCurrentSongId(
+        this.props.albumModel.changeSongRandomly()
+      );
+    } else {
+      this.props.songModel.setCurrentSongId(
+        this.props.albumModel.changeSongByDirection(direction, this.props.songModel.currentSongId)
+      );
+    }
+  }
+
+  changeSongByRepeat () {
+    this.playerUI.setTimer(this.props.songModel.songLength);
+    this.playerUI.playSong();
+    this.audioRef.play();
   }
 
   sliderChange = (value) => {
@@ -82,6 +105,14 @@ class Player extends React.Component {
 
   get songTimeStatus () {
     return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+  }
+
+  get randomButtonStyle() {
+    return this.playerUI.randomize ? { color: 'orange' } : { color: 'grey' };
+  }
+
+  get repeatButtonStyle() {
+    return this.playerUI.repeat ? { color: 'orange' } : { color: 'grey' };
   }
 
   onAudioRef = (audio) => {
@@ -139,8 +170,11 @@ class Player extends React.Component {
                 className='btns'
               >
 
-                <Button>
-                  <i className="fas fa-random"></i>
+                <Button onClick={this.handleRandomizeClick}>
+                  <i
+                    className="fas fa-random"
+                    style={this.randomButtonStyle}
+                  ></i>
                 </Button>
 
               </Col>
@@ -185,8 +219,11 @@ class Player extends React.Component {
 
               <Col span={2} className='btns'>
 
-                <Button>
-                  <i className="fas fa-redo-alt"></i>
+                <Button onClick={this.handleRepeatClick}>
+                  <i
+                    className="fas fa-redo-alt"
+                    style={this.repeatButtonStyle}
+                  ></i>
                 </Button>
 
               </Col>

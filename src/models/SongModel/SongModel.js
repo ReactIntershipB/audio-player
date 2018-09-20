@@ -25,7 +25,7 @@ export class SongModel extends Model {
       return !!this.data.preview;
     }
 
-    @action setCurrentSongId(id) {
+    @action setCurrentSongId (id) {
       this.currentSongId = id;
     }
 }
