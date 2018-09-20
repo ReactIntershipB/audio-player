@@ -15,13 +15,22 @@ import './App.css';
 @observer
 class App extends React.Component {
   get background() {
-    const src = this.props.songModel.data.album ? this.props.songModel.data.album.cover_xl : null;
+    const src = this.backgroundSrc;
 
     if (src) {
       return <div className="background-image" style={{ backgroundImage: `url(${src})` }}></div>;
     } else {
       return <div className="background-image"></div>;
     }
+  }
+
+  get backgroundSrc() {
+     if (this.props.songModel.data.album) {
+         return this.props.songModel.data.album.cover_xl;
+     } else if (this.props.songModel.data.type === 'album') {
+         return this.props.songModel.data.cover_xl;
+     }
+     return null;
   }
 
   render() {
@@ -36,6 +45,7 @@ class App extends React.Component {
           <Player />
         </div>
         <div className="content-container">
+          <div id="message-box"></div>
           <Switch>
             <Route path='/search/artist/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
             <Route path='/search/album/:term' component={({ match }) => <AlbumSearchResult match={match} />} />

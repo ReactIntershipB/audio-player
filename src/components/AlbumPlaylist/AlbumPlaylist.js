@@ -18,7 +18,7 @@ export default class AlbumPlaylist extends Component {
   get playlist() {
     const { data, loading } = this.props.albumModel;
 
-    return (loading || data.error || !data.tracks ? this.resultsMessage : <ListComponent heading={data.title} data={data.tracks.data} avatar={data.cover_small} />);
+    return (loading || data.error || !data.tracks ? this.resultsMessage : <ListComponent heading={data.title} data={data.tracks.data} type={'track'} albumTitle={data.title} />);
   }
 
   get spinner() {

@@ -23,8 +23,13 @@
    margin-bottom: 10px; 
 }
 
-.ant-radio-button-wrapper {
-    width: 70px;
+.ant-radio-group .ant-radio-button-wrapper {
+    width: 50px;
+    padding: 0;
+}
+
+.ant-radio-group {
+    text-align: center;
 }
 
 .search-input .ant-btn-primary,

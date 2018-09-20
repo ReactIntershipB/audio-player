@@ -32,7 +32,7 @@
 .playlist-container {
     height: 100%;
     width: 100%;
-    padding: 1%;
+    padding: 3%;
 }
 
 .list-grid-container {
@@ -83,16 +83,22 @@
     justify-content: center;
 }
 
-.list-column-title {
-    text-align: center;
-    font-family: 'Lora', serif;
-}
-
-
 .list-column-item-content {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+}
+
+.list-column-item-content a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.list-column-item-content a:hover,
+.list-column-item-content a:active {
+    color: black;
 }
 
 .list-column-item-content-heading {

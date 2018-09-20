@@ -7,7 +7,7 @@ import './../common/Common.css';
 
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
-import { ListGrid } from './../common/ListGrid';
+import { ListComponent } from './../common/ListComponent';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -28,7 +28,7 @@ export default class AlbumSearchResult extends React.Component {
 
    get listComponent() {
        const { loading, dataWithoutDuplicates } = this.props.searchModel;
-       return !loading && dataWithoutDuplicates.length > 0 ? <ListGrid data={dataWithoutDuplicates}/> : null;
+       return !loading && dataWithoutDuplicates.length > 0 ? <ListComponent data={dataWithoutDuplicates} type={'album'} /> : null;
    }
 
    render() {

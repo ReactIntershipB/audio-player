@@ -12,6 +12,12 @@ export class SongModel extends Model {
       return this.data.preview;
     }
 
+    @computed get songAuthor() {
+      if (this.data.artist) {
+        return this.data.artist.name;
+      }
+    }
+
     @computed get songTitle () {
       return this.data.title;
     }
