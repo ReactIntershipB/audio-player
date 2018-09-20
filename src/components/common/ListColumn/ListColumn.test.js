@@ -27,7 +27,7 @@ describe('ListColumn', () => {
         const props = {
             albumModel: {},
             songModel: {},
-            playerModel: {},
+            searchModel: {},
             appUI: {}
         };
 

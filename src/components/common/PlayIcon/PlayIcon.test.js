@@ -12,7 +12,7 @@ describe('PlayIcon', () => {
         const props = {
             albumModel: {},
             songModel: {},
-            playerModel: {},
+            searchModel: {},
             appUI: new MockAppUI()
         };
 
@@ -30,7 +30,7 @@ describe('PlayIcon', () => {
         const props = {
             albumModel: {},
             songModel: {},
-            playerModel: {},
+            searchModel: {},
             appUI: {}
         };
 

@@ -16,7 +16,7 @@ describe('AlbumPlaylist', () => {
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
-      playerModel: {},
+      searchModel: {},
       appUI: {}
     };
 
@@ -34,7 +34,7 @@ describe('AlbumPlaylist', () => {
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
-      playerModel: {},
+      searchModel: {},
       appUI: {}
     };
     const find = props.albumModel.find;
