@@ -13,18 +13,20 @@ describe('AlbumPlaylist', () => {
   };
 
   it('should match snapshot', () => {
-    const albumModel = new mockStore.AlbumModel();
-    const songModel = {};
-    const playerModel = {};
-    const appUI = {};
+    const props = {
+      albumModel: new mockStore.AlbumModel(),
+      songModel: {},
+      playerModel: {},
+      appUI: {}
+    };
 
     const albumPlaylist = renderer
       .create(
         <Provider
-          albumModel={albumModel}
-          songModel={songModel}
-          playerModel={playerModel}
-          appUI={appUI}
+          albumModel={props.albumModel}
+          songModel={props.songModel}
+          playerModel={props.playerModel}
+          appUI={props.appUI}
         >
           <AlbumPlaylist match={match} />
         </Provider>
@@ -34,19 +36,21 @@ describe('AlbumPlaylist', () => {
   });
 
   it('should call the find function with proper arguments', () => {
-    const albumModel = new mockStore.AlbumModel();
-    const songModel = {};
-    const playerModel = {};
-    const appUI = {};
-    const find = albumModel.find;
+    const props = {
+      albumModel: new mockStore.AlbumModel(),
+      songModel: {},
+      playerModel: {},
+      appUI: {}
+    };
+    const find = props.albumModel.find;
 
     renderer
       .create(
         <Provider
-          albumModel={albumModel}
-          songModel={songModel}
-          playerModel={playerModel}
-          appUI={appUI}
+          albumModel={props.albumModel}
+          songModel={props.songModel}
+          playerModel={props.playerModel}
+          appUI={props.appUI}
         >
           <AlbumPlaylist match={match} />
         </Provider>
