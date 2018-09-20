@@ -4,15 +4,13 @@ import { List, Avatar } from 'antd';
 
 import { PlayIcon } from './PlayIcon';
 import './Common.css';
+import { ResultsMessage } from './ResultsMessage';
 
 const ListComponent = ({ heading, data, avatar }) => {
   const ui = new ListUi();
   if (data.length === 0) {
       return (
-        <div className="no-results-container">
-            <i className="far fa-sad-tear"></i>
-            <p>No Results</p>
-        </div>
+        <ResultsMessage />
       );
   } else {
     return (

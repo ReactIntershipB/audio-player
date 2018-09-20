@@ -18,6 +18,7 @@ class App extends React.Component {
   render() {
     return (
       <Layout>
+        <div id="message-box"></div>
         <Header>
            <Switch>
             <Route path='/search/:type/:term' component={Search} />
