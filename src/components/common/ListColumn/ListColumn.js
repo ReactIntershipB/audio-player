@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Avatar } from 'antd';
 
-import { PlayIcon } from './PlayIcon';
-import './Common.css';
-import { ResultsMessage } from './ResultsMessage';
+import { PlayIcon } from '../PlayIcon';
+import '../Common.css';
+import { ResultsMessage } from '../ResultsMessage';
 
 export const ListColumn = ({ heading, data, avatar }) => {
   const ui = new ListUi();

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { Alert } from 'antd';
 
-import Spinner from './../common/Spinner';
-import { ListComponent } from '../common/ListComponent';
+import Spinner from './../common/Spinner/Spinner';
+import { ListComponent } from '../common/ListComponent/ListComponent';
 import { MessageBox } from '../common/MessageBox';
 
 @inject('albumModel')
