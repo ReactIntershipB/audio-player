@@ -12,13 +12,23 @@ export class SongModel extends Model {
       return this.data.preview;
     }
 
+    @computed get songAuthor() {
+      if (this.data.artist) {
+        return this.data.artist.name;
+      }
+    }
+
     @computed get songTitle () {
       return this.data.title;
     }
 
     @computed get songLength () {
       // return this.data.duration;
-      return 30; // Hardcoded data for demo version of API
+      return 30;
+    }
+
+    @computed get songDurationString() {
+      return `0 : ${30 % 60}`;
     }
 
     @computed get songLoaded () {

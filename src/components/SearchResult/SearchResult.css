@@ -1,3 +1,5 @@
+@import url("../common/Common.css");
+
 .list-container {
     width: 90%;
     margin: 1% auto;
@@ -23,4 +25,9 @@
 .no-serach-term-container p {
     font-size: 2em;
     margin-top: 2%;
+}
+
+.component-container {
+    height: 100%;
+    width: 100%;
 }

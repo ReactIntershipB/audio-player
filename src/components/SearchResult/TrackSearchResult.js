@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
-import ListColumn from '../common/ListColumn';
+
+import { ListComponent } from '../common/ListComponent';
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
+
+import './../common/Common.css';
 
 @inject('searchModel', 'songModel')
 @observer
@@ -30,7 +33,7 @@ export default class TrackSearchResult extends React.Component {
        const { termText, loading, dataList } = this.props.searchModel;
 
        if (!loading && termText !== '') {
-          return <ListColumn heading={termText} data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} />;
+          return <ListComponent data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} type={'track'} />;
        } else {
           return null;
        }
@@ -38,11 +41,11 @@ export default class TrackSearchResult extends React.Component {
 
    render() {
        return (
-           <React.Fragment>
-                { this.spinner }
-                { this.startComponent }
-                { this.listComponent }
-           </React.Fragment>
+           <div className="component-container">
+                {this.spinner}
+                {this.startComponent}
+                {this.listComponent}
+           </div>
        );
    }
 }

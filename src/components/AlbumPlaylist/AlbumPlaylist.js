@@ -4,9 +4,8 @@ import { observer, inject } from 'mobx-react';
 import { Alert } from 'antd';
 
 import Spinner from './../common/Spinner';
-import ListComponent from '../common/ListColumn';
+import { ListComponent } from '../common/ListComponent';
 import { MessageBox } from '../common/MessageBox';
-import { ResultsMessage } from '../common/ResultsMessage';
 
 @inject('albumModel')
 @observer
@@ -18,7 +17,7 @@ export default class AlbumPlaylist extends Component {
   get playlist() {
     const { data, loading } = this.props.albumModel;
 
-    return (loading || data.error || !data.tracks ? this.resultsMessage : <ListComponent heading={data.title} data={data.tracks.data} avatar={data.cover_small} />);
+    return (loading || data.error || !data.tracks ? null : <ListComponent heading={data.title} data={data.tracks.data} type={'track'} albumTitle={data.title} />);
   }
 
   get spinner() {
@@ -26,21 +25,17 @@ export default class AlbumPlaylist extends Component {
     return loading ? <Spinner /> : null;
   }
 
-  get resultsMessage() {
-    return this.props.albumModel.loading ? null : <ResultsMessage />;
-  }
-
   get errorMessage() {
     return this.props.albumModel.isError
     ? <MessageBox>
-      <Alert message="Something went wrong with download data. Please try to refresh the page." type="warning" showIcon />
+      <Alert message="Something went wrong with download data. Please try to refresh the page." type="error" showIcon />
     </MessageBox>
     : null;
   }
 
   render() {
     return (
-      <div>
+      <div className="component-container">
         {this.spinner}
         {this.playlist}
         {this.errorMessage}

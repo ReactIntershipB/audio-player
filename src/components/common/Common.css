@@ -1,9 +1,8 @@
-.no-results-container {
+.spinner-container {
     display: flex;
-    height: 70vh;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
 }
 
 .no-results-container i {
@@ -11,30 +10,116 @@
     color: #1890ff;
 }
 
-.no-results-container p {
-    font-size: 2em;
-    margin-top: 2%;
+/* Animation for slide down container */
+.slide-appear {
+    opacity: 0;
+    transition: opacity .7s ease-in;
+}
+
+.slide-appear.slide-appear-active {
+    opacity: 1;
+}
+
+.slide-enter {
+    max-height: 0;
+    transition: all 1s ease-in;
+}
+
+.slide-enter.slide-enter-active {
+    max-height: 40vh;
 }
 
 .playlist-container {
-    max-height: 70vh;
-    margin: 2vh auto;
-    padding: 0 20px;
-    text-align: left;
-    overflow: auto;
+    height: 100%;
+    width: 100%;
+    padding: 3%;
 }
 
-.avatar {
+.list-grid-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-flow: wrap;
+    align-items: center;
+}
+
+.list-grid-card-container {
+    border: 1px solid lightgray;
+    width: 48%;
+    height: 40vh;
+    margin-bottom: 2%;
+    background-color: rgba(211, 211, 211, .2);
+}
+
+.list-grid-card-content {
+    height: 83%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-grid-card-content button {
+    background-color: rgba(255, 255, 255, .9);
+}
+
+.list-grid-card-title {
+    color: black;
+    text-align: center;
+    margin-top: 1px;
+    font-size: .9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.list-column-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-column-item-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.list-column-item-content a {
+    width: 100%;
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    color: black;
 }
 
-.avatar > :first-child {
-    margin-right: 20px;
+.list-column-item-content a:hover,
+.list-column-item-content a:active {
+    color: black;
 }
 
-/*from https://css-tricks.com/examples/hrs/*/
+.list-column-item-content-heading {
+    flex-basis: 80%;
+    margin-left: 2%;
+    overflow: hidden;
+}
+
+.list-column-item-content-heading p {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.list-column-item-content p {
+    margin: 0;
+    color: white;
+}
+
 hr {
     border: 0;
     height: 0;
@@ -42,53 +127,88 @@ hr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.ant-spin-spinning.spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-span {
-    white-space: nowrap;
-}
-.ant-layout.ant-layout {
-    width: 99vw;
-    margin: 0 auto;
-    background-color: white;
-}
-.ant-layout-header.ant-layout-header {
-    height: 10vh;
-    display: flex;
-    justify-content: center;
-    background-color: lightgray;
-}
-.ant-layout-content.ant-layout-content {
-    height: 73vh;
-    background-color: white;
-}
-.ant-layout-footer.ant-layout-footer {
-    background-color: white;
-    padding: 0;
-    height: 17vh;
+.noresult-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-@media only screen and (min-width: 768px) {
-    .ant-layout.ant-layout {
-        width: 90vw;
-    }
-} 
-
-@media only screen and (min-width: 992px) {
-    .ant-layout.ant-layout {
-        width: 80vw;
-    }
-} 
-
-@media only screen and (min-width: 1200px) {
-    .ant-layout.ant-layout {
-        width: 70vw;
-    }
+.start-container {
+    height: 100%;
+    padding: 1%;
 }
+
+.start-container h3 {
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Lora', serif;
+    margin-top: 10px;
+}
+
+.start-icon-container {
+    text-align: center;
+}
+
+.start-container i {
+    font-size: 3em;
+    color: #D81159;
+}
+
+.start-cards-container {
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.start-cards-container a {
+    flex-basis: 48%;
+    color: white;
+}
+
+.start-cards-container a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.start-card-container {
+    width: 99%;
+    height: 99%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.start-card-content {
+    width: 100%;
+    height: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.start-card-title {
+    margin: 2% 0 0 0;
+    text-align: center;
+    color: white;
+    font-family: 'Lora', serif;
+}
+
+.play-button.ant-btn:hover,
+.play-button.ant-btn:focus {
+    color: #D81159;
+    border-color: #D81159;
+}
+
+.play-button.ant-btn:active,
+.play-button.ant-btn.active {
+    color: #8F2D56;
+    border-color: #8F2D56;
+}
+
+.spinner-container .ant-spin-dot i {
+    background-color: #f0f5f9;
+}
+
+

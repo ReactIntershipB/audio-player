@@ -1,0 +1,76 @@
+.player-container {
+    width: 450px;
+    border-radius: 10px;
+    position: absolute;
+    -webkit-box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
+    -moz-box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
+    box-shadow: 2px 1px 29px 7px rgba(0, 0, 0, 0.55);
+    background-image: url(./images/red_gradient.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.top-layer-container {
+    height: 450px;
+    position: relative;
+    width: 100%;
+}
+
+.background-image {
+    opacity: .9;
+    background-image: url(./images/red_gradient.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-size: contain;
+    border-radius: 10px 10px 0 0;
+}
+
+.background-image::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+    border-radius: 10px 10px 0 0;
+}
+
+.content-container {
+    height: 50vh;
+    width: 100%;
+    overflow: auto;
+}
+
+.content-container::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #F5F5F5;
+}
+
+.content-container::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.content-container::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.content-container::-webkit-scrollbar-thumb:horizontal:active,
+.content-container::-webkit-scrollbar-thumb:vertical:active { 
+    background-color: #D81159;
+}
+
+#message-box {
+    position: absolute;
+}

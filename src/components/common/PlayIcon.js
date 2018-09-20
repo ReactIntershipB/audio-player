@@ -27,6 +27,7 @@ export class PlayIcon extends React.Component {
         return (
             <Button
                 disabled={this.props.disabled}
+                className="play-button"
                 shape='circle'
                 size={'large'}
                 icon={this.iconType}

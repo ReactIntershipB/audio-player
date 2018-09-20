@@ -3,7 +3,9 @@ import { Spin } from 'antd';
 
 const Spinner = () => {
     return (
-        <Spin className="spinner" size="large" />
+        <div className="spinner-container">
+           <Spin size="large" />
+        </div>
     );
 };
 
