@@ -5,6 +5,11 @@
     height: 100%;
 }
 
+.no-results-container i {
+    font-size: 9em;
+    color: #1890ff;
+}
+
 /* Animation for slide down container */
 .slide-appear {
     opacity: 0;

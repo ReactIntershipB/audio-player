@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 
-import ListColumn from '../common/ListColumn';
+import { ListComponent } from '../common/ListComponent';
 import Spinner from './../common/Spinner';
 import { Start } from './../common/Start';
 
@@ -33,7 +33,7 @@ export default class TrackSearchResult extends React.Component {
        const { termText, loading, dataList } = this.props.searchModel;
 
        if (!loading && termText !== '') {
-          return <ListColumn heading={termText} data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} />;
+          return <ListComponent heading={termText} data={dataList} getButtonType={this.getButtonType} handleClick={this.handleClick} />;
        } else {
           return null;
        }
