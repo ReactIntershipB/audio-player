@@ -1,6 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AlbumPlaylist should match snapshot 1`] = `
+exports[`AlbumPlaylist should match snapshot when is loading 1`] = `
+<div>
+  <div
+    className="ant-spin ant-spin-lg ant-spin-spinning spinner"
+  >
+    <span
+      className="ant-spin-dot ant-spin-dot-spin"
+    >
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
+  </div>
+</div>
+`;
+
+exports[`AlbumPlaylist should match snapshot when song is playing 1`] = `
 <div>
   <div
     className="playlist-container"
@@ -94,6 +111,21 @@ exports[`AlbumPlaylist should match snapshot 1`] = `
         <hr />
       </div>
     </div>
+  </div>
+</div>
+`;
+
+exports[`AlbumPlaylist should match snapshot when there is no results 1`] = `
+<div>
+  <div
+    className="no-results-container"
+  >
+    <i
+      className="far fa-sad-tear"
+    />
+    <p>
+      No Results
+    </p>
   </div>
 </div>
 `;

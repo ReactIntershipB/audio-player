@@ -1,5 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { render, fireEvent } from 'react-testing-library';
 import { Provider } from 'mobx-react';
 
 import Player from './Player';
@@ -10,22 +11,36 @@ describe('Player', () => {
         const props = {
             albumModel: {},
             songModel: new mockStore.SongModel(),
-            playerModel: {},
+            searchModel: {},
             appUI: {}
         };
 
         const player = renderer
             .create(
-                <Provider
-                    albumModel={props.albumModel}
-                    songModel={props.songModel}
-                    playerModel={props.playerModel}
-                    appUI={props.appUI}
-                >
+                <Provider {...props} >
                     <Player />
                 </Provider>
             ).toJSON();
 
         expect(player).toMatchSnapshot();
+    });
+
+    it('should match snapshot after click play button', () => {
+        const props = {
+            albumModel: {},
+            songModel: new mockStore.SongModel(),
+            searchModel: {},
+            appUI: {}
+        };
+        const player = render(
+            <Provider {...props} >
+                <Player />
+            </Provider>
+        );
+
+        // const playButton = player.querySelector(`[data-testid="play-button"]`);
+        // fireEvent.click(playButton);
+
+        // expect(player).toMatchSnapshot();
     });
 });

@@ -12,7 +12,7 @@ describe('AlbumPlaylist', () => {
     }
   };
 
-  it('should match snapshot', () => {
+  it('should match snapshot when song is playing', () => {
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
@@ -25,7 +25,48 @@ describe('AlbumPlaylist', () => {
         <Provider {...props} >
           <AlbumPlaylist match={match} />
         </Provider>
-        ).toJSON();
+      ).toJSON();
+
+    expect(albumPlaylist).toMatchSnapshot();
+  });
+
+  it('should match snapshot when is loading', () => {
+    const props = {
+      albumModel: new mockStore.AlbumModel(),
+      songModel: {},
+      searchModel: {},
+      appUI: {}
+    };
+
+    mockStore.mockData = {};
+    props.albumModel.loading = true;
+
+    const albumPlaylist = renderer
+      .create(
+        <Provider {...props} >
+          <AlbumPlaylist match={match} />
+        </Provider>
+      ).toJSON();
+
+    expect(albumPlaylist).toMatchSnapshot();
+  });
+
+  it('should match snapshot when there is no results', () => {
+    const props = {
+      albumModel: new mockStore.AlbumModel(),
+      songModel: {},
+      searchModel: {},
+      appUI: {}
+    };
+
+    props.albumModel.getData = jest.fn();
+
+    const albumPlaylist = renderer
+      .create(
+        <Provider {...props} >
+          <AlbumPlaylist match={match} />
+        </Provider>
+      ).toJSON();
 
     expect(albumPlaylist).toMatchSnapshot();
   });
