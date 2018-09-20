@@ -52,9 +52,9 @@ describe('ListColumn', () => {
 });
 
 describe('ListUi', () => {
-    describe('formatNumber', () => {
-            const listUi = new ListUi();
+    const listUi = new ListUi();
 
+    describe('formatNumber', () => {
         it('should return passed number', () => {
             const mockDurationSec = 50;
 
@@ -69,6 +69,16 @@ describe('ListUi', () => {
             const formatNumber = listUi.formatNumber(mockDurationSec);
 
             expect(formatNumber).toEqual(`0${mockDurationSec}`);
+        });
+    });
+
+    describe('getDuration', () => {
+        it('should return formatted duration', () => {
+            const mockDuration = 125;
+
+            const getDuration = listUi.getDuration(mockDuration);
+
+            expect(getDuration).toEqual('2:05');
         });
     });
 });
