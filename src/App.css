@@ -1,25 +1,25 @@
 .player-container {
     border: 1px solid rgba(216,216,216);
-    width: 99vw;
+    width: 450px;
     border-radius: 5px 5px;
     position: absolute;
 }
 
 .top-layer-container {
-    height: 34vh;
+    height: 450px;
     position: relative;
     width: 100%;
 }
 
 .background-image {
-    background-image: url(./images/sea.jpg);
+    background-image: url(./images/red_gradient.png);
     background-repeat: no-repeat;
     background-position: center;
     position: absolute;
     top: 0;
     height: 100%;
     width: 100%;
-    background-size: cover;
+    background-size: contain;
 }
 
 .background-image::after {
@@ -58,34 +58,4 @@
 .content-container::-webkit-scrollbar-thumb:horizontal:active,
 .content-container::-webkit-scrollbar-thumb:vertical:active { 
     background-color: #D81159;
-}
-
-@media only screen and (min-width: 480px) {
-    .player-container {
-        width: 80vw;
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    .player-container {
-        width: 55vw;
-    }
-} 
-
-@media only screen and (min-width: 992px) {
-    .player-container {
-        width: 35vw;
-    }
-} 
-
-@media only screen and (min-width: 1200px) {
-    .player-container {
-        width: 40vw;
-    }
-}
-
-@media only screen and (min-width: 1440px) {
-    .player-container {
-        width: 30vw;
-    }
 }

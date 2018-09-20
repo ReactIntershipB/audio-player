@@ -6,13 +6,20 @@
     justify-content: center;
 }
 
-.player-title {
+.player-general {
     color: white;
     z-index: 10000;
     text-align: center;
-    font-family: 'Lora', serif;
-    font-size: 2em;
     text-shadow: 1px 1px 1px black;
+}
+
+.player-author {
+    font-size: 2.5em;
+    margin-bottom: 0;
+}
+
+.player-title {
+    font-size: 1.5em;
 }
 
 .buttons-container {
