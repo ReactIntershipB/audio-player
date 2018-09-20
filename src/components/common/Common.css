@@ -112,10 +112,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: white;
 }
 
 .list-column-item-content p {
     margin: 0;
+    color: white;
 }
 
 hr {
@@ -209,15 +211,4 @@ hr {
     background-color: #f0f5f9;
 }
 
-@media only screen and (min-width: 768px) {
-    .list-grid-card-container {
-        height: 31vh;
-    }
-} 
-
-@media only screen and (min-width: 992px) {
-    .list-grid-card-container {
-        height: 23vh;
-    }
-}
 

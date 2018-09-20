@@ -41,11 +41,11 @@ export default class TrackSearchResult extends React.Component {
 
    render() {
        return (
-           <React.Fragment>
-            {this.spinner}
-            {this.startComponent}
-            {this.listComponent}
-           </React.Fragment>
+           <div className="component-container">
+                {this.spinner}
+                {this.startComponent}
+                {this.listComponent}
+           </div>
        );
    }
 }

@@ -26,3 +26,8 @@
     font-size: 2em;
     margin-top: 2%;
 }
+
+.component-container {
+    height: 100%;
+    width: 100%;
+}

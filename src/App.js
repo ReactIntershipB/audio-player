@@ -16,7 +16,7 @@ import './App.css';
 class App extends React.Component {
   get background() {
     const src = this.backgroundSrc;
-
+    console.log('src', src);
     if (src) {
       return <div className="background-image" style={{ backgroundImage: `url(${src})` }}></div>;
     }

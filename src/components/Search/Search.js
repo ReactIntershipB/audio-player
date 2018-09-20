@@ -13,7 +13,9 @@ class SearchComponent extends Component {
     }
 
     componentDidUpdate(prevProps) {
-      if (prevProps.match.params.term !== this.props.match.params.term || prevProps.match.params.type !== this.props.match.params.type) {
+      const { term, type } = prevProps.match.params;
+
+      if (term && type && (term !== this.props.match.params.term || type !== this.props.match.params.type)) {
          this.fetchData();
       }
     }

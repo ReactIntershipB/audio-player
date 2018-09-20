@@ -33,11 +33,11 @@ export default class AlbumSearchResult extends React.Component {
 
    render() {
        return (
-            <React.Fragment>
+            <div className="component-container">
                 {this.startComponent}
                 {this.spinner}
                 {this.listComponent}
-            </React.Fragment>
+            </div>
        );
    }
 }

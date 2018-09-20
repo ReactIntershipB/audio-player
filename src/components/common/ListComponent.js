@@ -7,16 +7,11 @@ import { Avatar } from 'antd';
 import { PlayIcon } from './PlayIcon';
 
 import './Common.css';
-import { ResultsMessage } from './ResultsMessage';
 
 export class ListComponent extends React.Component {
   constructor(props) {
     super(props);
     this.ui = new ListUi();
-  }
-
-  get resultMessage() {
-    return this.props.data.length === 0 ? <ResultsMessage /> : null;
   }
 
   get list() {
@@ -52,24 +47,34 @@ export class ListComponent extends React.Component {
     }
   }
 
-  getPlayIcon(id) {
-    return this.props.type === 'track' ? <PlayIcon songId={id} /> : null;
+  getPlayIcon = (id) => {
+    const { type } = this.props;
+
+    return type === 'track' ? <PlayIcon songId={id} /> : null;
   }
 
-  getAvatar(item) {
-    return this.props.type !== 'track' ? <Avatar size={60} src={item.album.cover_small} /> : null;
+  getAvatar = (item) => {
+    const { type } = this.props;
+
+    return type !== 'track' ? <Avatar size={60} src={item.album.cover_small} shape={'square'}/> : null;
   }
 
-  getTitle(item) {
-    return this.props.type !== 'track' ? item.album.title : item.title;
+  getTitle = (item) => {
+    const { type } = this.props;
+
+    return type !== 'track' ? item.album.title : item.title;
   }
 
-  getAlbumTitle(item) {
-    return this.props.albumTitle || item.album.title;
+  getAlbumTitle = (item) => {
+    const { albumTitle } = this.props.albumTitle;
+    if (albumTitle) return albumTitle;
+    if (item.album) return item.album.title;
+    return '';
   }
 
-  getLink(item) {
-    return this.props.type !== 'track' ? `/album/${item.album.id}` : '';
+  getLink = (item) => {
+    const { type } = this.props.type;
+    return type === 'track' || !type ? '' : `/album/${item.album.id}`;
   }
 
   enableLink = (event) => {
@@ -81,7 +86,6 @@ export class ListComponent extends React.Component {
   render() {
     return (
       <React.Fragment>
-         {this.resultMessage}
          {this.list}
       </React.Fragment>
     );
