@@ -13,7 +13,6 @@ export class Model {
     @action
     getData = (apiQuery) => {
         this.toggleLoading();
-        console.trace();
         this.isError = false;
         return axios.get(`${this.getAPIBaseURL}${apiQuery}`)
             .then(res => {
