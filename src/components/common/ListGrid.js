@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { NoResult } from './NoResult';
+import { Link } from 'react-router-dom';
 import FadeIn from 'react-fade-in';
 
 import { PlayIcon } from './PlayIcon';
@@ -16,7 +17,9 @@ export const ListGrid = ({ data }) => {
                   return (
                       <div key={item.album.id} className="list-grid-card-container">
                         <div className="list-grid-card-content" style={{ backgroundImage: 'url(' + item.album.cover_big + ')' }}>
-                            <PlayIcon songId={item.id}/>
+                           <Link to={`/album/${item.album.id}`}>
+                               <PlayIcon songId={item.id}/>
+                           </Link>
                         </div>
                         <h3 className="list-grid-card-title">{item.album.title}</h3>
                     </div>
