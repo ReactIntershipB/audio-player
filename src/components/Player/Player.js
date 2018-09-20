@@ -121,11 +121,20 @@ class Player extends React.Component {
     this.audioRef = audio;
   }
 
+  get backgroundSrc() {
+     if (this.props.albumModel.data) {
+        return this.props.albumModel.data.cover_xl;
+     } else if (this.props.songModel.data) {
+         return this.props.songModel.data.album.cover_xl;
+     }
+     return null;
+  }
+
   render() {
     const { songLink, songAuthor, songTitle, songLength, songDurationString, currentSongId } = this.props.songModel;
 
     return (
-      <div className='player'>
+      <div className='player background-image' style={{ backgroundImage: `url(${this.backgroundSrc})` }}>
         <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
         <h4 className="player-general player-author">{songAuthor || 'Deezer Player'}</h4>
         <p className="player-general player-title">{songTitle || ''}</p>

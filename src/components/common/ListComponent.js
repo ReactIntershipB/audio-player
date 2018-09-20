@@ -73,7 +73,7 @@ export class ListComponent extends React.Component {
   }
 
   getLink = (item) => {
-    const { type } = this.props.type;
+    const { type } = this.props;
     return type === 'track' || !type ? '' : `/album/${item.album.id}`;
   }
 
