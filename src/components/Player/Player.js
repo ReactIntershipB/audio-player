@@ -81,7 +81,7 @@ class Player extends React.Component {
   }
 
   get songTimeStatus () {
-    return `${parseInt(this.currentSongTime)}/${this.props.songModel.songLength}`;
+    return `${parseInt(this.currentSongTime)} : ${this.props.songModel.songLength}`;
   }
 
   onAudioRef = (audio) => {

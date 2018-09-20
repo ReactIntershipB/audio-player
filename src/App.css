@@ -13,6 +13,7 @@
 
 .background-image {
     background-image: url(./images/sea.jpg);
+    opacity: .9;
     background-repeat: no-repeat;
     background-position: center;
     filter: blur(1px) grayscale(80%);

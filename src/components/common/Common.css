@@ -114,6 +114,74 @@ hr {
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.noresult-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-container {
+    height: 100%;
+    padding: 1%;
+}
+
+.start-container h3 {
+    text-align: center;
+    font-size: 2em;
+    font-family: 'Lora', serif;
+    margin-top: 10px;
+}
+
+.start-icon-container {
+    text-align: center;
+}
+
+.start-container i {
+    font-size: 3em;
+    color: #D81159;
+}
+
+.start-cards-container {
+  height: 85%;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  justify-content: space-between;
+}
+
+.start-cards-container a {
+    flex-basis: 48%;
+    color: white;
+}
+
+.start-cards-container a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.start-card-container {
+    width: 99%;
+    height: 99%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.start-card-content {
+    width: 100%;
+    height: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.start-card-title {
+    margin: 2% 0 0 0;
+    text-align: center;
+    color: white;
+    font-family: 'Lora', serif;
+}
+
 @media only screen and (min-width: 768px) {
     .list-grid-card-container {
         height: 31vh;

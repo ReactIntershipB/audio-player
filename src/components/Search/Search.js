@@ -12,6 +12,10 @@ class SearchComponent extends Component {
       this.fetchData();
     }
 
+    componentDidUpdate() {
+      this.fetchData();
+    }
+
     get dropdownMenu() {
         return (
           <Menu

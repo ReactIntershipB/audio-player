@@ -8,6 +8,7 @@ import TrackSearchResult from './components/SearchResult/TrackSearchResult';
 import AlbumPlaylist from './components/AlbumPlaylist/AlbumPlaylist';
 import Player from './components/Player/Player';
 import Search from './components/Search/Search';
+import { Start } from './components/common/Start';
 import './App.css';
 
 @inject('songModel')
@@ -40,6 +41,7 @@ class App extends React.Component {
             <Route path='/search/album/:term' component={({ match }) => <AlbumSearchResult match={match} />} />
             <Route path='/search/track/:term' component={({ match }) => <TrackSearchResult match={match} />} />
             <Route exact path='/album/:id' component={({ match }) => <AlbumPlaylist match={match} />} />
+            <Route component={Start} />
           </Switch>
         </div>
       </div>
