@@ -6,6 +6,11 @@
     -webkit-box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
     -moz-box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
     box-shadow: 11px 6px 20px -1px rgba(0, 0, 0, 0.26);
+    background-image: url(./images/red_gradient.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px 10px 10px 10px;
 }
 
 .top-layer-container {
@@ -15,14 +20,12 @@
 }
 
 .background-image {
-    background-image: url(./images/red_gradient.png);
-    background-repeat: no-repeat;
-    background-position: center;
     position: absolute;
     top: 0;
     height: 100%;
     width: 100%;
     background-size: contain;
+    border-radius: 10px 10px 0 0;
 }
 
 .background-image::after {
@@ -30,9 +33,10 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    opacity: 0.6;
+    opacity: 0.7;
     background-color: #000000;
     background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+    border-radius: 10px 10px 0 0;
 }
 
 .content-container {
@@ -48,7 +52,8 @@
 }
 
 .content-container::-webkit-scrollbar {
-	width: 12px;
+    width: 12px;
+    border-radius: 10px;
     background-color: #F5F5F5;
 }
 

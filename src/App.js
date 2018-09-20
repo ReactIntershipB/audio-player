@@ -18,8 +18,6 @@ class App extends React.Component {
 
     if (src) {
       return <div className="background-image" style={{ backgroundImage: `url(${src})` }}></div>;
-    } else {
-      return <div className="background-image"></div>;
     }
   }
 
