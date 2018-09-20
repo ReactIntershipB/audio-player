@@ -118,6 +118,7 @@
 .list-column-item-content p {
     margin: 0;
     color: white;
+    padding-left: 20px;
 }
 
 hr {
@@ -209,6 +210,10 @@ hr {
 
 .spinner-container .ant-spin-dot i {
     background-color: #f0f5f9;
+}
+
+.ant-avatar.ant-avatar {
+    box-shadow: 0px 0px 6px white;
 }
 
 
