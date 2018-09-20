@@ -1,7 +1,6 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-
 import './SearchResult.css';
 import './../common/Common.css';
 

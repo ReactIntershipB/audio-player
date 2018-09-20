@@ -4,7 +4,7 @@ import { List, Avatar } from 'antd';
 
 import { PlayIcon } from '../PlayIcon';
 import '../Common.css';
-import { ResultsMessage } from '../ResultsMessage';
+import { ResultsMessage } from '../ResultsMessage/ResultsMessage';
 
 export const ListColumn = ({ heading, data, avatar }) => {
   const ui = new ListUi();
