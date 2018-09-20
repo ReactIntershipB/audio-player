@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, Avatar } from 'antd';
 
-import { PlayIcon } from '../PlayIcon';
+import { PlayIcon } from '../PlayIcon/PlayIcon';
 import '../Common.css';
 import { ResultsMessage } from '../ResultsMessage/ResultsMessage';
 

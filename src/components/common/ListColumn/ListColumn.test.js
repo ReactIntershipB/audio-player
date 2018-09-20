@@ -33,12 +33,7 @@ describe('ListColumn', () => {
 
         const listColumn = renderer
             .create(
-                <Provider
-                    albumModel={props.albumModel}
-                    songModel={props.songModel}
-                    playerModel={props.playerModel}
-                    appUI={props.appUI}
-                >
+                <Provider {...props} >
                     <ListColumn
                         heading={mockData.title}
                         data={mockData.tracks.data}

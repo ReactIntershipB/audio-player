@@ -22,12 +22,7 @@ describe('AlbumPlaylist', () => {
 
     const albumPlaylist = renderer
       .create(
-        <Provider
-          albumModel={props.albumModel}
-          songModel={props.songModel}
-          playerModel={props.playerModel}
-          appUI={props.appUI}
-        >
+        <Provider {...props} >
           <AlbumPlaylist match={match} />
         </Provider>
         ).toJSON();
@@ -46,12 +41,7 @@ describe('AlbumPlaylist', () => {
 
     renderer
       .create(
-        <Provider
-          albumModel={props.albumModel}
-          songModel={props.songModel}
-          playerModel={props.playerModel}
-          appUI={props.appUI}
-        >
+        <Provider {...props} >
           <AlbumPlaylist match={match} />
         </Provider>
       );
