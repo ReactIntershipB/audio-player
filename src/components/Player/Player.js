@@ -97,7 +97,7 @@ class Player extends React.Component {
     return (
       <div className='player'>
         <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
-        <h4 className="player-general player-author">{songAuthor || ''}</h4>
+        <h4 className="player-general player-author">{songAuthor || 'Deezer Player'}</h4>
         <p className="player-general player-title">{songTitle || ''}</p>
         <div className="slider-container">
           <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />

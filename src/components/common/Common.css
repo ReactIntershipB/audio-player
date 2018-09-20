@@ -206,7 +206,7 @@ hr {
 }
 
 .spinner-container .ant-spin-dot i {
-    background-color: #D81159;
+    background-color: #f0f5f9;
 }
 
 @media only screen and (min-width: 768px) {
