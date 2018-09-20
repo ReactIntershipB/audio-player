@@ -1,0 +1,16 @@
+.searcher-wrapper {
+    margin-top: 30px;
+}
+
+.searcher-wrapper .ant-input-group-wrapper {
+    width: 30%;
+    margin: 0 auto;
+}
+
+.dropdown {
+    margin: 0 20px;
+}
+
+.dropdown-menu {
+    margin-top: 10px;
+}
