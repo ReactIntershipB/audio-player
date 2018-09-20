@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 
-import { ListComponent } from '../common/ListComponent/ListComponent';
-import Spinner from './../common/Spinner/Spinner';
+import { ListComponent } from '../common/ListComponent';
+import { Spinner } from './../common/Spinner/Spinner';
 import { Start } from './../common/Start/Start';
 
 import './../common/Common.css';

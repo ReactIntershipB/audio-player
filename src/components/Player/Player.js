@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-import { PlayIcon } from './../common/PlayIcon';
+import { PlayIcon } from './../common/PlayIcon/PlayIcon';
 import { reaction, when } from 'mobx';
 import { PlayerUI } from './PlayerUI';
 

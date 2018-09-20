@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import './SearchResult.css';
 import './../common/Common.css';
 
-import Spinner from './../common/Spinner/Spinner';
-import { Start } from './../common/Start';
+import { Spinner } from './../common/Spinner/Spinner';
+import { Start } from './../common/Start/Start';
 import { ListComponent } from './../common/ListComponent';
 
 @inject('searchModel', 'songModel')

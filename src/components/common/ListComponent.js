@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import FadeIn from 'react-fade-in';
 import { Avatar } from 'antd';
 
-import { PlayIcon } from './PlayIcon';
+import { PlayIcon } from './PlayIcon/PlayIcon';
 
 import './Common.css';
 
