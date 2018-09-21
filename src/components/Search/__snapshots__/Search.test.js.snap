@@ -1,97 +1,168 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Search should match snapshot 1`] = `
-<form
-  className="searcher-wrapper"
-  onSubmit={[Function]}
+<div
+  className="search-container"
 >
-  <span
-    className="ant-input-group-wrapper"
-    style={undefined}
+  <div
+    className="search-form-container"
   >
     <span
-      className="ant-input-wrapper ant-input-group"
+      className="ant-input-search search-input ant-input-search-enter-button ant-input-affix-wrapper"
+      style={undefined}
     >
       <input
-        className="ant-input searcher-input"
+        className="ant-input"
         disabled={false}
         onChange={[Function]}
         onKeyDown={[Function]}
-        placeholder="Find some music..."
+        placeholder="Find your favourite artist"
+        size={undefined}
         style={null}
         type="text"
         value="test"
       />
       <span
-        className="ant-input-group-addon"
+        className="ant-input-suffix"
       >
-        <i
-          className="anticon anticon-search"
+        <button
+          className="ant-btn ant-input-search-button ant-btn-primary"
+          disabled={undefined}
+          onClick={[Function]}
+          type="button"
         >
-          <svg
-            aria-hidden="true"
-            className=""
-            data-icon="search"
-            fill="currentColor"
-            height="1em"
-            onClick={undefined}
-            style={undefined}
-            viewBox="64 64 896 896"
-            width="1em"
+          <i
+            className="anticon anticon-search"
           >
-            <path
-              d="M608 112c-167.9 0-304 136.1-304 304 0 70.3 23.9 135 63.9 186.5L114.3 856.1a8.03 8.03 0 0 0 0 11.3l42.3 42.3c3.1 3.1 8.2 3.1 11.3 0l253.6-253.6C473 696.1 537.7 720 608 720c167.9 0 304-136.1 304-304S775.9 112 608 112zm161.2 465.2C726.2 620.3 668.9 644 608 644s-118.2-23.7-161.2-66.8C403.7 534.2 380 476.9 380 416s23.7-118.2 66.8-161.2c43-43.1 100.3-66.8 161.2-66.8s118.2 23.7 161.2 66.8c43.1 43 66.8 100.3 66.8 161.2s-23.7 118.2-66.8 161.2z"
-            />
-          </svg>
-        </i>
+            <svg
+              aria-hidden="true"
+              className=""
+              data-icon="search"
+              fill="currentColor"
+              height="1em"
+              onClick={undefined}
+              style={undefined}
+              viewBox="64 64 896 896"
+              width="1em"
+            >
+              <path
+                d="M608 112c-167.9 0-304 136.1-304 304 0 70.3 23.9 135 63.9 186.5L114.3 856.1a8.03 8.03 0 0 0 0 11.3l42.3 42.3c3.1 3.1 8.2 3.1 11.3 0l253.6-253.6C473 696.1 537.7 720 608 720c167.9 0 304-136.1 304-304S775.9 112 608 112zm161.2 465.2C726.2 620.3 668.9 644 608 644s-118.2-23.7-161.2-66.8C403.7 534.2 380 476.9 380 416s23.7-118.2 66.8-161.2c43-43.1 100.3-66.8 161.2-66.8s118.2 23.7 161.2 66.8c43.1 43 66.8 100.3 66.8 161.2s-23.7 118.2-66.8 161.2z"
+              />
+            </svg>
+          </i>
+        </button>
       </span>
     </span>
-  </span>
-  <button
-    className="ant-btn ant-dropdown-link ant-dropdown-trigger dropdown"
-    disabled={undefined}
-    onBlur={undefined}
-    onClick={[Function]}
-    onContextMenu={undefined}
-    onFocus={undefined}
-    onMouseDown={undefined}
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
-    onTouchStart={undefined}
-    type="button"
-  >
-    <span>
-      Artist
-    </span>
-    <i
-      className="anticon anticon-down"
+    <div
+      className="ant-radio-group ant-radio-group-solid radio-group-input"
+      id={undefined}
+      onMouseEnter={undefined}
+      onMouseLeave={undefined}
+      style={undefined}
     >
-      <svg
-        aria-hidden="true"
-        className=""
-        data-icon="down"
-        fill="currentColor"
-        height="1em"
-        onClick={undefined}
+      <label
+        className="ant-radio-button-wrapper ant-radio-button-wrapper-checked"
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
         style={undefined}
-        viewBox="64 64 896 896"
-        width="1em"
       >
-        <path
-          d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"
-        />
-      </svg>
-    </i>
-  </button>
-  <button
-    className="ant-btn ant-btn-primary"
-    disabled={undefined}
-    onClick={[Function]}
-    type="button"
-  >
-    <span>
-      Submit
-    </span>
-  </button>
-</form>
+        <span
+          className="ant-radio-button ant-radio-button-checked"
+          style={Object {}}
+        >
+          <input
+            autoFocus={undefined}
+            checked={true}
+            className="ant-radio-button-input"
+            disabled={false}
+            id={undefined}
+            name={undefined}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={undefined}
+            onFocus={[Function]}
+            readOnly={undefined}
+            tabIndex={undefined}
+            type="radio"
+            value="artist"
+          />
+          <span
+            className="ant-radio-button-inner"
+          />
+        </span>
+        <span>
+          Artist
+        </span>
+      </label>
+      <label
+        className="ant-radio-button-wrapper"
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
+        style={undefined}
+      >
+        <span
+          className="ant-radio-button"
+          style={Object {}}
+        >
+          <input
+            autoFocus={undefined}
+            checked={false}
+            className="ant-radio-button-input"
+            disabled={false}
+            id={undefined}
+            name={undefined}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={undefined}
+            onFocus={[Function]}
+            readOnly={undefined}
+            tabIndex={undefined}
+            type="radio"
+            value="album"
+          />
+          <span
+            className="ant-radio-button-inner"
+          />
+        </span>
+        <span>
+          Album
+        </span>
+      </label>
+      <label
+        className="ant-radio-button-wrapper"
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
+        style={undefined}
+      >
+        <span
+          className="ant-radio-button"
+          style={Object {}}
+        >
+          <input
+            autoFocus={undefined}
+            checked={false}
+            className="ant-radio-button-input"
+            disabled={false}
+            id={undefined}
+            name={undefined}
+            onBlur={[Function]}
+            onChange={[Function]}
+            onClick={undefined}
+            onFocus={[Function]}
+            readOnly={undefined}
+            tabIndex={undefined}
+            type="radio"
+            value="track"
+          />
+          <span
+            className="ant-radio-button-inner"
+          />
+        </span>
+        <span>
+          Track
+        </span>
+      </label>
+    </div>
+  </div>
+</div>
 `;

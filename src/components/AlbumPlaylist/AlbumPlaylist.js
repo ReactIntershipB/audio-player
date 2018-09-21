@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import { Alert } from 'antd';
 
 import { Spinner } from './../common/Spinner/Spinner';
-import { ListComponent } from '../common/ListComponent';
+import { ListComponent } from '../common/ListComponent/ListComponent';
 import { MessageBox } from '../common/MessageBox/MessageBox';
 
 @inject('albumModel')

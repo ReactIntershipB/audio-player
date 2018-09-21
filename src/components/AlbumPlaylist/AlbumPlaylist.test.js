@@ -4,6 +4,7 @@ import { Provider } from 'mobx-react';
 
 import AlbumPlaylist from './AlbumPlaylist';
 import * as mockStore from './mockStorePlaylist';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 describe('AlbumPlaylist', () => {
   const match = {
@@ -13,6 +14,7 @@ describe('AlbumPlaylist', () => {
   };
 
   it('should match snapshot when song is playing', () => {
+    // arrange
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
@@ -20,17 +22,22 @@ describe('AlbumPlaylist', () => {
       appUI: {}
     };
 
+    // act
     const albumPlaylist = renderer
       .create(
         <Provider {...props} >
-          <AlbumPlaylist match={match} />
+          <Router >
+            <AlbumPlaylist match={match} />
+          </Router>
         </Provider>
       ).toJSON();
 
+    // assert
     expect(albumPlaylist).toMatchSnapshot();
   });
 
   it('should match snapshot when is loading', () => {
+    // arrange
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
@@ -41,37 +48,22 @@ describe('AlbumPlaylist', () => {
     mockStore.mockData = {};
     props.albumModel.loading = true;
 
+    // act
     const albumPlaylist = renderer
       .create(
         <Provider {...props} >
-          <AlbumPlaylist match={match} />
+          <Router >
+            <AlbumPlaylist match={match} />
+          </Router>
         </Provider>
       ).toJSON();
 
-    expect(albumPlaylist).toMatchSnapshot();
-  });
-
-  it('should match snapshot when there is no results', () => {
-    const props = {
-      albumModel: new mockStore.AlbumModel(),
-      songModel: {},
-      searchModel: {},
-      appUI: {}
-    };
-
-    props.albumModel.getData = jest.fn();
-
-    const albumPlaylist = renderer
-      .create(
-        <Provider {...props} >
-          <AlbumPlaylist match={match} />
-        </Provider>
-      ).toJSON();
-
+    // assert
     expect(albumPlaylist).toMatchSnapshot();
   });
 
   it('should call the find function with proper arguments', () => {
+    // arrange
     const props = {
       albumModel: new mockStore.AlbumModel(),
       songModel: {},
@@ -80,13 +72,17 @@ describe('AlbumPlaylist', () => {
     };
     const find = props.albumModel.find;
 
+    // act
     renderer
       .create(
         <Provider {...props} >
-          <AlbumPlaylist match={match} />
+          <Router >
+            <AlbumPlaylist match={match} />
+          </Router>
         </Provider>
       );
 
+    // assert
     expect(find).toHaveBeenCalled();
     expect(find).toHaveBeenCalledWith(match.params.id);
     expect(find).toHaveBeenCalledTimes(1);

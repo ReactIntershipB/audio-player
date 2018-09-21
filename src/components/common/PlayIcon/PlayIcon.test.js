@@ -4,11 +4,12 @@ import { Provider } from 'mobx-react';
 import { PlayIcon } from './PlayIcon';
 
 class MockAppUI {
-     isPlaying = true;
+    isPlaying = true;
 }
 
 describe('PlayIcon', () => {
     it('should match snapshot when song is playing', () => {
+        // arrange
         const props = {
             albumModel: {},
             songModel: {},
@@ -16,6 +17,7 @@ describe('PlayIcon', () => {
             appUI: new MockAppUI()
         };
 
+        // act
         const albumPlaylist = renderer
             .create(
                 <Provider {...props}>
@@ -23,10 +25,12 @@ describe('PlayIcon', () => {
                 </Provider>
             ).toJSON();
 
+        // assert
         expect(albumPlaylist).toMatchSnapshot();
     });
 
     it('should match snapshot when song is not playing', () => {
+        // arrange
         const props = {
             albumModel: {},
             songModel: {},
@@ -34,6 +38,7 @@ describe('PlayIcon', () => {
             appUI: {}
         };
 
+        // act
         const albumPlaylist = renderer
             .create(
                 <Provider {...props}>
@@ -41,6 +46,7 @@ describe('PlayIcon', () => {
                 </Provider>
             ).toJSON();
 
+        // assert
         expect(albumPlaylist).toMatchSnapshot();
     });
 });

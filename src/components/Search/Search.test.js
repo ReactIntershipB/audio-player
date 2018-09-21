@@ -12,6 +12,7 @@ class MockSearchModel {
 
 describe('Search', () => {
     it('should match snapshot', () => {
+        // arrange
         const props = {
             albumModel: {},
             songModel: {},
@@ -22,6 +23,7 @@ describe('Search', () => {
             params: {}
         };
 
+        // act
         const search = renderer
             .create(
                 <Provider {...props} >
@@ -29,6 +31,7 @@ describe('Search', () => {
                 </Provider>
             ).toJSON();
 
+        // assert
         expect(search).toMatchSnapshot();
     });
 });

@@ -2,7 +2,7 @@
 
 exports[`PlayIcon should match snapshot when song is not playing 1`] = `
 <button
-  className="ant-btn ant-btn-circle ant-btn-lg ant-btn-icon-only"
+  className="ant-btn play-button ant-btn-circle ant-btn-lg ant-btn-icon-only"
   data-testid="play-button"
   disabled={undefined}
   onClick={[Function]}
@@ -32,7 +32,7 @@ exports[`PlayIcon should match snapshot when song is not playing 1`] = `
 
 exports[`PlayIcon should match snapshot when song is playing 1`] = `
 <button
-  className="ant-btn ant-btn-circle ant-btn-lg ant-btn-icon-only"
+  className="ant-btn play-button ant-btn-circle ant-btn-lg ant-btn-icon-only"
   data-testid="play-button"
   disabled={undefined}
   onClick={[Function]}

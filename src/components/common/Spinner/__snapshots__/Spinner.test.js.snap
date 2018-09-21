@@ -1,16 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Spinner /> to match snapshot 1`] = `
+exports[`Spinner to match snapshot 1`] = `
 <div
-  className="ant-spin ant-spin-lg ant-spin-spinning spinner"
+  className="spinner-container"
 >
-  <span
-    className="ant-spin-dot ant-spin-dot-spin"
+  <div
+    className="ant-spin ant-spin-lg ant-spin-spinning"
   >
-    <i />
-    <i />
-    <i />
-    <i />
-  </span>
+    <span
+      className="ant-spin-dot ant-spin-dot-spin"
+    >
+      <i />
+      <i />
+      <i />
+      <i />
+    </span>
+  </div>
 </div>
 `;
