@@ -25,12 +25,21 @@ export default class AlbumPlaylist extends Component {
     return loading ? <Spinner /> : null;
   }
 
+  get noResultsMessage() {
+    const { data, loading } = this.props.albumModel;
+    return data.error && !loading
+      ? <MessageBox>
+        <Alert message="No results" type="warning" showIcon />
+      </MessageBox>
+      : null;
+  }
+
   get errorMessage() {
     return this.props.albumModel.isError
-    ? <MessageBox>
-      <Alert message="Something went wrong with download data. Please try to refresh the page." type="error" showIcon />
-    </MessageBox>
-    : null;
+      ? <MessageBox>
+        <Alert message="Something went wrong with download data. Please try to refresh the page." type="error" showIcon />
+      </MessageBox>
+      : null;
   }
 
   render() {
@@ -39,6 +48,7 @@ export default class AlbumPlaylist extends Component {
         {this.spinner}
         {this.playlist}
         {this.errorMessage}
+        {this.noResultsMessage}
       </div>
     );
   }
