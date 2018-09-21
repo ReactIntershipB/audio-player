@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 
-import { PlayIcon } from './../common/PlayIcon';
+import { PlayIcon } from './../common/PlayIcon/PlayIcon';
 import { reaction } from 'mobx';
-import { PlayerUI } from './PlayerUI';
 
+import { PlayerUI } from './PlayerUI';
 import './Player.css';
 
 @inject('appUI', 'songModel', 'albumModel')
@@ -110,14 +110,6 @@ class Player extends React.Component {
     return `${parseInt(this.currentSongTime)} : ${this.props.songModel.songLength}`;
   }
 
-  get randomButtonStyle() {
-    return this.playerUI.randomize ? { color: 'orange' } : { color: 'grey' };
-  }
-
-  get repeatButtonStyle() {
-    return this.playerUI.repeat ? { color: 'orange' } : { color: 'grey' };
-  }
-
   onAudioRef = (audio) => {
     this.audioRef = audio;
   }
@@ -148,13 +140,13 @@ class Player extends React.Component {
         </div>
         <div className="buttons-container">
           <Button onClick={this.handleRandomizeClick}>
-              <i className="fas fa-random" style={this.randomButtonStyle}></i>
+              <i className="fas fa-random" ></i>
           </Button>
           <Button shape='circle' size={'large'} icon='backward' onClick={this.handlePreviousSongClick} />
           <PlayIcon disabled={!songLink} songId={currentSongId}/>
           <Button shape='circle' size={'large'} icon='forward' onClick={this.handleNextSongClick} />
           <Button onClick={this.handleRepeatClick}>
-              <i className="fas fa-redo-alt" style={this.repeatButtonStyle}></i>
+              <i className="fas fa-redo-alt"></i>
           </Button>
         </div>
       </div>

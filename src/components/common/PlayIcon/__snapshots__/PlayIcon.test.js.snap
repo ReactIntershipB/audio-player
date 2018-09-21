@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayIcon should match snapshot when song is not playing 1`] = `
+<button
+  className="ant-btn play-button ant-btn-circle ant-btn-lg ant-btn-icon-only"
+  data-testid="play-button"
+  disabled={undefined}
+  onClick={[Function]}
+  type="button"
+>
+  <i
+    className="anticon anticon-caret-right"
+  >
+    <svg
+      aria-hidden="true"
+      className=""
+      data-icon="caret-right"
+      fill="currentColor"
+      height="1em"
+      onClick={undefined}
+      style={undefined}
+      viewBox="0 0 1024 1024"
+      width="1em"
+    >
+      <path
+        d="M392.7 76.3l489.1 403.1a42.53 42.53 0 0 1 0 63.4L392.7 947.7c-27.4 24.4-70.8 5-70.8-31.7V107.9c.1-36.6 43.4-56.1 70.8-31.6z"
+      />
+    </svg>
+  </i>
+</button>
+`;
+
+exports[`PlayIcon should match snapshot when song is playing 1`] = `
+<button
+  className="ant-btn play-button ant-btn-circle ant-btn-lg ant-btn-icon-only"
+  data-testid="play-button"
+  disabled={undefined}
+  onClick={[Function]}
+  type="button"
+>
+  <i
+    className="anticon anticon-pause"
+  >
+    <svg
+      aria-hidden="true"
+      className=""
+      data-icon="pause"
+      fill="currentColor"
+      height="1em"
+      onClick={undefined}
+      style={undefined}
+      viewBox="64 64 896 896"
+      width="1em"
+    >
+      <path
+        d="M304 176h80v672h-80zm408 0h-64c-4.4 0-8 3.6-8 8v656c0 4.4 3.6 8 8 8h64c4.4 0 8-3.6 8-8V184c0-4.4-3.6-8-8-8z"
+      />
+    </svg>
+  </i>
+</button>
+`;

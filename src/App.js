@@ -8,7 +8,7 @@ import TrackSearchResult from './components/SearchResult/TrackSearchResult';
 import AlbumPlaylist from './components/AlbumPlaylist/AlbumPlaylist';
 import Player from './components/Player/Player';
 import Search from './components/Search/Search';
-import { Start } from './components/common/Start';
+import { Start } from './components/common/Start/Start';
 import './App.css';
 
 @observer
