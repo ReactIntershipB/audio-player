@@ -123,6 +123,13 @@ class Player extends React.Component {
      return null;
   }
 
+  get randomButtonStyle() {
+    return this.playerUI.randomize ? { color: '#D81159' } : { color: 'grey' };
+  }
+   get repeatButtonStyle() {
+    return this.playerUI.repeat ? { color: '#D81159' } : { color: 'grey' };
+  }
+
   render() {
     const { songLink, songAuthor, songTitle, songLength, songDurationString, currentSongId } = this.props.songModel;
 
@@ -140,13 +147,13 @@ class Player extends React.Component {
         </div>
         <div className="buttons-container">
           <Button onClick={this.handleRandomizeClick}>
-              <i className="fas fa-random" ></i>
+              <i className="fas fa-random" style={this.randomButtonStyle}></i>
           </Button>
           <Button shape='circle' size={'large'} icon='backward' onClick={this.handlePreviousSongClick} />
           <PlayIcon disabled={!songLink} songId={currentSongId}/>
           <Button shape='circle' size={'large'} icon='forward' onClick={this.handleNextSongClick} />
           <Button onClick={this.handleRepeatClick}>
-              <i className="fas fa-redo-alt"></i>
+              <i className="fas fa-redo-alt" style={this.repeatButtonStyle}></i>
           </Button>
         </div>
       </div>
