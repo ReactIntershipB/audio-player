@@ -4,7 +4,7 @@ import { Button, Slider } from 'antd';
 import { observer, inject } from 'mobx-react';
 
 import { PlayIcon } from './../common/PlayIcon';
-import { reaction, when } from 'mobx';
+import { reaction } from 'mobx';
 import { PlayerUI } from './PlayerUI';
 
 import './Player.css';
@@ -16,10 +16,11 @@ class Player extends React.Component {
     super(props);
     this.playerUI = new PlayerUI();
 
-    when(
+    reaction(
       () => this.playerUI.getNextSong,
       () => {
-        this.changeSong('next');
+        console.log('next');
+        if (this.playerUI.getNextSong) this.changeSong('next');
       }
     );
 
