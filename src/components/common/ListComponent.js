@@ -66,14 +66,14 @@ export class ListComponent extends React.Component {
   }
 
   getAlbumTitle = (item) => {
-    const { albumTitle } = this.props.albumTitle;
+    const { albumTitle } = this.props;
     if (albumTitle) return albumTitle;
     if (item.album) return item.album.title;
     return '';
   }
 
   getLink = (item) => {
-    const { type } = this.props.type;
+    const { type } = this.props;
     return type === 'track' || !type ? '' : `/album/${item.album.id}`;
   }
 
