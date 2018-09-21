@@ -105,6 +105,11 @@
     flex-basis: 80%;
     margin-left: 2%;
     overflow: hidden;
+    transition: .3s ease-in-out;
+}
+
+.list-column-item-content-heading:hover {
+    transform: scale(1.1);
 }
 
 .list-column-item-content-heading p {

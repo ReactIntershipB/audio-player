@@ -122,10 +122,10 @@ class Player extends React.Component {
   }
 
   get backgroundSrc() {
-     if (this.props.albumModel.data) {
-        return this.props.albumModel.data.cover_xl;
-     } else if (this.props.songModel.data) {
+     if (this.props.songModel.data.album) {
          return this.props.songModel.data.album.cover_xl;
+     } else if (this.props.albumModel.data) {
+        return this.props.albumModel.data.cover_xl;
      }
      return null;
   }
