@@ -66,7 +66,7 @@ export class ListComponent extends React.Component {
   }
 
   getAlbumTitle = (item) => {
-    const { albumTitle } = this.props.albumTitle;
+    const { albumTitle } = this.props;
     if (albumTitle) return albumTitle;
     if (item.album) return item.album.title;
     return '';

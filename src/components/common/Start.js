@@ -6,10 +6,10 @@ import './Common.css';
 export const Start = () => {
     return (
         <div className="playlist-container">
-            {/* <div className="list-column-container">
+            <div className="list-column-container">
                 <div>
                     <div className="list-column-item-content">
-                        <Link to={''}>
+                        <Link to={'/album/72000342'}>
                             <Avatar size={60} shape={'square'} src={'https://e-cdns-images.dzcdn.net/images/cover/bf74fc764097630ba58782ae79cfbee6/500x500-000000-80-0-0.jpg'} />
                             <div className="list-column-item-content-heading">
                                 <p>Eminem - Kamikaze</p>
@@ -18,7 +18,7 @@ export const Start = () => {
                     </div>
                     <hr />
                 </div>
-            </div> */}
+            </div>
             <div className="list-column-container">
                 <div>
                     <div className="list-column-item-content">
