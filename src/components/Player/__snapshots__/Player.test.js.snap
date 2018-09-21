@@ -101,6 +101,11 @@ exports[`Player should match snapshot 1`] = `
     >
       <i
         className="fas fa-random"
+        style={
+          Object {
+            "color": "grey",
+          }
+        }
       />
     </button>
     <button
@@ -187,6 +192,11 @@ exports[`Player should match snapshot 1`] = `
     >
       <i
         className="fas fa-redo-alt"
+        style={
+          Object {
+            "color": "grey",
+          }
+        }
       />
     </button>
   </div>
