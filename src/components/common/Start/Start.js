@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
-import './Common.css';
+import '../Common.css';
 
 export const Start = () => {
     return (

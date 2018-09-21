@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Start to match snapshot 1`] = `
+<div
+  className="playlist-container"
+>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/72000342"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://e-cdns-images.dzcdn.net/images/cover/bf74fc764097630ba58782ae79cfbee6/500x500-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              Eminem - Kamikaze
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/57148262"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://e-cdns-images.dzcdn.net/images/cover/27c1cc0cab1bbe6db36da433c6098be0/56x56-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              Imagine Dragons - Evolve
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/42014431"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://e-cdns-images.dzcdn.net/images/cover/975abab73605c4526d1a050940ecf7cf/56x56-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              Shakira - El Dorado
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/8609508"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://e-cdns-images.dzcdn.net/images/cover/2d6db71be43a0d86542293d0f0d1919b/56x56-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              2Pac - Greatest Hits
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/1649488"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://e-cdns-images.dzcdn.net/images/cover/01cbc8484f34e2f33260ca05d060feda/56x56-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              Rihanna - Good Girl Gone Bad: Reloaded
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+  <div
+    className="list-column-container"
+  >
+    <div>
+      <div
+        className="list-column-item-content"
+      >
+        <a
+          href="/album/6854302"
+          onClick={[Function]}
+        >
+          <span
+            className="ant-avatar ant-avatar-square ant-avatar-image"
+            style={
+              Object {
+                "fontSize": 18,
+                "height": 60,
+                "lineHeight": "60px",
+                "width": 60,
+              }
+            }
+          >
+            <img
+              alt={undefined}
+              onError={[Function]}
+              src="https://cdns-images.dzcdn.net/images/cover/c20b4437ea351e2cf8c1ee98faa84c9c/56x56-000000-80-0-0.jpg"
+            />
+          </span>
+          <div
+            className="list-column-item-content-heading"
+          >
+            <p>
+              Marek Grechuta - Zlote Przeboje 1
+            </p>
+          </div>
+        </a>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+`;

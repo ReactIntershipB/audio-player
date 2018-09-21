@@ -2,36 +2,28 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react';
 
-import Search from './Search';
+import Player from './Player';
+import * as mockStore from './mockStorePlayer';
 
-class MockSearchModel {
-    term = 'test';
-    termText = 'test';
-    filterName = 'artist';
-}
-
-describe('Search', () => {
+describe('Player', () => {
     it('should match snapshot', () => {
         // arrange
         const props = {
             albumModel: {},
-            songModel: {},
-            searchModel: new MockSearchModel(),
+            songModel: new mockStore.SongModel(),
+            searchModel: {},
             appUI: {}
-        };
-        const match = {
-            params: {}
         };
 
         // act
-        const search = renderer
+        const player = renderer
             .create(
                 <Provider {...props} >
-                    <Search match={match} />
+                    <Player />
                 </Provider>
             ).toJSON();
 
         // assert
-        expect(search).toMatchSnapshot();
+        expect(player).toMatchSnapshot();
     });
 });

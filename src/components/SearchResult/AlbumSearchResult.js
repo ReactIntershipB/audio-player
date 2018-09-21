@@ -1,13 +1,12 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react';
 import PropTypes from 'prop-types';
-
 import './SearchResult.css';
 import './../common/Common.css';
 
-import Spinner from './../common/Spinner';
-import { Start } from './../common/Start';
-import { ListComponent } from './../common/ListComponent';
+import { Spinner } from './../common/Spinner/Spinner';
+import { Start } from './../common/Start/Start';
+import { ListComponent } from '../common/ListComponent/ListComponent';
 
 @inject('searchModel', 'songModel')
 @observer

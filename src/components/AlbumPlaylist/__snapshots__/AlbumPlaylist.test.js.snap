@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlbumPlaylist should match snapshot when is loading 1`] = `
+<div
+  className="component-container"
+>
+  <div
+    className="spinner-container"
+  >
+    <div
+      className="ant-spin ant-spin-lg ant-spin-spinning"
+    >
+      <span
+        className="ant-spin-dot ant-spin-dot-spin"
+      >
+        <i />
+        <i />
+        <i />
+        <i />
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`AlbumPlaylist should match snapshot when song is playing 1`] = `
+<div
+  className="component-container"
+>
+  <div>
+    <div
+      style={
+        Object {
+          "opacity": 0,
+          "position": "relative",
+          "top": 20,
+          "transition": "opacity 400ms, top 400ms",
+        }
+      }
+    >
+      <div
+        className="playlist-container"
+      >
+        <div
+          className="list-column-container"
+        >
+          <div>
+            <div
+              className="list-column-item-content"
+            >
+              <a
+                href="/"
+                onClick={[Function]}
+              >
+                <button
+                  className="ant-btn play-button ant-btn-circle ant-btn-lg ant-btn-icon-only"
+                  data-testid="play-button"
+                  disabled={undefined}
+                  onClick={[Function]}
+                  type="button"
+                >
+                  <i
+                    className="anticon anticon-caret-right"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className=""
+                      data-icon="caret-right"
+                      fill="currentColor"
+                      height="1em"
+                      onClick={undefined}
+                      style={undefined}
+                      viewBox="0 0 1024 1024"
+                      width="1em"
+                    >
+                      <path
+                        d="M392.7 76.3l489.1 403.1a42.53 42.53 0 0 1 0 63.4L392.7 947.7c-27.4 24.4-70.8 5-70.8-31.7V107.9c.1-36.6 43.4-56.1 70.8-31.6z"
+                      />
+                    </svg>
+                  </i>
+                </button>
+                <div
+                  className="list-column-item-content-heading"
+                >
+                  <p>
+                    Daft Punk - One More Time
+                  </p>
+                  <p>
+                    Discovery
+                  </p>
+                </div>
+                <p>
+                  5:20
+                </p>
+              </a>
+            </div>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
