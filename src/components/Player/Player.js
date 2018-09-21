@@ -134,9 +134,9 @@ class Player extends React.Component {
     const { songLink, songAuthor, songTitle, songLength, songDurationString, currentSongId } = this.props.songModel;
 
     return (
-      <div className='player background-image' style={{ backgroundImage: `url(${this.backgroundSrc})` }}>
+      <div className={this.backgroundSrc ? 'player background-image' : 'player'} style={{ backgroundImage: `url(${this.backgroundSrc})` }}>
         <audio id='audioPlayer' autoPlay ref={this.onAudioRef} src={songLink}></audio>
-        <h4 className="player-general player-author">{songAuthor || 'Deezer Player'}</h4>
+        <h4 className="player-general player-author">{songAuthor || (this.backgroundSrc ? '' : 'Deezer Player')}</h4>
         <p className="player-general player-title">{songTitle || ''}</p>
         <div className="slider-container">
           <Slider min={0} max={songLength} value={this.currentSongTime} disabled={false} onChange={this.sliderChange} />
